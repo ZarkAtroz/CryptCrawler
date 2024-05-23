@@ -1,0 +1,2 @@
+-> A lógica de movimentação do personagem iria interagir aqui com o mapa
+-> Criação do mapa geral e das salas

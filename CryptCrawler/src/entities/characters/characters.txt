@@ -1,0 +1,3 @@
+-> Onde estarão reunidas as classes dos personagens
+-> Dá para colocar subpacotes, como por exemplo, um pacote para os personagens principais e outro para os secundários
+-> Ou um pacote para os personagens de um determinado tipo, como por exemplo, os personagens que são magos, etc
