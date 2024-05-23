@@ -61,6 +61,15 @@ public class UI {
             charMatriz[i] = linhas[i].toCharArray();
         }
 
+        // Espaçoes em brancos
+        for(int i = 0; i < charMatriz.length; i++){
+            for(int j = 0; j < charMatriz[i].length; j++){
+                int asciiNumber = (int) charMatriz[i][j];
+                if(asciiNumber == 9617) // 9632
+                    charMatriz[i][j] = 160;
+            }
+        }
+
         for(int i = 0; i < charMatriz.length; i++){
             for(int j = 0; j < charMatriz[i].length; j++){
                 System.out.print(charMatriz[i][j]);
