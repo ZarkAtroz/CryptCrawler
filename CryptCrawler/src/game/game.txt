@@ -1,0 +1,2 @@
+-> Aqui seria o main de todo o projeto
+-> Onde estaria o launcher

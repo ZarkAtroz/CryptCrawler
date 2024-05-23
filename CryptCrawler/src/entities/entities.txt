@@ -1,0 +1,3 @@
+-> Entidades são objetos do corpo do jogo, como personagens, inimigos, itens, partida, mapa, batalha, etc.
+-> São a parte funcional do jogo, que interagem com o jogador e com o ambiente.
+-> Entidades são objetos que possuem métodos e atributos, e que podem ser instanciados e manipulados.

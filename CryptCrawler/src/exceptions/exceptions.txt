@@ -1,0 +1,3 @@
+-> Aqui estariam as exceções personalizadas, utilizadas cada uma em partes específicas do jogo
+-> Por exemplo, uma exceção de limite do mapa "Out ofBoundsException",
+ou uma exceção de movimento inválido "InvalidMoveException"
