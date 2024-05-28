@@ -1,9 +1,8 @@
-package combate.jogador;
+package combate.herois;
 
 import combate.Combatente;
-import combate.PersonagemCombate;
 
-public class Rogue extends PersonagemCombate implements Combatente {
+public class Rogue extends Heroi implements Combatente {
 
     
     // Construtor

@@ -17,12 +17,6 @@ public abstract class PersonagemCombate {
     // Habilidades
     protected ArrayList<Habilidade> hbs;
 
-    // Status adicionais
-    protected int hp_atual;
-    protected int hp_max;
-    protected int mp_atual;
-    protected int mp_max;
-
     // Construtores
     public PersonagemCombate(int lvl) {
         this.lvl = lvl;
@@ -30,5 +24,41 @@ public abstract class PersonagemCombate {
 
     // Funcões
     public abstract void leveling();
+
+    public int getForca() {
+        return forca;
+    }
+
+    public int getInteligencia() {
+        return inteligencia;
+    }
+
+    public int getAgilidade() {
+        return agilidade;
+    }
+
+    public int getSorte() {
+        return sorte;
+    }
+
+    public int getCritico() {
+        return critico;
+    }
+
+    public int getResistencia() {
+        return resistencia;
+    }
+
+    public int getExp() {
+        return exp;
+    }
+
+    public int getLvl() {
+        return lvl;
+    }
+
+    public ArrayList<Habilidade> getHbs() {
+        return hbs;
+    }
 
 }
