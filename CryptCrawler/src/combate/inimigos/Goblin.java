@@ -1,5 +1,6 @@
 package combate.inimigos;
 
+import combate.Combatente;
 
 public class Goblin extends Inimigo implements Combatente {
 
