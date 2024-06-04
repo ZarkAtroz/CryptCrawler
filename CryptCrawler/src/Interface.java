@@ -1,14 +1,48 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+
+// Para funcionar, vá para o IntelliJ, clique com o botão direito no arquivo .jar e clique em "add as a library" (ultima opção)
+import asciiPanel.AsciiPanel;
 
 public class Interface extends JPanel {
 
     private int x = 200; // posição inicial x do personagem
     private int y = 200; // posição inicial y do personagem
     private int moveSpeed;
+    private AsciiPanel terminal;
+    private BufferedImage terminalImage;
 
     public Interface() {
         this.setFocusable(true);
+
+        terminal = new AsciiPanel();
+        terminal.setSize(80, 24);
+        terminal.setBounds(40, 40, 80, 24);
+        this.add(terminal);
+
+        terminalImage = new BufferedImage(80, 24, BufferedImage.TYPE_INT_RGB);
+        updateAsciiPanel();
+    }
+
+    private void updateAsciiPanel(){
+
+        terminal.clear();
+        terminal.write("Hello World!", 1, 1);
+        char[][] matriz = {
+                {'A', 'B', 'C'},
+                {'D', 'E', 'F'}
+        };
+
+        for(int i = 0; i < matriz.length; i++){
+            for(int j = 0; j < matriz[i].length; j++){
+                terminal.write(matriz[i][j]);
+            }
+        }
+
+        Graphics2D g2d = terminalImage.createGraphics();
+        terminal.paintComponents(g2d);
+        g2d.dispose();
     }
 
     public void setMoveSpeed(int moveSpeed){
@@ -72,6 +106,12 @@ public class Interface extends JPanel {
         // Desenha o personagem (vermelho)
         // g.setColor(Color.RED);
         // g.fillRect(x, y, borda, borda); // personagem
+
+        g.drawImage(terminalImage, 40, 40, null);
+        terminal.setBounds(40, 40, 800, 400);
+        Graphics2D g2d = terminalImage.createGraphics();
+        terminal.paintComponents(g2d);
+        g2d.dispose();
 
     }
 }
