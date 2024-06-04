@@ -19,12 +19,9 @@ public class Interface extends JPanel {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
 
-
         // Desenha fundo preto
         g.setColor(Color.BLACK);
         g.fillRect(0, 0, getWidth(), getHeight());
-
-        // Desenha as barreiras (cinza claro)
 
         // Área mapa
         float proporcaoMapa = 1.8f;
@@ -71,10 +68,6 @@ public class Interface extends JPanel {
         g.fillRect(larguraMapa + (2 * margem) + borda, alturaTexto + (2 * margem) + (2 * borda), borda, alturaMini);
         g.fillRect(larguraMapa + (2 * margem) + borda, alturaTexto + (2 * margem) + alturaMini + borda, larguraMini, borda);
         g.fillRect(larguraMapa + (2 * margem) + larguraMini, alturaTexto + (2 * margem) + (2 * borda), borda, alturaMini);
-        //g.fillRect();
-
-        // g.fillRect(250, 100, 150, 10); // outra barreira horizontal no meio
-        // g.fillRect(100, 250, 10, 150); // barreira vertical no meio
 
         // Desenha o personagem (vermelho)
         // g.setColor(Color.RED);
