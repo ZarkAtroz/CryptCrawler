@@ -11,38 +11,52 @@ public class Interface extends JPanel {
     private int y = 200; // posição inicial y do personagem
     private int moveSpeed;
     private AsciiPanel terminal;
-    private BufferedImage terminalImage;
+    private AsciiPanel teste;
+
+    private int asciiWidth = 80; // largura do painel ASCII (em caracteres)
+    private int asciiHeight = 24; // altura do painel ASCII (em caracteres)
+
+    private static final int CHAR_WIDTH = 9;
+    private static final int CHAR_HEIGHT = 16;
 
     public Interface() {
         this.setFocusable(true);
 
         terminal = new AsciiPanel();
-        terminal.setSize(80, 24);
-        terminal.setBounds(40, 40, 80, 24);
+        terminal.setSize(asciiWidth * CHAR_WIDTH, asciiHeight * CHAR_HEIGHT);
+        terminal.setBounds(30, 30, asciiWidth * CHAR_WIDTH, asciiHeight * CHAR_HEIGHT);
         this.add(terminal);
 
-        terminalImage = new BufferedImage(80, 24, BufferedImage.TYPE_INT_RGB);
+        teste = new AsciiPanel();
+        teste.setSize(3  * CHAR_WIDTH, 3 * CHAR_HEIGHT);
+        teste.setBounds(960, 450, 40 * CHAR_WIDTH, 15 * CHAR_HEIGHT);
+        this.add(teste);
+
         updateAsciiPanel();
     }
 
     private void updateAsciiPanel(){
 
         terminal.clear();
-        terminal.write("Hello World!", 1, 1);
-        char[][] matriz = {
-                {'A', 'B', 'C'},
-                {'D', 'E', 'F'}
-        };
+        teste.clear();
 
-        for(int i = 0; i < matriz.length; i++){
-            for(int j = 0; j < matriz[i].length; j++){
-                terminal.write(matriz[i][j]);
-            }
-        }
+        terminal.write("Hello World!", 0, 0);
+        teste.write("Teste", 1, 1);
+        //char[][] matriz = {
+        //        {'A', 'B', 'C'},
+        //        {'D', 'E', 'F'}
+        //};
 
-        Graphics2D g2d = terminalImage.createGraphics();
-        terminal.paintComponents(g2d);
-        g2d.dispose();
+        //for(int i = 0; i < matriz.length; i++){
+            //for(int j = 0; j < matriz[i].length; j++){
+            //    terminal.write(matriz[i][j]);
+            //}
+        //}
+
+        //teste.write("Teste", 1, 1);
+
+        teste.repaint();
+        terminal.repaint();
     }
 
     public void setMoveSpeed(int moveSpeed){
@@ -54,7 +68,7 @@ public class Interface extends JPanel {
         super.paintComponent(g);
 
         // Desenha fundo preto
-        g.setColor(Color.BLACK);
+        g.setColor(Color.MAGENTA);
         g.fillRect(0, 0, getWidth(), getHeight());
 
         // Área mapa
@@ -107,11 +121,9 @@ public class Interface extends JPanel {
         // g.setColor(Color.RED);
         // g.fillRect(x, y, borda, borda); // personagem
 
-        g.drawImage(terminalImage, 40, 40, null);
-        terminal.setBounds(40, 40, 800, 400);
-        Graphics2D g2d = terminalImage.createGraphics();
-        terminal.paintComponents(g2d);
-        g2d.dispose();
+        terminal.setBounds(30, 30, asciiWidth * CHAR_WIDTH, asciiHeight * CHAR_HEIGHT);
+        teste.setBounds(960, 450, 40 * CHAR_WIDTH, 15 * CHAR_HEIGHT);
+
 
     }
 }

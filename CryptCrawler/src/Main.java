@@ -14,6 +14,7 @@ public class Main extends JFrame {
 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
+        frame.setLayout(null);
 
     }
 
