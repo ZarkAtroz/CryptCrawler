@@ -7,7 +7,7 @@ public class Main extends JFrame {
         JFrame frame = new JFrame("Interface");
         Interface interfaceJogo = new Interface();
         frame.add(interfaceJogo);
-        frame.setSize(1366, 768);
+        frame.setSize(1280, 720);
 
         // frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         // frame.setUndecorated(true);

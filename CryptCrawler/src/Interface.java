@@ -10,11 +10,19 @@ public class Interface extends JPanel {
     private int x = 200; // posição inicial x do personagem
     private int y = 200; // posição inicial y do personagem
     private int moveSpeed;
-    private AsciiPanel terminal;
-    private AsciiPanel teste;
+    private AsciiPanel telaDeJogo;
+    private AsciiPanel statusJogador;
+    private AsciiPanel relatorioJogo;
+    private AsciiPanel miniMapa;
 
-    private int asciiWidth = 80; // largura do painel ASCII (em caracteres)
-    private int asciiHeight = 24; // altura do painel ASCII (em caracteres)
+    private int telaDeJogoWidth = 80; // largura do painel ASCII (em caracteres)
+    private int telaDeJogoHeight = 24; // altura do painel ASCII (em caracteres)
+    private int statusJogadorWidht = 80;
+    private int statusJogadorHeight = 12;
+    private int relatorioJogoWidht = 49;
+    private int relatorioJogoHeight = 20;
+    private int miniMapaWidht = 49;
+    private int miniMapaHeight = 16;
 
     private static final int CHAR_WIDTH = 9;
     private static final int CHAR_HEIGHT = 16;
@@ -22,41 +30,81 @@ public class Interface extends JPanel {
     public Interface() {
         this.setFocusable(true);
 
-        terminal = new AsciiPanel();
-        terminal.setSize(asciiWidth * CHAR_WIDTH, asciiHeight * CHAR_HEIGHT);
-        terminal.setBounds(30, 30, asciiWidth * CHAR_WIDTH, asciiHeight * CHAR_HEIGHT);
-        this.add(terminal);
+        telaDeJogo = new AsciiPanel();
+        telaDeJogo.setSize(telaDeJogoWidth * CHAR_WIDTH, telaDeJogoHeight * CHAR_HEIGHT);
+        telaDeJogo.setBounds(30, 30, telaDeJogoWidth * CHAR_WIDTH, telaDeJogoHeight * CHAR_HEIGHT);
+        this.add(telaDeJogo);
 
-        teste = new AsciiPanel();
-        teste.setSize(3  * CHAR_WIDTH, 3 * CHAR_HEIGHT);
-        teste.setBounds(960, 450, 40 * CHAR_WIDTH, 15 * CHAR_HEIGHT);
-        this.add(teste);
+        statusJogador = new AsciiPanel();
+        statusJogador.setSize(statusJogadorWidht  * CHAR_WIDTH, statusJogadorHeight * CHAR_HEIGHT);
+        statusJogador.setBounds(30, 464, statusJogadorWidht * CHAR_WIDTH, statusJogadorHeight * CHAR_HEIGHT);
+        this.add(statusJogador);
+
+        relatorioJogo = new AsciiPanel();
+        relatorioJogo.setSize(relatorioJogoWidht * CHAR_WIDTH, relatorioJogoHeight * CHAR_HEIGHT);
+        relatorioJogo.setBounds(790, 30, relatorioJogoWidht * CHAR_WIDTH, relatorioJogoHeight * CHAR_HEIGHT);
+        this.add(relatorioJogo);
+
+        miniMapa = new AsciiPanel();
+        miniMapa.setSize(miniMapaWidht * CHAR_WIDTH, miniMapaHeight * CHAR_HEIGHT);
+        miniMapa.setBounds(790, 390, miniMapaWidht * CHAR_WIDTH, miniMapaHeight * CHAR_HEIGHT);
+        this.add(miniMapa);
 
         updateAsciiPanel();
     }
 
     private void updateAsciiPanel(){
 
-        terminal.clear();
-        teste.clear();
+        telaDeJogo.clear();
+        statusJogador.clear();
+        relatorioJogo.clear();
+        miniMapa.clear();
 
-        terminal.write("Hello World!", 0, 0);
-        teste.write("Teste", 1, 1);
-        //char[][] matriz = {
-        //        {'A', 'B', 'C'},
-        //        {'D', 'E', 'F'}
-        //};
+        // Exemplo de uma sala vazia
+        // largura: 80 | altura: 24 (em pixels)
+        char[][] matriz = new char[][]{
+                {'.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.',},
+                {'.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.',},
+                {'.','.','@','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.',},
+                {'.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.',},
+                {'.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.',},
+                {'.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.',},
+                {'.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.',},
+                {'.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.',},
+                {'.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.',},
+                {'.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.',},
+                {'.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.',},
+                {'.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.',},
+                {'.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.',},
+                {'.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.',},
+                {'.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.',},
+                {'.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.',},
+                {'.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.',},
+                {'.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.',},
+                {'.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.',},
+                {'.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.',},
+                {'.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.',},
+                {'.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.',},
+                {'.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.',},
+                {'.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.',},
+        };
 
-        //for(int i = 0; i < matriz.length; i++){
-            //for(int j = 0; j < matriz[i].length; j++){
-            //    terminal.write(matriz[i][j]);
-            //}
-        //}
+//        telaDeJogo.write("Tela de jogo", 1, 1);
+        for(int i = 0; i < matriz.length; i++){
+            for(int j = 0; j < matriz[i].length; j++){
+                telaDeJogo.write(matriz[i][j], j, i);
+            }
 
-        //teste.write("Teste", 1, 1);
+        }
 
-        teste.repaint();
-        terminal.repaint();
+        statusJogador.write("Status Jogador", 1, 1);
+        relatorioJogo.write("Relatorio Jogo", 1, 1);
+        miniMapa.write("Mini Mapa", 1, 1);
+
+        statusJogador.repaint();
+        telaDeJogo.repaint();
+        relatorioJogo.repaint();
+        miniMapa.repaint();
     }
 
     public void setMoveSpeed(int moveSpeed){
@@ -71,58 +119,19 @@ public class Interface extends JPanel {
         g.setColor(Color.MAGENTA);
         g.fillRect(0, 0, getWidth(), getHeight());
 
-        // Área mapa
-        float proporcaoMapa = 1.8f;
+        g.setColor(Color.ORANGE);
+        g.fillRect(20, 20, telaDeJogoWidth * CHAR_WIDTH + 20, telaDeJogoHeight * CHAR_HEIGHT + 20);
 
-        int larguraMapa = 900;
+        g.fillRect(20, 444, statusJogadorWidht * CHAR_WIDTH + 20, statusJogadorHeight * CHAR_HEIGHT + 20);
 
-        int borda = larguraMapa / 90;
-        int margem = borda * 2;
+        g.fillRect(780, 20, relatorioJogoWidht * CHAR_WIDTH + 20, relatorioJogoHeight * CHAR_HEIGHT + 20);
 
-        int alturaMapa = (int) (larguraMapa / proporcaoMapa);
-        g.setColor(Color.LIGHT_GRAY);
-        g.fillRect(margem, margem, larguraMapa, borda); // Cima esquerda
-        g.fillRect(margem, margem, borda, alturaMapa); // Cima esquerda
-        g.fillRect(margem, alturaMapa + margem, larguraMapa, borda); // Baixo esquerda
-        g.fillRect(larguraMapa + margem, margem, borda, alturaMapa + borda); // Cima direita
+        g.fillRect(780, 380, miniMapaWidht * CHAR_WIDTH + 20, miniMapaHeight * CHAR_HEIGHT + 20);
 
-        // Área status personagem
-        float proporcaoStatus = 6.4285f;
-        int larguraStatus = larguraMapa;
-        int alturaStatus = (int) ( larguraStatus / proporcaoStatus);
-        g.setColor(Color.PINK);
-        g.fillRect(margem, alturaMapa + (2 * margem) + borda, larguraStatus, borda); // Cima esquerda
-        g.fillRect(margem, alturaMapa + (2 * margem) + borda, borda, alturaStatus); // Cima esquerda
-        g.fillRect(margem, alturaMapa + (2 * margem) + borda + alturaStatus, larguraStatus, borda); // Baixo esquerda
-        g.fillRect(larguraStatus + margem, alturaMapa + (2 * margem) + borda, borda, alturaStatus + borda); // Cima direita
-
-        // Área da caixa de texto
-        float proporcaoLarguraTexto = 2.25f;
-        float proporcaoAlturaTexto = 2.3684f;
-        int larguraTexto = (int) (larguraMapa / proporcaoLarguraTexto);
-        int alturaTexto = (int) (larguraMapa / proporcaoAlturaTexto);
-        g.setColor(Color.RED);
-        g.fillRect(larguraMapa + (2 * margem) + borda, margem, alturaTexto, borda); // Cima esquerda
-        g.fillRect(larguraMapa + (2 * margem) + borda, margem, borda, larguraTexto); // Cima esquerda
-        g.fillRect(larguraMapa + (2 * margem) + borda, margem + alturaTexto + borda, larguraTexto - margem, borda); // Baixo esquerda
-        g.fillRect(larguraMapa + (2 * margem) + larguraTexto - margem, margem, borda, alturaTexto + margem);
-
-        // Área mini-mapa
-        float proporcaoMini = 3.46153f;
-        int larguraMini = larguraTexto - margem;
-        int alturaMini = (int) (larguraMapa / proporcaoMini);
-        g.setColor(Color.BLUE);
-        g.fillRect(larguraMapa + (2 * margem) + borda, alturaTexto + (2 * margem) + (2 * borda), larguraMini, borda);
-        g.fillRect(larguraMapa + (2 * margem) + borda, alturaTexto + (2 * margem) + (2 * borda), borda, alturaMini);
-        g.fillRect(larguraMapa + (2 * margem) + borda, alturaTexto + (2 * margem) + alturaMini + borda, larguraMini, borda);
-        g.fillRect(larguraMapa + (2 * margem) + larguraMini, alturaTexto + (2 * margem) + (2 * borda), borda, alturaMini);
-
-        // Desenha o personagem (vermelho)
-        // g.setColor(Color.RED);
-        // g.fillRect(x, y, borda, borda); // personagem
-
-        terminal.setBounds(30, 30, asciiWidth * CHAR_WIDTH, asciiHeight * CHAR_HEIGHT);
-        teste.setBounds(960, 450, 40 * CHAR_WIDTH, 15 * CHAR_HEIGHT);
+        telaDeJogo.setBounds(30, 30, telaDeJogoWidth * CHAR_WIDTH, telaDeJogoHeight * CHAR_HEIGHT);
+        statusJogador.setBounds(30, 454, statusJogadorWidht * CHAR_WIDTH, statusJogadorHeight * CHAR_HEIGHT);
+        relatorioJogo.setBounds(790, 30, relatorioJogoWidht * CHAR_WIDTH, relatorioJogoHeight * CHAR_HEIGHT);
+        miniMapa.setBounds(790, 390, miniMapaWidht * CHAR_WIDTH, miniMapaHeight * CHAR_HEIGHT);
 
 
     }
