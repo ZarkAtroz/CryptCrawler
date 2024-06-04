@@ -116,10 +116,10 @@ public class Interface extends JPanel {
         super.paintComponent(g);
 
         // Desenha fundo preto
-        g.setColor(Color.MAGENTA);
+        g.setColor(Color.BLACK);
         g.fillRect(0, 0, getWidth(), getHeight());
 
-        g.setColor(Color.ORANGE);
+        g.setColor(Color.GRAY);
         g.fillRect(20, 20, telaDeJogoWidth * CHAR_WIDTH + 20, telaDeJogoHeight * CHAR_HEIGHT + 20);
 
         g.fillRect(20, 444, statusJogadorWidht * CHAR_WIDTH + 20, statusJogadorHeight * CHAR_HEIGHT + 20);
