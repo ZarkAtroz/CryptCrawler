@@ -1,5 +1,6 @@
 package combate.inimigos;
 
+import combate.Habilidade;
 import combate.PersonagemCombate;
 
 public abstract class Inimigo extends PersonagemCombate {
@@ -11,5 +12,12 @@ public abstract class Inimigo extends PersonagemCombate {
     public Inimigo(int lvl) {
         super(lvl);
     }
-    
+
+    @Override
+    public void addHabs(int cd, int tp, int status, float mod, String nome) {
+        Habilidade hab = new Habilidade(tp, status, mod, nome);
+        hab.inimigoHab(cd);
+
+        hbs.add(hab);
+    }
 }

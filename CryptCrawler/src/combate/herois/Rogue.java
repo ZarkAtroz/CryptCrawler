@@ -1,8 +1,8 @@
 package combate.herois;
 
-import combate.Combatente;
+import combate.Habilidade;
 
-public class Rogue extends Heroi implements Combatente {
+public class Rogue extends Heroi {
 
     
     // Construtor
@@ -11,6 +11,8 @@ public class Rogue extends Heroi implements Combatente {
         leveling();
         this.hp_atual = this.hp_max;
         this.mp_atual = this.mp_max;
+        addHabs(0, 1, (getAgilidade() + getSorte()), 0.25f, "ATK BASICO");
+        addHabs(4, 1, (getAgilidade() + getSorte()), 0.50f, "Estocada");
     }
 
     // Funções da classe PersonagemCombate
@@ -28,10 +30,10 @@ public class Rogue extends Heroi implements Combatente {
 
     // Funções da interface
     @Override
-    public int dano(int status, float hab_mod, float buff, int res_ini, int agi_def) {
+    public int dano(Habilidade hb, float buff, int res_ini, int agi_def) {
         if (acerto(this.agilidade, agi_def)) {
             int res = res_ini / 2;
-            int dmg = (int) (status * hab_mod * buff);
+            int dmg = (int) (hb.getStatus() * hb.getModficador() * buff);
 
             if (txcrit()) {
                 dmg = dmg * this.critico;
@@ -58,11 +60,5 @@ public class Rogue extends Heroi implements Combatente {
         int num_random = (int) (1 + (Math.random()) * 100);
 
         return this.sorte > num_random;
-    }
-
-    @Override
-    public String toString() {
-        return hp_atual + "/" + hp_max + " - " + mp_atual + "/" + mp_max + "\n" + forca + " - " + inteligencia + "\n" +
-            agilidade + " - " + sorte;
     }
 }

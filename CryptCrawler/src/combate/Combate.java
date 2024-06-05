@@ -2,8 +2,10 @@ package combate;
 
 import java.util.ArrayList;
 
+import combate.herois.Heroi;
+
 public class Combate {
 
-    public ArrayList<PersonagemCombate> personagens;
+    public static ArrayList<Heroi> herois = new ArrayList<>();
 
 }

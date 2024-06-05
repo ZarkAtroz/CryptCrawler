@@ -1,8 +1,10 @@
 package combate.herois;
 
+import combate.Combatente;
+import combate.Habilidade;
 import combate.PersonagemCombate;
 
-public abstract class Heroi extends PersonagemCombate {
+public abstract class Heroi extends PersonagemCombate implements Combatente {
 
     protected int hp_atual;
     protected int hp_max;
@@ -47,4 +49,11 @@ public abstract class Heroi extends PersonagemCombate {
         this.mp_max = mp_max;
     }
 
+    @Override
+    public void addHabs(int mp, int tp, int status, float mod, String nome) {
+        Habilidade hab = new Habilidade(tp, status, mod, nome);
+        hab.heroiHab(mp);
+
+        hbs.add(hab);
+    }
 }

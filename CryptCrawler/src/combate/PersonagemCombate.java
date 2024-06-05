@@ -15,7 +15,7 @@ public abstract class PersonagemCombate {
     protected int lvl;
 
     // Habilidades
-    protected ArrayList<Habilidade> hbs;
+    protected ArrayList<Habilidade> hbs = new ArrayList<>();
 
     // Construtores
     public PersonagemCombate(int lvl) {
@@ -24,6 +24,8 @@ public abstract class PersonagemCombate {
 
     // Funcões
     public abstract void leveling();
+
+    public abstract void addHabs(int cd_mp, int tp, int status, float mod, String nome);
 
     public int getForca() {
         return forca;

@@ -1,8 +1,9 @@
 package combate.herois;
 
 import combate.Combatente;
+import combate.Habilidade;
 
-public class Healer extends Heroi implements Combatente {
+public class Healer extends Heroi {
 
     // Construtor
     public Healer(int lvl) {
@@ -10,6 +11,11 @@ public class Healer extends Heroi implements Combatente {
         leveling();
         this.hp_atual = this.hp_max;
         this.mp_atual = this.mp_max;
+
+        addHabs(0, 1, getInteligencia(), 0.25f, "ATK BASICO");
+        addHabs(4, 2, (int) (getInteligencia() * 0.5), 0, "Cura");
+        addHabs(3, 2, (int) (getInteligencia() * 0.5), 0, "Buff Dano");
+        addHabs(0, 1, (int) (getInteligencia() * 0.5), 0, "Buff Res");
     }
 
     // Funções da classe PersonagemCombate
@@ -27,10 +33,10 @@ public class Healer extends Heroi implements Combatente {
 
     // Funções da interface
     @Override
-    public int dano(int status, float hab_mod, float buff, int res_ini, int agi_def) {
+    public int dano(Habilidade hb, float buff, int res_ini, int agi_def) {
         if (acerto(this.agilidade, agi_def)) {
             int res = res_ini / 2;
-            int dmg = (int) (status * hab_mod * buff);
+            int dmg = (int) (hb.getStatus() * hb.getModficador() * buff);
 
             if (txcrit()) {
                 dmg = dmg * this.critico;

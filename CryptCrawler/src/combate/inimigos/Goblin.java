@@ -1,6 +1,7 @@
 package combate.inimigos;
 
 import combate.Combatente;
+import combate.Habilidade;
 
 public class Goblin extends Inimigo implements Combatente {
 
@@ -9,7 +10,7 @@ public class Goblin extends Inimigo implements Combatente {
     }
 
     @Override
-    public int dano(int status, float hab_mod, float buff, int res_ini, int agi_def) {
+    public int dano(Habilidade hb, float buff, int res_ini, int agi_def) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'dano'");
     }

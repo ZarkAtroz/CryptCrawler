@@ -1,8 +1,9 @@
 package combate.herois;
 
 import combate.Combatente;
+import combate.Habilidade;
 
-public class MagoElemental extends Heroi implements Combatente{
+public class MagoElemental extends Heroi {
 
     // Construtor
     public MagoElemental(int lvl) {
@@ -10,6 +11,9 @@ public class MagoElemental extends Heroi implements Combatente{
         leveling();
         this.hp_atual = this.hp_max;
         this.mp_atual = this.mp_max;
+
+        addHabs(0, 1, getInteligencia(), 0.25f, "ATK BASICO");
+        addHabs(5, 1, (getInteligencia() + 2), 0.50f, "Bola de Fogo");
     }
 
     // Funções da classe PersonagemCombate
@@ -27,10 +31,10 @@ public class MagoElemental extends Heroi implements Combatente{
 
     // Funções da interface
     @Override
-    public int dano(int status, float hab_mod, float buff, int res_ini, int agi_def) {
+    public int dano(Habilidade hb, float buff, int res_ini, int agi_def) {
         if (acerto(this.agilidade, agi_def)) {
             int res = res_ini / 2;
-            int dmg = (int) (status * hab_mod * buff);
+            int dmg = (int) (hb.getStatus() * hb.getModficador() * buff);
 
             if (txcrit()) {
                 dmg = dmg * this.critico;
