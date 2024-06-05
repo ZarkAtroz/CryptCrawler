@@ -13,9 +13,9 @@ public class Healer extends Heroi {
         this.mp_atual = this.mp_max;
 
         addHabs(0, 1, getInteligencia(), 0.25f, "ATK BASICO");
-        addHabs(4, 2, (int) (getInteligencia() * 0.5), 0, "Cura");
-        addHabs(3, 2, (int) (getInteligencia() * 0.5), 0, "Buff Dano");
-        addHabs(0, 1, (int) (getInteligencia() * 0.5), 0, "Buff Res");
+        addHabs(4, 3, (int) (getInteligencia() * 0.5), 0, "Cura");
+        addHabs(3, 3, (int) (getInteligencia() * 0.5), 0, "Buff Dano");
+        addHabs(0, 3, (int) (getInteligencia() * 0.5), 0, "Buff Res");
     }
 
     // Funções da classe PersonagemCombate

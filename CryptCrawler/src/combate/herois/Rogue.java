@@ -12,7 +12,7 @@ public class Rogue extends Heroi {
         this.hp_atual = this.hp_max;
         this.mp_atual = this.mp_max;
         addHabs(0, 1, (getAgilidade() + getSorte()), 0.25f, "ATK BASICO");
-        addHabs(4, 1, (getAgilidade() + getSorte()), 0.50f, "Estocada");
+        addHabs(4, 2, (getAgilidade() + getSorte()), 0.50f, "Estocada");
     }
 
     // Funções da classe PersonagemCombate

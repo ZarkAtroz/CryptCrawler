@@ -52,8 +52,14 @@ public class MagoElemental extends Heroi {
         int necessario = 100 * agi_atk / total;
         int num_random = (int) (1 + (Math.random() * 100));
 
-        System.out.println("Acerto: " + (necessario > num_random));
-        return necessario > num_random;
+        boolean acertou = necessario > num_random;
+        if (acertou) {
+            System.out.println("Acerto de " + getClass().getSimpleName());
+        } else {
+            System.out.println("Erro de" + getClass().getSimpleName());
+        }
+
+        return acertou;
     }
 
     @Override

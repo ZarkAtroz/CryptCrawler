@@ -8,8 +8,9 @@ public class Habilidade {
 
     private int tipo_hb;
     /*
-     * 1 = dano
-     * 2 = buff
+     * 1 = atk_bas
+     * 2 = hab_dano
+     * 3 = suporte
      */
 
     private int status;
