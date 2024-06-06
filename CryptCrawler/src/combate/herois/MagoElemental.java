@@ -1,6 +1,5 @@
 package combate.herois;
 
-import combate.Combatente;
 import combate.Habilidade;
 
 public class MagoElemental extends Heroi {
@@ -34,6 +33,10 @@ public class MagoElemental extends Heroi {
     public int dano(Habilidade hb, float buff, int res_ini, int agi_def) {
         if (acerto(this.agilidade, agi_def)) {
             int res = res_ini / 2;
+            if (res < 1) {
+                res = 1;
+            }
+            
             int dmg = (int) (hb.getStatus() * hb.getModficador() * buff);
 
             if (txcrit()) {

@@ -1,9 +1,8 @@
 package combate.herois;
 
-import combate.Combatente;
 import combate.Habilidade;
 
-public class Guerreiro extends Heroi implements Combatente{
+public class Guerreiro extends Heroi {
 
     // Construtor
     public Guerreiro(int lvl) {
@@ -37,6 +36,7 @@ public class Guerreiro extends Heroi implements Combatente{
             if (res < 1) {
                 res = 1;
             }
+            
             int dmg = (int) (hb.getStatus() * hb.getModficador() * buff);
 
             if (txcrit()) {
