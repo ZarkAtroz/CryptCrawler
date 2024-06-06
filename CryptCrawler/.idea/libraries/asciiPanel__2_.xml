@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="asciiPanel (2)">
-    <CLASSES>
-      <root url="jar://$PROJECT_DIR$/src/asciiPanel/asciiPanel.jar!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>
