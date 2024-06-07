@@ -1,15 +1,14 @@
-import Interface.Interface;
+import Ui.Interface;
 
 import javax.swing.*;
 
 public class CryptCrawler extends JFrame {
 
-    private JFrame frame;
-    private Interface interfaceJogo;
+    private final Interface interfaceJogo;
 
     public CryptCrawler(){
-        this.frame = new JFrame("CryptCrawler");
-        ImageIcon img = new ImageIcon("src\\teste.jpg");
+        JFrame frame = new JFrame("Crypt Crawler");
+        ImageIcon img = new ImageIcon("Icon\\icon.jpg");
         frame.setIconImage(img.getImage());
 
         this.interfaceJogo = new Interface();

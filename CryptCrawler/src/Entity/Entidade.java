@@ -1,4 +1,7 @@
-package Entidades;
+package Entity;
 
 public class Entidade {
+
+
+
 }
