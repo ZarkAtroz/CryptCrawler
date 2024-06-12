@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="cd81eca7-8282-4515-b0e4-cc228301eed5" name="Changes" comment="" />
+    <list default="true" id="cd81eca7-8282-4515-b0e4-cc228301eed5" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/CryptCrawler/src/Ui/ComandosTela.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CryptCrawler/src/Ui/MiniMapa.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CryptCrawler/src/Ui/RelatorioJogo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CryptCrawler/src/Ui/StatusJogador.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CryptCrawler/src/Ui/Tela.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CryptCrawler/src/Ui/TelaDeJogo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CryptCrawler/src/asciiPanel/asciiPanel.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CryptCrawler/src/Ui/Interface.java" beforeDir="false" afterPath="$PROJECT_DIR$/CryptCrawler/src/Ui/Interface.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -27,9 +36,9 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "Telas-lógica",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/johnc/Documents/GitHub/CryptCrawler"
+    "last_opened_file_path": "C:/Users/johnc/Documents/GitHub/CryptCrawler/CryptCrawler"
   }
 }]]></component>
   <component name="RunManager">
