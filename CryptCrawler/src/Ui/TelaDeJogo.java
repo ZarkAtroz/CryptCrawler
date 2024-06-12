@@ -10,8 +10,9 @@ public class TelaDeJogo extends Tela{
 
     public void printTexto(String texto, int x, int y){
         getTela().clear();
-        getTela().write("TELA DE JOGO 45 x 30", x, y);
-        getTela().write("45 x 30", x, y + 1);
+        getTela().write(texto, x, y);
+        // getTela().write("TELA DE JOGO 45 x 30", x, y);
+        // getTela().write("45 x 30", x, y + 1);
         getTela().repaint();
     }
 

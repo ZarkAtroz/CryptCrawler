@@ -2,11 +2,18 @@ package Ui;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.InputEvent;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.util.LinkedList;
+import java.util.Queue;
 
 // Para funcionar, vá para o IntelliJ, clique com o botão direito no arquivo .jar e clique em "add as a library" (ultima opção)
 import asciiPanel.*;
 
-public class Interface extends JPanel {
+public class Interface extends JPanel implements KeyListener{
+
+    private Queue<InputEvent> inputQueue;
 
     private final TelaDeJogo telaDeJogo;
     private final StatusJogador statusJogador;
@@ -15,33 +22,60 @@ public class Interface extends JPanel {
 
     private final int telaDeJogoWidth = 45; // largura do painel ASCII (em caracteres)
     private final int telaDeJogoHeight = 30;
-    private final int statusJogadorWidht = 80;
+    private final int statusJogadorWidth = 80;
     private final int statusJogadorHeight = 12;
-    private final int relatorioJogoWidht = 49;
+    private final int relatorioJogoWidth = 49;
     private final int relatorioJogoHeight = 30;
-    private final int miniMapaWidht = 49;
+    private final int miniMapaWidth = 49;
     private final int miniMapaHeight = 35;
 
     private static final int FONT_AEROSMATICA_SIZE = 16;
     private static final int FONT_DRAKE_SIZE = 9;
 
     public Interface() {
+        this.inputQueue = new LinkedList<>();
+
         this.setFocusable(true);
-
-        telaDeJogo = new TelaDeJogo(45, 30, AsciiFont.AEROSMATICA_16_16, 16);
+        telaDeJogo = new TelaDeJogo(telaDeJogoWidth, telaDeJogoHeight, AsciiFont.AEROSMATICA_16_16, FONT_AEROSMATICA_SIZE);
         this.add(telaDeJogo.getTela());
-
-        statusJogador = new StatusJogador(80, 12, AsciiFont.DRAKE_10x10, 9);
+        statusJogador = new StatusJogador(statusJogadorWidth, statusJogadorHeight, AsciiFont.DRAKE_10x10, FONT_DRAKE_SIZE);
         this.add(statusJogador.getTela());
-
-        relatorioJogo = new RelatorioJogo(49, 30, AsciiFont.DRAKE_10x10, 9);
+        relatorioJogo = new RelatorioJogo(relatorioJogoWidth, relatorioJogoHeight, AsciiFont.DRAKE_10x10, FONT_DRAKE_SIZE);
         this.add(relatorioJogo.getTela());
-
-        miniMapa = new MiniMapa(49, 35, AsciiFont.DRAKE_10x10, 9);
+        miniMapa = new MiniMapa(miniMapaWidth, miniMapaHeight, AsciiFont.DRAKE_10x10, FONT_DRAKE_SIZE);
         this.add(miniMapa.getTela());
+
+        super.addKeyListener(this);
 
     }
 
+    public MiniMapa getMiniMapa() { return miniMapa; }
+
+    public int getMiniMapaHeight() { return miniMapaHeight; }
+
+    public int getMiniMapaWidth() { return miniMapaWidth; }
+
+    public RelatorioJogo getRelatorioJogo() { return relatorioJogo; }
+
+    public int getRelatorioJogoHeight() { return relatorioJogoHeight; }
+
+    public int getRelatorioJogoWidth() { return relatorioJogoWidth; }
+
+    public StatusJogador getStatusJogador() { return statusJogador; }
+
+    public int getStatusJogadorHeight() { return statusJogadorHeight; }
+
+    public int getStatusJogadorWidth() { return statusJogadorWidth; }
+
+    public TelaDeJogo getTelaDeJogo() { return telaDeJogo; }
+
+    public int getTelaDeJogoHeight() { return telaDeJogoHeight; }
+
+    public int getTelaDeJogoWidth() { return telaDeJogoWidth; }
+
+    public InputEvent getNextInput() { return inputQueue.poll(); }
+
+    // Imprimir | Atualizar todos os painéis da Interface
     public void updateAsciiPanel(){
 
         char[][] matriz = new char[45][30];
@@ -52,14 +86,12 @@ public class Interface extends JPanel {
         }
 
         telaDeJogo.printMundo(matriz);
-
         try {
             Thread.sleep(1000);
         } catch (InterruptedException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-
         telaDeJogo.printTexto("TELA DE JOGO", 1, 1);
 
         // Teste da lógica para adicionar informações
@@ -68,18 +100,15 @@ public class Interface extends JPanel {
         for(int i = 0; i < 40; i++){
            relatorioJogo.atualizarInformacao("texto " + i, 1, 0);
             try {
-                Thread.sleep(300);
+                Thread.sleep(200);
             } catch (InterruptedException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
             }
         }
 
-
         relatorioJogo.textoUnico("RELATORIO JOGO", 1, 1);
-
         statusJogador.printTela("STATUS JOGADOR", 1 , 1);
-
         miniMapa.printMatriz();
 
         try {
@@ -102,19 +131,33 @@ public class Interface extends JPanel {
         g.fillRect(0, 0, getWidth(), getHeight());
 
         g.setColor(Color.GRAY);
+
+        // Tela de jogo
         g.fillRect(20, 20, telaDeJogoWidth * FONT_AEROSMATICA_SIZE + 20, telaDeJogoHeight * FONT_AEROSMATICA_SIZE + 20);
 
-        g.fillRect(20, 535, statusJogadorWidht * FONT_DRAKE_SIZE + 20, statusJogadorHeight * FONT_DRAKE_SIZE + 20);
+        // Status jogador
+        g.fillRect(20, 535, statusJogadorWidth * FONT_DRAKE_SIZE + 20, statusJogadorHeight * FONT_DRAKE_SIZE + 20);
 
-        g.fillRect(780, 20, relatorioJogoWidht * FONT_DRAKE_SIZE + 20, relatorioJogoHeight * FONT_DRAKE_SIZE + 20);
+        // Relatório jogo
+        g.fillRect(780, 20, relatorioJogoWidth * FONT_DRAKE_SIZE + 20, relatorioJogoHeight * FONT_DRAKE_SIZE + 20);
 
-        g.fillRect(780, 325, miniMapaWidht * FONT_DRAKE_SIZE + 20, miniMapaHeight * FONT_DRAKE_SIZE + 20 + 3);
+        // Mini mapa
+        g.fillRect(780, 325, miniMapaWidth * FONT_DRAKE_SIZE + 20, miniMapaHeight * FONT_DRAKE_SIZE + 20 + 3);
 
         telaDeJogo.setBounds(30, 30);
         statusJogador.setBounds(30, 545);
         relatorioJogo.setBounds(790, 30);
         miniMapa.setBounds(790, 333);
 
-
     }
+
+    @Override
+    public void keyTyped(KeyEvent e) { }
+
+    @Override
+    public void keyPressed(KeyEvent e) { inputQueue.add(e); }
+
+    @Override
+    public void keyReleased(KeyEvent e) { }
+
 }

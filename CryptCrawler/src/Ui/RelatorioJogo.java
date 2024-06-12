@@ -31,21 +31,17 @@ public class RelatorioJogo extends Tela{
         this.historico = historico;
     }
 
-    public void adicionarInformacao(String texto){
-
-    }
-
     public void atualizarInformacao(String texto, int x, int y){
 
-        if(linhas.size() == 29){
+        if(linhas.size() == 26){
             historico.add(linhas.get(0));
             linhas.remove(0);
         }
         linhas.add(texto);
 
         getTela().clear();
-        for(int i = 0; i < linhas.size(); i++){
-            getTela().write(linhas.get(i), x, y++);
+        for (String linha : linhas) {
+            getTela().write(linha, x, y++);
         }
 
         getTela().repaint();
@@ -54,10 +50,10 @@ public class RelatorioJogo extends Tela{
     public void textoUnico(String texto, int x, int y){
         getTela().clear();
         getTela().write(texto, x, y);
-        getTela().write(getWidth() + " x " + getHeight(), 1, 2);
-        getTela().write("QUANTIDADE REAL LINHAS = 26" , 1, 3);
-        getTela().write("TAMANHO MAXIMO LINHA = 48 COMECANDO PELO x0" , 1, 4);
-        getTela().write("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",0,6);
+        // getTela().write(getWidth() + " x " + getHeight(), 1, 2);
+        // getTela().write("QUANTIDADE REAL LINHAS = 26" , 1, 3);
+        // getTela().write("TAMANHO MAXIMO LINHA = 48 COMECANDO PELO x0" , 1, 4);
+        // getTela().write("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",0,6);
         getTela().repaint();
     }
 
