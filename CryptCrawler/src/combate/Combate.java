@@ -33,12 +33,15 @@ public class Combate {
         turno_heroi = (heroi_atual.getAgilidade() > inimigo_atual.getAgilidade());
     }
 
-    public void teste() {
+    public String teste() {
         Scanner sc = new Scanner(System.in);
+        String str = "";
+
         if (turno_heroi) {
-            System.out.println("Turno do Heroi: ");
-            System.out.println("Heroi atual: " + heroi_atual.getClass().getSimpleName());
-            System.out.println("HP: " + heroi_atual.getHp_atual() +"/"+ heroi_atual.getHp_max());
+            str += "Turno do Heroi:\n";
+            str += "Heroi atual: \n" + heroi_atual.getClass().getSimpleName();
+            str += "Turno do Heroi: \n" + heroi_atual.getHp_atual() +"/"+ heroi_atual.getHp_max();
+
             System.out.println(heroi_atual.getHbs().get(0));
 
             int dano = heroi_atual.dano(heroi_atual.getHbs().get(0), 1, 1, inimigo_atual.getAgilidade());
@@ -47,9 +50,10 @@ public class Combate {
 
             turno_heroi = false;
         } else {
-            System.out.println("Turno do Inimigo");
-            System.out.println("Inimigo atual: " + inimigo_atual.getClass().getSimpleName());
-            System.out.println("HP: " + inimigo_atual.getHp_atual() +"/"+inimigo_atual.getHp_max());
+            str += "Turno do Inimigo:\n";
+            str += "Inimigo atual: \n" + inimigo_atual.getClass().getSimpleName();
+            str += "Turno do Inimigo: \n" + inimigo_atual.getHp_atual() +"/"+ inimigo_atual.getHp_max();
+
             System.out.println(inimigo_atual.getHbs().get(0));
 
             int dano = inimigo_atual.dano(inimigo_atual.getHbs().get(0), 1, 1, heroi_atual.getAgilidade());
@@ -58,8 +62,9 @@ public class Combate {
 
             turno_heroi = true;
         }
-        sc.nextLine();
 
+        //sc.nextLine();
+        return str;
         
     }
     
