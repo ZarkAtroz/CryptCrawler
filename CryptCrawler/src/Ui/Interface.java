@@ -8,10 +8,10 @@ import asciiPanel.*;
 
 public class Interface extends JPanel {
 
-    private final AsciiPanel telaDeJogo;
-    private final AsciiPanel statusJogador;
-    private final AsciiPanel relatorioJogo;
-    private final AsciiPanel miniMapa;
+    private final TelaDeJogo telaDeJogo;
+    private final StatusJogador statusJogador;
+    private final RelatorioJogo relatorioJogo;
+    private final MiniMapa miniMapa;
 
     private final int telaDeJogoWidth = 45; // largura do painel ASCII (em caracteres)
     private final int telaDeJogoHeight = 30;
@@ -28,45 +28,69 @@ public class Interface extends JPanel {
     public Interface() {
         this.setFocusable(true);
 
-        telaDeJogo = new AsciiPanel(telaDeJogoWidth * FONT_AEROSMATICA_SIZE, telaDeJogoHeight * FONT_AEROSMATICA_SIZE, AsciiFont.AEROSMATICA_16_16);
-        telaDeJogo.setSize(telaDeJogoWidth * FONT_AEROSMATICA_SIZE, telaDeJogoHeight * FONT_AEROSMATICA_SIZE);
-        telaDeJogo.setBounds(30, 30, telaDeJogoWidth * FONT_AEROSMATICA_SIZE, telaDeJogoHeight * FONT_AEROSMATICA_SIZE);
-        this.add(telaDeJogo);
+        telaDeJogo = new TelaDeJogo(45, 30, AsciiFont.AEROSMATICA_16_16, 16);
+        this.add(telaDeJogo.getTela());
 
-        statusJogador = new AsciiPanel(statusJogadorWidht * FONT_DRAKE_SIZE, statusJogadorHeight * FONT_DRAKE_SIZE, AsciiFont.DRAKE_10x10);
-        statusJogador.setSize(statusJogadorWidht  * FONT_DRAKE_SIZE, statusJogadorHeight * FONT_DRAKE_SIZE);
-        statusJogador.setBounds(30, 545, statusJogadorWidht * FONT_DRAKE_SIZE, statusJogadorHeight * FONT_DRAKE_SIZE);
-        this.add(statusJogador);
+        statusJogador = new StatusJogador(80, 12, AsciiFont.DRAKE_10x10, 9);
+        this.add(statusJogador.getTela());
 
-        relatorioJogo = new AsciiPanel(relatorioJogoWidht * FONT_DRAKE_SIZE, relatorioJogoHeight * FONT_DRAKE_SIZE, AsciiFont.DRAKE_10x10);
-        relatorioJogo.setSize(relatorioJogoWidht * FONT_DRAKE_SIZE, relatorioJogoHeight * FONT_DRAKE_SIZE);
-        relatorioJogo.setBounds(790, 30, relatorioJogoWidht * FONT_DRAKE_SIZE, relatorioJogoHeight * FONT_DRAKE_SIZE);
-        this.add(relatorioJogo);
+        relatorioJogo = new RelatorioJogo(49, 30, AsciiFont.DRAKE_10x10, 9);
+        this.add(relatorioJogo.getTela());
 
-        miniMapa = new AsciiPanel(miniMapaWidht * FONT_DRAKE_SIZE, miniMapaHeight * FONT_DRAKE_SIZE, AsciiFont.DRAKE_10x10);
-        miniMapa.setSize(miniMapaWidht * FONT_DRAKE_SIZE, miniMapaHeight * FONT_DRAKE_SIZE);
-        miniMapa.setBounds(790, 337, miniMapaWidht * FONT_DRAKE_SIZE, miniMapaHeight * FONT_DRAKE_SIZE);
-        this.add(miniMapa);
+        miniMapa = new MiniMapa(49, 35, AsciiFont.DRAKE_10x10, 9);
+        this.add(miniMapa.getTela());
 
     }
 
     public void updateAsciiPanel(){
 
-        telaDeJogo.clear();
-        statusJogador.clear();
-        relatorioJogo.clear();
-        miniMapa.clear();
+        char[][] matriz = new char[45][30];
+        for (int i = 0; i < 45; i++) {
+            for (int j = 0; j < 30; j++) {
+                matriz[i][j] = '.';
+            }
+        }
 
-        telaDeJogo.write(((char) 1) + "" + ((char) 2) + "" + ((char) 16) + "" + ((char) 17) + "" + ((char) 18), 0, 0);
+        telaDeJogo.printMundo(matriz);
 
-        statusJogador.write("STATUS JOGADOR", 1, 1);
-        relatorioJogo.write("RELATORIO JOGO", 1, 1);
-        miniMapa.write("MINI MAPA", 1, 1);
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
 
-        statusJogador.repaint();
-        telaDeJogo.repaint();
-        relatorioJogo.repaint();
-        miniMapa.repaint();
+        telaDeJogo.printTexto("TELA DE JOGO", 1, 1);
+
+        // Teste da lógica para adicionar informações
+        relatorioJogo.textoUnico("t", 0, 0);
+
+        for(int i = 0; i < 40; i++){
+           relatorioJogo.atualizarInformacao("texto " + i, 1, 0);
+            try {
+                Thread.sleep(300);
+            } catch (InterruptedException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        }
+
+
+        relatorioJogo.textoUnico("RELATORIO JOGO", 1, 1);
+
+        statusJogador.printTela("STATUS JOGADOR", 1 , 1);
+
+        miniMapa.printMatriz();
+
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+        miniMapa.printTela("MINI MAPA", 1, 1);
+
     }
 
     @Override
@@ -84,12 +108,12 @@ public class Interface extends JPanel {
 
         g.fillRect(780, 20, relatorioJogoWidht * FONT_DRAKE_SIZE + 20, relatorioJogoHeight * FONT_DRAKE_SIZE + 20);
 
-        g.fillRect(780, 327, miniMapaWidht * FONT_DRAKE_SIZE + 20, miniMapaHeight * FONT_DRAKE_SIZE + 20);
+        g.fillRect(780, 325, miniMapaWidht * FONT_DRAKE_SIZE + 20, miniMapaHeight * FONT_DRAKE_SIZE + 20 + 3);
 
-        telaDeJogo.setBounds(30, 30, telaDeJogoWidth * FONT_AEROSMATICA_SIZE, telaDeJogoHeight * FONT_AEROSMATICA_SIZE);
-        statusJogador.setBounds(30, 545, statusJogadorWidht * FONT_DRAKE_SIZE, statusJogadorHeight * FONT_DRAKE_SIZE);
-        relatorioJogo.setBounds(790, 30, relatorioJogoWidht * FONT_DRAKE_SIZE, relatorioJogoHeight * FONT_DRAKE_SIZE);
-        miniMapa.setBounds(790, 337, miniMapaWidht * FONT_DRAKE_SIZE, miniMapaHeight * FONT_DRAKE_SIZE);
+        telaDeJogo.setBounds(30, 30);
+        statusJogador.setBounds(30, 545);
+        relatorioJogo.setBounds(790, 30);
+        miniMapa.setBounds(790, 333);
 
 
     }
