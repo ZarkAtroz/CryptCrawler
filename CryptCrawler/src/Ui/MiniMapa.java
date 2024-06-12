@@ -9,9 +9,9 @@ public class MiniMapa extends Tela{
     }
 
     public void printMatriz(){
-        char[][] matriz = new char[44][32];
-        for (int i = 0; i < 44; i++) {
-            for (int j = 0; j < 32; j++) {
+        char[][] matriz = new char[49][35];
+        for (int i = 0; i < 49; i++) {
+            for (int j = 0; j < 35; j++) {
                 matriz[i][j] = '.';
             }
         }
@@ -19,9 +19,9 @@ public class MiniMapa extends Tela{
         getTela().clear();
         int x = 0, y = 0;
 
-        for(int j = 0; j < 32; j++, y++){
+        for(int j = 0; j < 35; j++, y++){
             x = 0;
-            for (int i = 0; i < 44; i++, x++) {
+            for (int i = 0; i < 49; i++, x++) {
                 getTela().write(matriz[i][j], x, y);
             }
         }

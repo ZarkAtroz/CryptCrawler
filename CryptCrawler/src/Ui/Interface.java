@@ -31,13 +31,13 @@ public class Interface extends JPanel {
         telaDeJogo = new TelaDeJogo(45, 30, AsciiFont.AEROSMATICA_16_16, 16);
         this.add(telaDeJogo.getTela());
 
-        statusJogador = new StatusJogador(72, 11, AsciiFont.DRAKE_10x10, 10);
+        statusJogador = new StatusJogador(80, 12, AsciiFont.DRAKE_10x10, 9);
         this.add(statusJogador.getTela());
 
-        relatorioJogo = new RelatorioJogo(44, 27, AsciiFont.DRAKE_10x10, 10);
+        relatorioJogo = new RelatorioJogo(49, 30, AsciiFont.DRAKE_10x10, 9);
         this.add(relatorioJogo.getTela());
 
-        miniMapa = new MiniMapa(44, 32, AsciiFont.DRAKE_10x10, 10);
+        miniMapa = new MiniMapa(49, 35, AsciiFont.DRAKE_10x10, 9);
         this.add(miniMapa.getTela());
 
     }
@@ -60,7 +60,7 @@ public class Interface extends JPanel {
             e.printStackTrace();
         }
 
-        telaDeJogo.printTexto("TELA DE JOGO 45 x 30", 1, 1);
+        telaDeJogo.printTexto("TELA DE JOGO", 1, 1);
 
         // Teste da lógica para adicionar informações
         relatorioJogo.textoUnico("t", 0, 0);
@@ -68,7 +68,7 @@ public class Interface extends JPanel {
         for(int i = 0; i < 40; i++){
            relatorioJogo.atualizarInformacao("texto " + i, 1, 0);
             try {
-                Thread.sleep(10);
+                Thread.sleep(300);
             } catch (InterruptedException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
