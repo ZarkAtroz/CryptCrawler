@@ -1,5 +1,6 @@
 package combate;
 
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -19,6 +20,7 @@ public class Combate {
 
     private boolean turno_heroi;
 
+    public Combate(){}
 
     public Combate(int i_heroi, int i_inimigo, ArrayList<Heroi> hr, ArrayList<Inimigo> in) {
         herois = hr;
@@ -33,15 +35,16 @@ public class Combate {
         turno_heroi = (heroi_atual.getAgilidade() > inimigo_atual.getAgilidade());
     }
 
-    public String teste() {
-        Scanner sc = new Scanner(System.in);
+    public String jogando() {
         String str = "";
 
         if (turno_heroi) {
-            str += "Turno do Heroi:\n";
-            str += "Heroi atual: \n" + heroi_atual.getClass().getSimpleName();
-            str += "Turno do Heroi: \n" + heroi_atual.getHp_atual() +"/"+ heroi_atual.getHp_max();
+            str += "Turno dos Hérois\n";
+        } else {
+            str += "Turno dos inimigos\n";
+        }
 
+        if (turno_heroi) {
             System.out.println(heroi_atual.getHbs().get(0));
 
             int dano = heroi_atual.dano(heroi_atual.getHbs().get(0), 1, 1, inimigo_atual.getAgilidade());
@@ -50,10 +53,6 @@ public class Combate {
 
             turno_heroi = false;
         } else {
-            str += "Turno do Inimigo:\n";
-            str += "Inimigo atual: \n" + inimigo_atual.getClass().getSimpleName();
-            str += "Turno do Inimigo: \n" + inimigo_atual.getHp_atual() +"/"+ inimigo_atual.getHp_max();
-
             System.out.println(inimigo_atual.getHbs().get(0));
 
             int dano = inimigo_atual.dano(inimigo_atual.getHbs().get(0), 1, 1, heroi_atual.getAgilidade());
@@ -63,9 +62,15 @@ public class Combate {
             turno_heroi = true;
         }
 
-        //sc.nextLine();
+        str += "Heroi atual: " + heroi_atual.getClass().getSimpleName() + " | " + heroi_atual.getHp_atual() + "/" + heroi_atual.getHp_max() + "\n";
+        str += "Inimigo atual: " + inimigo_atual.getClass().getSimpleName() + " | " + inimigo_atual.getHp_atual() + "/" + inimigo_atual.getHp_max() + "\n";
+
         return str;
-        
+    }
+
+    public void trocaPersonagem(int index_h) {
+        index_heroi_atual = index_h;
+        heroi_atual = herois.get(index_heroi_atual);
     }
     
 }

@@ -1,6 +1,7 @@
 package combate.herois;
 
 import combate.Habilidade;
+import combate.TesteCombate;
 
 public class MagoElemental extends Heroi {
 
@@ -56,10 +57,11 @@ public class MagoElemental extends Heroi {
         int num_random = (int) (1 + (Math.random() * 100));
 
         boolean acertou = necessario > num_random;
+
         if (acertou) {
-            System.out.println("Acerto de " + getClass().getSimpleName());
+            TesteCombate.relatorioJogo(getClass().getSimpleName() + " acertou com sucesso");
         } else {
-            System.out.println("Erro de" + getClass().getSimpleName());
+            TesteCombate.relatorioJogo(getClass().getSimpleName() + " não teve sucesso no acerto");
         }
 
         return acertou;

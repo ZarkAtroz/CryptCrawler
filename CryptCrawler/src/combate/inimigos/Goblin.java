@@ -1,6 +1,7 @@
 package combate.inimigos;
 
 import combate.Habilidade;
+import combate.TesteCombate;
 
 public class Goblin extends Inimigo {
 
@@ -49,8 +50,15 @@ public class Goblin extends Inimigo {
         int necessario = 100 * agi_atk / total;
         int num_random = (int) (1 + (Math.random() * 100));
 
-        System.out.println("Acerto: " + (necessario > num_random));
-        return necessario > num_random;
+        boolean acertou = necessario > num_random;
+
+        if (acertou) {
+            TesteCombate.relatorioJogo(getClass().getSimpleName() + " acertou com sucesso");
+        } else {
+            TesteCombate.relatorioJogo(getClass().getSimpleName() + " não teve sucesso no acerto");
+        }
+
+        return acertou;
     }
 
     @Override
