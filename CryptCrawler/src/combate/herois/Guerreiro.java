@@ -32,6 +32,7 @@ public class Guerreiro extends Heroi {
     // Funções da interface
     @Override
     public int dano(Habilidade hb, float buff, int res_ini, int agi_def) {
+        this.mp_atual -= hb.getCusto_mp();
         if (acerto(this.agilidade, agi_def)) {
             int res = res_ini / 2;
             if (res < 1) {
