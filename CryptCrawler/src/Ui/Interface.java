@@ -15,27 +15,40 @@ public class Interface extends JPanel implements KeyListener{
 
     private Queue<InputEvent> inputQueue;
 
+    /* Declarando as telas do jogo */
     private final TelaDeJogo telaDeJogo;
     private final StatusJogador statusJogador;
     private final RelatorioJogo relatorioJogo;
     private final MiniMapa miniMapa;
 
+    /* Tamanhos dos painéis */
+
+    /* - Tamanho da Tela do Jogo */
     private final int telaDeJogoWidth = 45; // largura do painel ASCII (em caracteres)
     private final int telaDeJogoHeight = 30;
+
+    /* - Tamanho da Tela do Status do Jogador */
     private final int statusJogadorWidth = 80;
     private final int statusJogadorHeight = 12;
+
+    /* - Tamanho da Tela do Relatório do Jogo */
     private final int relatorioJogoWidth = 49;
     private final int relatorioJogoHeight = 30;
+
+    /* - Tamanho da Tela do Mini Mapa */
     private final int miniMapaWidth = 49;
     private final int miniMapaHeight = 35;
 
+    /* Tamanho das fontes */
     private static final int FONT_AEROSMATICA_SIZE = 16;
     private static final int FONT_DRAKE_SIZE = 9;
 
     public Interface() {
         this.inputQueue = new LinkedList<>();
 
-        this.setFocusable(true);
+        this.setFocusable(true); // Para o KeyListener funcionar - Quando o painel é focado, ele pode receber eventos de teclado
+
+        /* Inicializando as telas do jogo e adicionando no painel */
         telaDeJogo = new TelaDeJogo(telaDeJogoWidth, telaDeJogoHeight, AsciiFont.AEROSMATICA_16_16, FONT_AEROSMATICA_SIZE);
         this.add(telaDeJogo.getTela());
         statusJogador = new StatusJogador(statusJogadorWidth, statusJogadorHeight, AsciiFont.DRAKE_10x10, FONT_DRAKE_SIZE);
@@ -45,8 +58,7 @@ public class Interface extends JPanel implements KeyListener{
         miniMapa = new MiniMapa(miniMapaWidth, miniMapaHeight, AsciiFont.DRAKE_10x10, FONT_DRAKE_SIZE);
         this.add(miniMapa.getTela());
 
-        super.addKeyListener(this);
-
+        super.addKeyListener(this); // Adicionando o KeyListener ao painel - "Registrando" a classe Interface como ouvinte de eventos de teclado
     }
 
     public MiniMapa getMiniMapa() { return miniMapa; }
@@ -81,11 +93,11 @@ public class Interface extends JPanel implements KeyListener{
         char[][] matriz = new char[45][30];
         for (int i = 0; i < 45; i++) {
             for (int j = 0; j < 30; j++) {
-                matriz[i][j] = '.';
+                matriz[i][j] = 'A';
             }
         }
 
-        telaDeJogo.printMundo(matriz);
+        //telaDeJogo.printMundo(matriz);
         try {
             Thread.sleep(1000);
         } catch (InterruptedException e) {
@@ -155,7 +167,10 @@ public class Interface extends JPanel implements KeyListener{
     public void keyTyped(KeyEvent e) { }
 
     @Override
-    public void keyPressed(KeyEvent e) { inputQueue.add(e); }
+    public void keyPressed(KeyEvent e) {
+        inputQueue.add(e);
+        System.out.println("Pressed Key: " + e.getKeyCode());
+    }
 
     @Override
     public void keyReleased(KeyEvent e) { }

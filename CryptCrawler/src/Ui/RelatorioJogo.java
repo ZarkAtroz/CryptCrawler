@@ -41,14 +41,13 @@ public class RelatorioJogo extends Tela{
 
         getTela().clear();
         for (String linha : linhas) {
-            getTela().write(linha, x, y++);
+            getTela().write(linha, x, y);
         }
 
         getTela().repaint();
     }
 
     public void textoUnico(String texto, int x, int y){
-        getTela().clear();
         getTela().write(texto, x, y);
         // getTela().write(getWidth() + " x " + getHeight(), 1, 2);
         // getTela().write("QUANTIDADE REAL LINHAS = 26" , 1, 3);

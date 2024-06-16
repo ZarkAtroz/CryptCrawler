@@ -2,30 +2,27 @@ package Ui;
 
 import asciiPanel.AsciiFont;
 
-public class MiniMapa extends Tela{
+public class MiniMapa extends Tela {
 
     public MiniMapa(int width, int height, AsciiFont font, int FONT_SIZE) {
         super(width, height, font, FONT_SIZE);
     }
 
     public void printMatriz(){
-        char[][] matriz = new char[49][35];
-        for (int i = 0; i < 49; i++) {
-            for (int j = 0; j < 35; j++) {
-                matriz[i][j] = '.';
+        for (int i = 0; i < getWidth(); i++) {
+            for (int j = 0; j < getHeight(); j++) {
+                tiles[i][j] = '.';
             }
         }
 
-        getTela().clear();
         int x = 0, y = 0;
 
-        for(int j = 0; j < 35; j++, y++){
+        for(int j = 0; j < getHeight(); j++, y++){
             x = 0;
-            for (int i = 0; i < 49; i++, x++) {
-                getTela().write(matriz[i][j], x, y);
+            for (int i = 0; i < getWidth(); i++, x++) {
+                getTela().write(tiles[i][j], x, y);
             }
         }
-
 
         getTela().repaint();
     }

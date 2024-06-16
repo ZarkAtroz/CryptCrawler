@@ -7,6 +7,7 @@ public class Tela implements ComandosTela{
 
     private int width;
     private int height;
+    protected char[][] tiles;
 
     private AsciiPanel tela;
     private final int FONT_SIZE;
@@ -14,6 +15,7 @@ public class Tela implements ComandosTela{
     public Tela(int width, int height, AsciiFont font, int FONT_SIZE) {
         this.width = width;
         this.height = height;
+        this.tiles = new char[width][height];
         this.FONT_SIZE = FONT_SIZE;
         this.tela = new AsciiPanel(width, height, font);
         this.tela.setSize(width * FONT_SIZE, height * FONT_SIZE);
@@ -42,6 +44,13 @@ public class Tela implements ComandosTela{
 
     public void setWidth(int width) {
         this.width = width;
+    }
+
+    public char[][] getTiles() {
+        return tiles;
+    }
+    public void setTiles(char[][] tiles) {
+        this.tiles = tiles;
     }
 
     @Override
