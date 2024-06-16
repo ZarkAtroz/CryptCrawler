@@ -44,11 +44,21 @@ public class Combate {
 
             turno_heroi = false;
         } else {
-            int dano = inimigo_atual.dano(inimigo_atual.getHbs().get(0), 1, 1, heroi_atual.getAgilidade());
+            index_hb = (int) (Math.random() * inimigo_atual.getHbs().size());
+            System.out.println(inimigo_atual.getHbs().get(index_hb));
+            int dano = inimigo_atual.dano(inimigo_atual.getHbs().get(index_hb), 1, 1, heroi_atual.getAgilidade());
             dano = heroi_atual.getHp_atual() - dano;
             heroi_atual.setHp_atual(dano);
 
             turno_heroi = true;
+        }
+
+        if (inimigo_atual.getHp_atual() <= 0) {
+            proximoInimigo();
+        }
+
+        if (heroi_atual.getHp_atual() <= 0) {
+            trocaPersonagem(index_heroi_atual + 1);
         }
     }
 
@@ -77,7 +87,7 @@ public class Combate {
 
         str += "- Inimigos: \n";
         for (int i = 0; i < inimigos.size(); i++) {
-            if (i != index_inimigo_atual) {
+            if (i != index_inimigo_atual || inimigos.get(i).getHp_atual() <= 0) {
                 Inimigo in = inimigos.get(i);
                 str += "-- " + in.getClass().getSimpleName() + " | " + in.getHp_atual() + "/" + in.getHp_max() + "\n";
             }
@@ -89,6 +99,16 @@ public class Combate {
     public void trocaPersonagem(int index_h) {
         index_heroi_atual = index_h;
         heroi_atual = herois.get(index_heroi_atual);
+    }
+
+    public void proximoInimigo() {
+        int i = index_inimigo_atual + 1;
+        if (i >= inimigos.size()) {
+            TesteCombate.closeWindow();
+        } else {
+            inimigo_atual = inimigos.get(i);
+            index_inimigo_atual = i;
+        }
     }
     
 

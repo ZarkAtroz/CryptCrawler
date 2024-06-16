@@ -145,4 +145,8 @@ public class TesteCombate extends JFrame {
     public static void status(String str) {
         texto.setText(str);
     }
+
+    public static void closeWindow() {
+        System.exit(0);
+    }
 }
