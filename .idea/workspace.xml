@@ -2,14 +2,23 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cd81eca7-8282-4515-b0e4-cc228301eed5" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/CryptCrawler/src/Ui/ComandosTela.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CryptCrawler/src/Ui/MiniMapa.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CryptCrawler/src/Ui/RelatorioJogo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CryptCrawler/src/Ui/StatusJogador.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CryptCrawler/src/Ui/Tela.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CryptCrawler/src/Ui/TelaDeJogo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CryptCrawler/src/asciiPanel/asciiPanel.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CryptCrawler/out/production/CryptCrawler/CryptCrawler.class" beforeDir="false" afterPath="$PROJECT_DIR$/CryptCrawler/out/production/CryptCrawler/CryptCrawler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CryptCrawler/out/production/CryptCrawler/Ui/Controller/KeyEventController.class" beforeDir="false" afterPath="$PROJECT_DIR$/CryptCrawler/out/production/CryptCrawler/Ui/Controller/KeyEventController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CryptCrawler/out/production/CryptCrawler/Ui/Interface.class" beforeDir="false" afterPath="$PROJECT_DIR$/CryptCrawler/out/production/CryptCrawler/Ui/Interface.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CryptCrawler/out/production/CryptCrawler/Ui/MiniMapa.class" beforeDir="false" afterPath="$PROJECT_DIR$/CryptCrawler/out/production/CryptCrawler/Ui/MiniMapa.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CryptCrawler/out/production/CryptCrawler/Ui/RelatorioJogo.class" beforeDir="false" afterPath="$PROJECT_DIR$/CryptCrawler/out/production/CryptCrawler/Ui/RelatorioJogo.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CryptCrawler/out/production/CryptCrawler/Ui/StatusJogador.class" beforeDir="false" afterPath="$PROJECT_DIR$/CryptCrawler/out/production/CryptCrawler/Ui/StatusJogador.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CryptCrawler/out/production/CryptCrawler/Ui/Tela.class" beforeDir="false" afterPath="$PROJECT_DIR$/CryptCrawler/out/production/CryptCrawler/Ui/Tela.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CryptCrawler/out/production/CryptCrawler/Ui/TelaDeJogo.class" beforeDir="false" afterPath="$PROJECT_DIR$/CryptCrawler/out/production/CryptCrawler/Ui/TelaDeJogo.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CryptCrawler/out/production/CryptCrawler/world/World.class" beforeDir="false" afterPath="$PROJECT_DIR$/CryptCrawler/out/production/CryptCrawler/world/World.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CryptCrawler/src/CryptCrawler.java" beforeDir="false" afterPath="$PROJECT_DIR$/CryptCrawler/src/CryptCrawler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CryptCrawler/src/Ui/Interface.java" beforeDir="false" afterPath="$PROJECT_DIR$/CryptCrawler/src/Ui/Interface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CryptCrawler/src/Ui/MiniMapa.java" beforeDir="false" afterPath="$PROJECT_DIR$/CryptCrawler/src/Ui/MiniMapa.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CryptCrawler/src/Ui/RelatorioJogo.java" beforeDir="false" afterPath="$PROJECT_DIR$/CryptCrawler/src/Ui/RelatorioJogo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CryptCrawler/src/Ui/StatusJogador.java" beforeDir="false" afterPath="$PROJECT_DIR$/CryptCrawler/src/Ui/StatusJogador.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CryptCrawler/src/Ui/Tela.java" beforeDir="false" afterPath="$PROJECT_DIR$/CryptCrawler/src/Ui/Tela.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CryptCrawler/src/Ui/TelaDeJogo.java" beforeDir="false" afterPath="$PROJECT_DIR$/CryptCrawler/src/Ui/TelaDeJogo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CryptCrawler/src/world/World.java" beforeDir="false" afterPath="$PROJECT_DIR$/CryptCrawler/src/world/World.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,7 +45,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "Telas-lógica",
+    "git-widget-placeholder": "Campo-de-visao",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/johnc/Documents/GitHub/CryptCrawler/CryptCrawler"
   }

@@ -3,6 +3,8 @@ package world;
 import Entity.Player;
 import Ui.Exceptions.OutOfMapException;
 
+import java.util.Random;
+
 /*
 * Mapa completo da Dungeon
 * Deverá ter uma escala (número inteiro)x maior que o minimapa
