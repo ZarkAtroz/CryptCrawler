@@ -1,4 +1,4 @@
-# Guia game.CryptCrawler
+# Guia game.game.CryptCrawler
 
 > Use o IntelliJ IDE para jogar
 > 

@@ -19,16 +19,16 @@ import java.util.ArrayList;
 import java.util.Queue;
 
 /**
- * Game.CryptCrawler is the main class of the game. It extends JFrame and implements KeyListener and GameEventListener.
+ * Game.game.CryptCrawler is the main class of the game. It extends JFrame and implements KeyListener and GameEventListener.
  * It handles the game loop, input events, and the game interface.
  */
-public class CryptCrawler extends JFrame implements KeyListener, GameEventListener {
+public class CryptCrawler extends JFrame implements GameEventListener {
 
     // The running state of the game.
     private boolean rodando;
 
     // The desired frames per second of the game (Target FPS).
-    private int framesPerSecond = 30;
+    private int framesPerSecond = 60;
 
     // The time per loop in nanoseconds, calculated based on Target FPS
     private int timePerLoop = 1000000000 / framesPerSecond;
@@ -44,6 +44,8 @@ public class CryptCrawler extends JFrame implements KeyListener, GameEventListen
 
     // The input event queue.
     private Queue<InputEvent> inputQueue;
+
+    private int tick;
 
     /**
      * This method reads a file and stores the entities in an ArrayList.
@@ -70,30 +72,30 @@ public class CryptCrawler extends JFrame implements KeyListener, GameEventListen
     }
 
     /**
-     * The constructor of the Game.CryptCrawler class.
+     * The constructor of the Game.game.CryptCrawler class.
      * It initializes the game interface and the game frame.
      */
     public CryptCrawler(){
 
         /*
-        * by: @icaro
-        * Sobre o SaveGame, vou criar uma classe auxiliar "SaveGame".
-        * Ela terá dois métodos principais:
-        * - saveGame(): Salva o jogo em um arquivo (ObjectOutputStream)
-        * - loadGame(): Carrega o jogo do arquivo (ObjectInputStream)
-        *
-        * Terá uma outra classe auxiliar chamada "GameState". Ela terá todos os atributos que serão salvos.
-        * Eles serão atribuídos ao GameState inGame, e quando o jogo for salvo, o SaveGame vai salvar SOMENTE o GameState.
-        * Todos os atributos do jogo deverão ser atualizados no GameState. Os atributos do jogo funcionarão com base nas informações do GameState.
-        * Ou seja, para atualizar um atributo do jogo, seria preciso somente modificar ele no GameState, portanto, só precisar salvar ele no arquivo.
-        * Quando usar o loadGame(), o SaveGame vai carregar o objeto GameState para a classe principal CryptCrawler, com todas as informações, que serão
-        * distribuídas nos respectivos espaços.
-        */
+         * by: @icaro
+         * Sobre o SaveGame, vou criar uma classe auxiliar "SaveGame".
+         * Ela terá dois métodos principais:
+         * - saveGame(): Salva o jogo em um arquivo (ObjectOutputStream)
+         * - loadGame(): Carrega o jogo do arquivo (ObjectInputStream)
+         *
+         * Terá uma outra classe auxiliar chamada "GameState". Ela terá todos os atributos que serão salvos.
+         * Eles serão atribuídos ao GameState inGame, e quando o jogo for salvo, o SaveGame vai salvar SOMENTE o GameState.
+         * Todos os atributos do jogo deverão ser atualizados no GameState. Os atributos do jogo funcionarão com base nas informações do GameState.
+         * Ou seja, para atualizar um atributo do jogo, seria preciso somente modificar ele no GameState, portanto, só precisar salvar ele no arquivo.
+         * Quando usar o loadGame(), o SaveGame vai carregar o objeto GameState para a classe principal game.CryptCrawler, com todas as informações, que serão
+         * distribuídas nos respectivos espaços.
+         */
         //if(lerSave == true){
-            // importar do save
-            // passar pra classes
+        // importar do save
+        // passar pra classes
         //} else {
-            // ler direto do .txt
+        // ler direto do .txt
         //}
 
         // lerArquivo("blocos.txt");
@@ -106,8 +108,11 @@ public class CryptCrawler extends JFrame implements KeyListener, GameEventListen
 
         this.interfaceJogo = new Interface();
         this.frame.add(interfaceJogo);
+
         this.frame.setSize(1280, 720);
-        super.addKeyListener(this);
+        //super.addKeyListener(this);
+
+        this.tick = 0;
 
     }
 
@@ -123,7 +128,8 @@ public class CryptCrawler extends JFrame implements KeyListener, GameEventListen
         // 3. Renderizar na tela
 
         // An instance of the World class is created.
-        World dungeonMap = new World(450, 300);
+        // The third parameter is the scale of the minimap, which determines the size of the minimap relative to the game world.
+        World dungeonMap = new World(450, 300, 2);
 
         // An instance of the Player class is created, that represents the player on the map.
         Player playerOnMap = new Player(null, 22, 15, dungeonMap);
@@ -158,6 +164,7 @@ public class CryptCrawler extends JFrame implements KeyListener, GameEventListen
             // Tela cheia
             // frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
             // frame.setUndecorated(true);
+
             if(!this.getRodando())
                 System.exit(0);
 
@@ -165,10 +172,34 @@ public class CryptCrawler extends JFrame implements KeyListener, GameEventListen
             // render(); -> imprimir todas as telas, mesmo que não tenha mudado nada (aplicar tudo nesse tópico no render())
 
             // Print the minimap and the game world.
-            interfaceJogo.getMiniMapa().printMatriz();
-            interfaceJogo.getTelaDeJogo().printMundo(dungeonMap.getTiles(), playerOnMap);
-            interfaceJogo.getRelatorioJogo().textoUnico("RELATORIO JOGO", 0, 0);
-            interfaceJogo.getRelatorioJogo().atualizarInformacao("OWNDOA", 0, 0);
+            //interfaceJogo.getTelaDeJogo().printMundo(dungeonMap.getTiles(), playerOnMap); subtituido por lookAt, onde vai centralizar a camera no persongem
+            interfaceJogo.getTelaDeJogo().lookAt(dungeonMap.getTiles(), playerOnMap);
+
+            // Aqui printa o MiniMapa
+            interfaceJogo.getMiniMapaInterface().printMiniMap(dungeonMap.getMiniMap(), playerOnMap);
+
+            // Teste do display
+            // Parece que os erros nos caracteres ocorrem quando está ocorrendo algum tipo de input
+            // Ao fazer um teste com uma nova informacao a cada input computado, ocorrera de alguns caracteres sumirem, sendo o mais provavel com caracter repetido
+
+            // Outra maneira de contornar a situacao é criar um sistema de tickRate baseado no frameRate
+            // Neste exemplo a cada 120 frames ocorrera uma verificao, no exemplo, se o player estiver na posicao (1,1) ira atualizar a informacao no relatorio
+            // E pela bateria de testes nao aconteceu nos paines, porem ainda aconteceu no painel da tela de jogo, minha sugestao é evitar usar o chao / vazio como um espaco em branco
+            if(tick % (framesPerSecond * 2) == 0){
+                tick = 0;
+                if(playerOnMap.getX() == 1 && playerOnMap.getY() == 1){
+                    interfaceJogo.getRelatorioJogo().atualizarInformacao("> Jogador na posicao (1,1)", 0, 0);
+                }
+                if(playerOnMap.getX() == 10 && playerOnMap.getY() == 10){
+                    interfaceJogo.getRelatorioJogo().atualizarInformacao("> Jogador na posicao (10,10)", 0, 0);
+                }
+                if(playerOnMap.getX() == 20 && playerOnMap.getY() == 20){
+                    interfaceJogo.getRelatorioJogo().atualizarInformacao("> Jogador na posicao (20,20)", 0, 0);
+                }
+
+                interfaceJogo.getStatusJogador().printTela("VIDA: 07/15", 1, 1);
+                interfaceJogo.getStatusJogador().printTela("MANA: 19/30", 1, 2);
+            }
 
             // Executes the next key event in the queue. This method is responsible for processing
             // the user's keyboard input and performing the corresponding actions in the game.
@@ -178,17 +209,18 @@ public class CryptCrawler extends JFrame implements KeyListener, GameEventListen
             // The end time of the game loop is recorded in nanoseconds.
             endTime = System.nanoTime();
 
-            interfaceJogo.getTelaDeJogo().getTela().repaint();
             // The sleep time is calculated as the difference between the desired time per loop (based on the desired frame rate)
             // and the actual time the game loop took. This is done to maintain a consistent frame rate across different hardware.
             sleepTime = timePerLoop - (endTime-startTime);
+
+            tick++;
 
             // If the calculated sleep time is greater than zero (meaning the game loop finished faster than the desired time per loop),
             // the thread is put to sleep for the calculated sleep time. This is done in milliseconds, hence the division by 1000000.
             // This effectively limits the frame rate to the desired frames per second.
             if (sleepTime > 0) {
                 try {
-                    Thread.sleep(sleepTime/1000000);
+                    Thread.sleep(sleepTime / 1000000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -212,29 +244,5 @@ public class CryptCrawler extends JFrame implements KeyListener, GameEventListen
      * @return The running state of the game.
      */
     public boolean getRodando() { return this.rodando; }
-
-    /**
-     * This method is called when a key is typed.
-     * It is currently empty and can be overridden to handle key typed events.
-     * @param e The key event.
-     */
-    @Override
-    public void keyTyped(KeyEvent e) { }
-
-    /**
-     * This method is called when a key is pressed.
-     * It is currently empty and can be overridden to handle key pressed events.
-     * @param e The key event.
-     */
-    @Override
-    public void keyPressed(KeyEvent e) { }
-
-    /**
-     * This method is called when a key is released.
-     * It is currently empty and can be overridden to handle key released events.
-     * @param e The key event.
-     */
-    @Override
-    public void keyReleased(KeyEvent e) { }
 
 }

@@ -15,6 +15,8 @@ public class World {
     private int width;
     private int height;
 
+    private MiniMap miniMap;
+
     /* Tiles - Character */
     private char[][] tiles;
     private boolean[][] passableTiles;
@@ -23,10 +25,11 @@ public class World {
     private Player playerOnMap;
 
     /* Constructor */
-    public World(int width, int height) {
+    public World(int width, int height, int miniMapScale) {
         this.width = width;
         this.height = height;
         this.tiles = new char[width][height];
+        this.miniMap = new MiniMap(width / miniMapScale, height / miniMapScale, miniMapScale);
         drawMap();
     }
 
@@ -58,6 +61,9 @@ public class World {
     public Player getPlayerOnMap() {
         return playerOnMap;
     }
+    public MiniMap getMiniMap() {
+        return miniMap;
+    }
 
     public void setPlayerOnMap(Player playerOnMap) {
         this.playerOnMap = playerOnMap;
@@ -81,7 +87,12 @@ public class World {
         drawTile(21, 16, (char)254);
         drawTile(21, 17, (char)254);
         drawTile(21, 18, (char)254);
-        drawTile(22, 18, (char)254);
+        drawTile(21, 19, (char)254);
+        drawTile(21, 20, (char)254);
+        drawTile(21, 21, (char)254);
+        drawTile(21, 22, (char)254);
+        drawTile(21, 23, (char)254);
+        drawTile(21, 24, (char)254);
     }
 
     public boolean isPassable(int x, int y) throws OutOfMapException {
@@ -110,5 +121,6 @@ public class World {
             tiles[x][y] = tile;
             passableTiles[x][y] = false;
         }
+        miniMap.updateTiles(x, y, tile);
     }
 }

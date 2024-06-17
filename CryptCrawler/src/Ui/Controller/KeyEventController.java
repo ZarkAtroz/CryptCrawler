@@ -10,9 +10,9 @@ import java.awt.event.MouseEvent;
 
 /*
 * Classe responsável por controlar os eventos de teclado
-* É chamada na classe principal Game.CryptCrawler
-* @see Game.CryptCrawler
-* Na classe principal Game.CryptCrawler, o método executeNextKeyEvent() é chamado
+* É chamada na classe principal Game.game.CryptCrawler
+* @see Game.game.CryptCrawler
+* Na classe principal Game.game.CryptCrawler, o método executeNextKeyEvent() é chamado
 * Exemplo de uso: Jogador clica W e essa classe detecta isso, informando a classe de movimento do personagem e realizando a ação
 *  */
 public class KeyEventController {
