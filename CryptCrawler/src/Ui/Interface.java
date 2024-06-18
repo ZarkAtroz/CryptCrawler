@@ -160,7 +160,6 @@ public class Interface extends JPanel implements KeyListener{
         statusJogador.setBounds(30, 545);
         relatorioJogo.setBounds(790, 30);
         miniMapa.setBounds(790, 333);
-
     }
 
     @Override

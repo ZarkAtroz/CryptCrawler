@@ -1,15 +1,28 @@
 package Ui.Controller;
 
+import Entity.Aliado;
+import Entity.Entidade;
 import Entity.Player;
+import log.Log;
 
+import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Queue;
 
 public class PlayerMovementController {
 
     private final Player player;
+    private final ArrayList<Aliado> aliados = new ArrayList<>();
 
-    public PlayerMovementController(Player player) {
+    public PlayerMovementController(Player player, ArrayList<Entidade> entidades) {
         this.player = player;
+        for (Entidade entidade : entidades) {
+            if (entidade instanceof Aliado) {
+                aliados.add((Aliado) entidade);
+            }
+        }
     }
 
     public int getPlayerX() {
@@ -33,6 +46,12 @@ public class PlayerMovementController {
             case KeyEvent.VK_D:
                 player.moveRight();
                 break;
+
+        }
+        Queue<Point> posicoesAnteriores = player.getPosicoes();
+        for(Aliado aliado : aliados) {
+            aliado.seguirJogador(posicoesAnteriores);
+            Log.logInfo("Posicao: " + aliado.getX() + " " + aliado.getY());
         }
     }
 }

@@ -2,6 +2,8 @@ package Ui;
 
 import asciiPanel.AsciiFont;
 
+import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 public class RelatorioJogo extends Tela{
@@ -33,18 +35,21 @@ public class RelatorioJogo extends Tela{
 
     public void atualizarInformacao(String texto, int x, int y){
 
-        if(linhas.size() == 26){
+        getTela().clear();
+
+        if(linhas.size() == 27){
             historico.add(linhas.get(0));
             linhas.remove(0);
         }
         linhas.add(texto);
 
-        getTela().clear();
+        // Draw the back buffer to the screen
         for (String linha : linhas) {
-            getTela().write(linha, x, y);
+            getTela().write(linha, x, y++, Color.WHITE, Color.BLACK);
         }
 
         getTela().repaint();
+
     }
 
     public void textoUnico(String texto, int x, int y){

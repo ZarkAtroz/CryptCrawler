@@ -1,5 +1,6 @@
 package Ui.Controller;
 
+import Entity.Entidade;
 import Entity.Player;
 import Ui.Interface;
 import log.Log;
@@ -7,6 +8,7 @@ import log.Log;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 
 /*
 * Classe responsável por controlar os eventos de teclado
@@ -27,9 +29,9 @@ public class KeyEventController {
      * @param listener The game event listener
      * @param playerOnMap The player on the map
      */
-    public KeyEventController(GameEventListener listener, Player playerOnMap) {
+    public KeyEventController(GameEventListener listener, Player playerOnMap, ArrayList<Entidade> entidades) {
         this.listener = listener;
-        this.playerMovementController = new PlayerMovementController(playerOnMap);
+        this.playerMovementController = new PlayerMovementController(playerOnMap, entidades);
     }
 
     /**

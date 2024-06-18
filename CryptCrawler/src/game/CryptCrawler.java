@@ -1,5 +1,6 @@
 package game;
 
+import Entity.Aliado;
 import Entity.Entidade;
 import Entity.Player;
 import Ui.Controller.GameEventListener;
@@ -15,7 +16,9 @@ import java.awt.event.KeyListener;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Queue;
 
 /**
@@ -126,13 +129,25 @@ public class CryptCrawler extends JFrame implements KeyListener, GameEventListen
         World dungeonMap = new World(450, 300);
 
         // An instance of the Player class is created, that represents the player on the map.
-        Player playerOnMap = new Player(null, 22, 15, dungeonMap);
+        ArrayList<Entidade> entidades = new ArrayList<>();
+
+        Player playerOnMap = new Player("Player", 22, 15, dungeonMap, 14, 0);
+        entidades.add(playerOnMap);
+
+
+        Aliado mago = new Aliado("Mago", playerOnMap.getX(), playerOnMap.getY(), 12, playerOnMap);
+        Aliado barbaro = new Aliado("Barbaro", playerOnMap.getX(), playerOnMap.getY(), 13, playerOnMap);
+
+        entidades.add(mago);
+        entidades.add(barbaro);
+
+        playerOnMap.setMaximoTrilha(2);
 
         // The player is set on the map.
         dungeonMap.setPlayerOnMap(playerOnMap);
 
         // An instance of the KeyEventController class is created, that controls the game's keyboard events.
-        KeyEventController keyEventController = new KeyEventController(this, playerOnMap);
+        KeyEventController keyEventController = new KeyEventController(this, playerOnMap, entidades);
 
         // The start time of the game loop, used to calculate the necessary sleep time
         // to maintain the desired frame rate.
@@ -166,14 +181,14 @@ public class CryptCrawler extends JFrame implements KeyListener, GameEventListen
 
             // Print the minimap and the game world.
             interfaceJogo.getMiniMapa().printMatriz();
-            interfaceJogo.getTelaDeJogo().printMundo(dungeonMap.getTiles(), playerOnMap);
+            interfaceJogo.getTelaDeJogo().printMundo(dungeonMap.getTiles(), entidades);
             interfaceJogo.getRelatorioJogo().textoUnico("RELATORIO JOGO", 0, 0);
-            interfaceJogo.getRelatorioJogo().atualizarInformacao("OWNDOA", 0, 0);
 
             // Executes the next key event in the queue. This method is responsible for processing
             // the user's keyboard input and performing the corresponding actions in the game.
             // It takes the game interface as a parameter, which is used to retrieve the next input event.
             keyEventController.executeKeyEvent(this.interfaceJogo);
+
 
             // The end time of the game loop is recorded in nanoseconds.
             endTime = System.nanoTime();
@@ -220,7 +235,6 @@ public class CryptCrawler extends JFrame implements KeyListener, GameEventListen
      */
     @Override
     public void keyTyped(KeyEvent e) { }
-
     /**
      * This method is called when a key is pressed.
      * It is currently empty and can be overridden to handle key pressed events.
