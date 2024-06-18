@@ -1,0 +1,3 @@
+id, nome, icone, bloqueado
+0, chao, ., false
+1, parede, #, true
