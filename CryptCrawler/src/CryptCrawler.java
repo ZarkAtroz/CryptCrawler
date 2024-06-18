@@ -8,16 +8,7 @@ import Ui.Interface;
 import Ui.Controller.KeyEventController;
 
 import javax.swing.*;
-import java.awt.event.InputEvent;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Queue;
 
 /**
  * Game.CryptCrawler is the main class of the game. It extends JFrame and implements KeyListener and GameEventListener.
@@ -29,22 +20,13 @@ public class CryptCrawler extends JFrame implements GameEventListener {
     private boolean rodando;
 
     // The desired frames per second of the game (Target FPS).
-    private int framesPerSecond = 60;
+    private final int framesPerSecond = 60;
 
     // The time per loop in nanoseconds, calculated based on Target FPS
-    private int timePerLoop = 1000000000 / framesPerSecond;
-
-    // The main game frame.
-    private JFrame frame;
-
-    // The game icon.
-    private ImageIcon img;
+    private final int timePerLoop = 1000000000 / framesPerSecond;
 
     // The game interface.
     private final Interface interfaceJogo;
-
-    // The input event queue.
-    private Queue<InputEvent> inputQueue;
 
     // Tick Rate
     private int tick;
@@ -82,13 +64,14 @@ public class CryptCrawler extends JFrame implements GameEventListener {
         this.rodando = true;
         Log.logInfo("Game Started");
 
-        this.frame = new JFrame("Crypt Crawler");
-        this.img = new ImageIcon("Icon\\icon.jpg");
-        this.frame.setIconImage(img.getImage());
+        JFrame frame;
 
-        this.interfaceJogo = new Interface();
-        this.frame.add(interfaceJogo);
-        this.frame.setSize(1280, 720);
+        frame = new JFrame("Crypt Crawler");
+        frame.setIconImage((new ImageIcon("Icon\\icon.jpg")).getImage());
+
+        interfaceJogo = new Interface();
+        frame.add(interfaceJogo);
+        frame.setSize(1280, 720);
 
         this.tick = 0;
 
@@ -97,7 +80,7 @@ public class CryptCrawler extends JFrame implements GameEventListener {
          * Esta parte estava no looping do frame rate, tambem estava interferindo no bug do clear(),
          * so precisa desta logica quando se cria o jogo | JFrame.
          */
-        this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
         frame.setLayout(null);
     }
