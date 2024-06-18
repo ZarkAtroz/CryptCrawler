@@ -82,6 +82,17 @@ public class World {
         drawTile(21, 17, (char)254);
         drawTile(21, 18, (char)254);
         drawTile(22, 18, (char)254);
+
+        // Desenhando no mapa todos os caracteres
+        int x = 30, y = 10;
+
+        for(int i = 0; i < 256; i++){
+            drawTile(x++, y, (char)i);
+            if(i % 16 == 0){
+                x = 60;
+                y++;
+            }
+        }
     }
 
     public boolean isPassable(int x, int y) throws OutOfMapException {

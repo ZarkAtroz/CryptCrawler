@@ -15,9 +15,6 @@ public class Tela implements ComandosTela{
     private AsciiPanel tela;
     private final int FONT_SIZE;
 
-    private BufferedImage backBuffer;
-    private Graphics2D backBufferGraphics;
-
     public Tela(int width, int height, AsciiFont font, int FONT_SIZE) {
         this.width = width;
         this.height = height;
@@ -27,24 +24,10 @@ public class Tela implements ComandosTela{
         this.tela.setSize(width * FONT_SIZE, height * FONT_SIZE);
         this.tela.setBounds(width * FONT_SIZE, height * FONT_SIZE, width * FONT_SIZE, height * FONT_SIZE);
 
-        this.backBuffer = new BufferedImage(tela.getWidth(), tela.getHeight(), BufferedImage.TYPE_INT_RGB);
-        backBufferGraphics = backBuffer.createGraphics();
-
         tiles = new char[width][height];
         for (int i = 0; i < getWidth(); i++) {
             for (int j = 0; j < getHeight(); j++) {
                 tiles[i][j] = ' ';
-            }
-        }
-    }
-
-    public void printClear(){
-        int x = 0, y = 0;
-
-        for(int j = 0; j < getHeight(); j++, y++){
-            x = 0;
-            for (int i = 0; i < getWidth(); i++, x++) {
-                getTela().write(tiles[i][j], x, y);
             }
         }
     }
@@ -73,10 +56,6 @@ public class Tela implements ComandosTela{
         this.width = width;
     }
 
-    public BufferedImage getBuffer() { return backBuffer; }
-
-    public Graphics2D getBufferGraphics() { return backBufferGraphics; }
-
     public char[][] getTiles() {
         return tiles;
     }
@@ -90,7 +69,7 @@ public class Tela implements ComandosTela{
     }
 
     @Override
-    public void setSize(int width, int height) {
-
+    public void clear() {
+        tela.clear();
     }
 }

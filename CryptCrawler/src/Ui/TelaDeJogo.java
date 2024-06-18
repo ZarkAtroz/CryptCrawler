@@ -3,6 +3,7 @@ package Ui;
 import Entity.Entidade;
 import Entity.Player;
 import asciiPanel.AsciiFont;
+import world.World;
 
 import java.awt.*;
 import java.util.List;
@@ -14,56 +15,45 @@ public class TelaDeJogo extends Tela {
     }
 
     public void printTexto(String texto, int x, int y){
-
         getTela().write(texto, x, y);
         // getTela().write("TELA DE JOGO 45 x 30", x, y);
         // getTela().write("45 x 30", x, y + 1);
     }
 
-    public void printMundo(char[][] dungeonTiles, List<Entidade> entidades){
-        getTela().clear();
-            // Desenha um mapa estático
-            for (int x = 0; x < getWidth(); x++) {
-                for (int y = 0; y < getHeight(); y++) {
-                    boolean isEntityPresent = false;
-                    for (Entidade entidade : entidades) {
-                        if (entidade.getX() == x && entidade.getY() == y) {
-                            getTela().write((char) entidade.getIcone(), x, y);
-                            isEntityPresent = true;
-                            break;  // Exit the loop once an entity is found at this position
-                        }
-                    }
-                    if (!isEntityPresent) {
-                        getTela().write(dungeonTiles[x][y], x, y);
-                    }
-                }
-            }
-        getTela().repaint();
+    public void printMundo(char[][] dungeonTiles, Player player, List<Entidade> entidades, World world){
+            lookAt(dungeonTiles, player, entidades, world);
     }
 
-    public Point GetCameraOrigin(int xfocus, int yfocus)
-    {
-        int spx = Math.max(0, Math.min(xfocus - 45 / 2, 450 - 45));
-        int spy = Math.max(0, Math.min(yfocus - 30 / 2, 300 - 30));
-        return new Point(spx, spy);
+    public Point GetCameraOrigin(int xPlayer, int yPlayer, World world) {
+        // Calculo para caso, o player esteja nas extremidades do mapa, nao ocorra nenhum erro de OutOfBounds
+        int x = Math.max(0, Math.min(xPlayer - this.getWidth() / 2, world.getWidth() - 45));
+        int y = Math.max(0, Math.min(yPlayer - this.getHeight() / 2, world.getHeight() - 30));
+        return new Point(x, y);
     }
 
-    public void lookAt(char[][] dungeonTiles, Player player){
+    public void lookAt(char[][] dungeonTiles, Player player, List<Entidade> entidades, World world){
 
         char tile;
         Point origin;
 
-        char[][] test = new char[10][10];
-
-        origin = GetCameraOrigin(player.getX(), player.getY());
+        // Vai calcular o ponto de origem da camera, baseado na posicao do player
+        origin = GetCameraOrigin(player.getX(), player.getY(), world);
 
         for (int x = 0; x < getWidth(); x++){
             for (int y = 0; y < getHeight(); y++){
                 tile = dungeonTiles[origin.x + x][origin.y + y];
-                if(player.getX() == (origin.x + x) && player.getY() == (origin.y + y))
-                    getTela().write((char)14, x, y);
-                else
-                    getTela().write(tile, x, y, Color.WHITE, Color.BLACK);
+
+                boolean isEntityPresent = false;
+                for (Entidade entidade : entidades) {
+                    if (entidade.getX() == (origin.x + x) && entidade.getY() == (origin.y + y)) {
+                        getTela().write((char) entidade.getIcone(), x, y);
+                        isEntityPresent = true;
+                        break;  // Exit the loop once an entity is found at this position
+                    }
+                }
+                if (!isEntityPresent) {
+                    getTela().write(tile, x, y);
+                }
             }
         }
 
