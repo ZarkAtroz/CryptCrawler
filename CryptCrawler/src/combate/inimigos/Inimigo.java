@@ -37,6 +37,29 @@ public abstract class Inimigo extends PersonagemCombate implements Combatente {
         this.hp_max = hp_max;
     }
 
+    public void colldownHabilidade() {
+        for (Habilidade hab : hbs) {
+            if (hab.getEm_cd() > 0) {
+                hab.setEm_cd(hab.getEm_cd() - 1);
+            }
+        }
+    }
 
+    public Habilidade returnHabilidade(int index) {
+
+        Habilidade aux = hbs.get(index);
+
+        if (aux.getTipo_hb() == 1 || aux.getEm_cd() == 0) {
+            return aux;
+        } else {
+            int new_index = index + 1;
+            if (new_index >= getHbs().size()) {
+                new_index = 0;
+            }
+            // Se o novo index for maior que o tamanho do vetor de habs vai para o atk bas
+            return returnHabilidade(new_index);
+        }
+
+    }
     
 }

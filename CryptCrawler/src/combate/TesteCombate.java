@@ -13,6 +13,7 @@ import combate.herois.Guerreiro;
 import combate.herois.Heroi;
 import combate.herois.Rogue;
 import combate.inimigos.Goblin;
+import combate.inimigos.GoblinForte;
 import combate.inimigos.Inimigo;
 
 public class TesteCombate extends JFrame {
@@ -42,75 +43,79 @@ public class TesteCombate extends JFrame {
             @Override
             public void keyPressed(KeyEvent e){
                 int keyCode = e.getKeyCode();
-                if (event == 0) {
-                    switch (keyCode) {
-                        case KeyEvent.VK_UP:
-                            String str_1 = "Escolha uma das habilidades do herói atual: \n";
-                            int j = 1;
-                            for (Habilidade h : c.heroi_atual.getHbs()) {
-                                str_1 += "["+j+"] " + h.getNome_hab() + "\n";
-                                j++;
-                            }
-                            relatorioJogo(str_1);
-                            event = 2;
-                            break;
-                        case KeyEvent.VK_DOWN:
-                            event = 1;
-                            String str = "Escolha entre uma das opções abaixo para trocar:\n";
-                            int i = 1;
-                            for (Heroi h : c.getHerois()) {
-                                str += "["+i+"] " + h.getClass().getSimpleName() + "\n";
-                                i++;
-                            }
-                            relatorioJogo(str);
-                            break;
-                        default:
-                            break;
+                if (!c.isTurno_heroi()) {
+                    c.atacar(0, 0);
+                } else {
+                    if (event == 0) {
+                        switch (keyCode) {
+                            case KeyEvent.VK_UP:
+                                String str_1 = "Escolha uma das habilidades do herói atual: \n";
+                                int j = 1;
+                                for (Habilidade h : c.heroi_atual.getHbs()) {
+                                    str_1 += "["+j+"] " + h.getNome_hab() + "\n";
+                                    j++;
+                                }
+                                relatorioJogo(str_1);
+                                event = 2;
+                                break;
+                            case KeyEvent.VK_DOWN:
+                                event = 1;
+                                String str = "Escolha entre uma das opções abaixo para trocar:\n";
+                                int i = 1;
+                                for (Heroi h : c.getHerois()) {
+                                    str += "["+i+"] " + h.getClass().getSimpleName() + "\n";
+                                    i++;
+                                }
+                                relatorioJogo(str);
+                                break;
+                            default:
+                                break;
+                        }
+                    } else if (event == 1) {
+                        switch (keyCode) {
+                            case KeyEvent.VK_1:
+                                c.trocaPersonagem(0);
+                                event = 0;
+                                break;
+                            case KeyEvent.VK_2:
+                                c.trocaPersonagem(1);
+                                event = 0;
+                                break;
+                            case KeyEvent.VK_3:
+                                c.trocaPersonagem(2);
+                                event = 0;
+                                break;
+                            case KeyEvent.VK_4:
+                                c.trocaPersonagem(3);
+                                event = 0;
+                                break;
+                            default:
+                                break;
+                        }
+                        relatorioJogo("Troca de personagem feita para " + c.heroi_atual.getClass().getSimpleName());
+                    } else if (event == 2) {
+                        switch (keyCode) {
+                            case KeyEvent.VK_1:
+                                c.atacar(0, c.getIndex_inimigo_atual());
+                                event = 0;
+                                break;
+                            case KeyEvent.VK_2:
+                                c.atacar(1, c.getIndex_inimigo_atual());
+                                event = 0;
+                                break;
+                            case KeyEvent.VK_3:
+                                c.atacar(2, c.getIndex_inimigo_atual());
+                                event = 0;
+                                break;
+                            case KeyEvent.VK_4:
+                                c.atacar(3, c.getIndex_inimigo_atual());
+                                event = 0;
+                                break;
+                            default:
+                                break;
+                        }
+                        status(c.statusPersonagens());
                     }
-                } else if (event == 1) {
-                    switch (keyCode) {
-                        case KeyEvent.VK_1:
-                            c.trocaPersonagem(0);
-                            event = 0;
-                            break;
-                        case KeyEvent.VK_2:
-                            c.trocaPersonagem(1);
-                            event = 0;
-                            break;
-                        case KeyEvent.VK_3:
-                            c.trocaPersonagem(2);
-                            event = 0;
-                            break;
-                        case KeyEvent.VK_4:
-                            c.trocaPersonagem(3);
-                            event = 0;
-                            break;
-                        default:
-                            break;
-                    }
-                    relatorioJogo("Troca de personagem feita para " + c.heroi_atual.getClass().getSimpleName());
-                } else if (event == 2) {
-                    switch (keyCode) {
-                        case KeyEvent.VK_1:
-                            c.atacar(0);
-                            event = 0;
-                            break;
-                        case KeyEvent.VK_2:
-                            c.atacar(1);
-                            event = 0;
-                            break;
-                        case KeyEvent.VK_3:
-                            c.atacar(2);
-                            event = 0;
-                            break;
-                        case KeyEvent.VK_4:
-                            c.atacar(3);
-                            event = 0;
-                            break;
-                        default:
-                            break;
-                    }
-                    status(c.statusPersonagens());
                 }
             }
 
@@ -130,7 +135,7 @@ public class TesteCombate extends JFrame {
         h.add(new Rogue(1));
 
         ArrayList<Inimigo> i = new ArrayList<>();
-        i.add(new Goblin(1));
+        i.add(new GoblinForte(1));
         i.add(new Goblin(1));
 
         c = new Combate(0, 0, h, i);

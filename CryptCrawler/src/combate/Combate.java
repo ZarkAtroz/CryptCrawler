@@ -36,22 +36,7 @@ public class Combate {
         turno_heroi = (heroi_atual.getAgilidade() > inimigo_atual.getAgilidade());
     }
 
-    public void atacar(int index_hb) {
-        if (turno_heroi) {
-            int dano = heroi_atual.dano(heroi_atual.getHbs().get(index_hb), 1, 1, inimigo_atual.getAgilidade());
-            dano = inimigo_atual.getHp_atual() - dano;
-            inimigo_atual.setHp_atual(dano);
-
-            turno_heroi = false;
-        } else {
-            index_hb = (int) (Math.random() * inimigo_atual.getHbs().size());
-            System.out.println(inimigo_atual.getHbs().get(index_hb));
-            int dano = inimigo_atual.dano(inimigo_atual.getHbs().get(index_hb), 1, 1, heroi_atual.getAgilidade());
-            dano = heroi_atual.getHp_atual() - dano;
-            heroi_atual.setHp_atual(dano);
-
-            turno_heroi = true;
-        }
+    public void atacar(int index_hb, int index_personagem) {
 
         if (inimigo_atual.getHp_atual() <= 0) {
             proximoInimigo();
@@ -60,6 +45,25 @@ public class Combate {
         if (heroi_atual.getHp_atual() <= 0) {
             trocaPersonagem(index_heroi_atual + 1);
         }
+
+        if (turno_heroi) {
+            Inimigo in = inimigos.get(index_personagem);
+            int dano = heroi_atual.dano(heroi_atual.getHbs().get(index_hb), 1, 1, in.getAgilidade());
+            dano = inimigo_atual.getHp_atual() - dano;
+            inimigo_atual.setHp_atual(dano);
+
+            turno_heroi = false;
+        } else {
+            index_hb = 3;
+            Habilidade hb = inimigo_atual.returnHabilidade(index_hb);
+            int dano = inimigo_atual.dano(hb, 1, 1, heroi_atual.getAgilidade());
+            dano = heroi_atual.getHp_atual() - dano;
+            heroi_atual.setHp_atual(dano);
+
+            turno_heroi = true;
+            inimigo_atual.colldownHabilidade();
+        }
+
     }
 
     // Gera o relatorios dos status dos Personagens
@@ -103,9 +107,12 @@ public class Combate {
 
     public void proximoInimigo() {
         int i = index_inimigo_atual + 1;
-        if (i >= inimigos.size()) {
+        if (inimigos.isEmpty()) {
             TesteCombate.closeWindow();
         } else {
+            if (i >= inimigos.size()) {
+                i = 0;
+            }
             inimigo_atual = inimigos.get(i);
             index_inimigo_atual = i;
         }
@@ -115,5 +122,17 @@ public class Combate {
     // Getter Setter
     public ArrayList<Heroi> getHerois() {
         return herois;
+    }
+
+    public int getIndex_heroi_atual() {
+        return index_heroi_atual;
+    }
+
+    public int getIndex_inimigo_atual() {
+        return index_inimigo_atual;
+    }
+
+    public boolean isTurno_heroi() {
+        return turno_heroi;
     }
 }
