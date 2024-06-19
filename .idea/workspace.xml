@@ -1,7 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="cd81eca7-8282-4515-b0e4-cc228301eed5" name="Changes" comment="" />
+    <list default="true" id="cd81eca7-8282-4515-b0e4-cc228301eed5" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/CryptCrawler/.idea/material_theme_project_new.xml" beforeDir="false" afterPath="$PROJECT_DIR$/CryptCrawler/.idea/material_theme_project_new.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CryptCrawler/Biblioteca/asciiPanel.jar" beforeDir="false" afterPath="$PROJECT_DIR$/CryptCrawler/Biblioteca/asciiPanel.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CryptCrawler/out/production/CryptCrawler/CryptCrawler.class" beforeDir="false" afterPath="$PROJECT_DIR$/CryptCrawler/out/production/CryptCrawler/CryptCrawler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CryptCrawler/out/production/CryptCrawler/Ui/Interface.class" beforeDir="false" afterPath="$PROJECT_DIR$/CryptCrawler/out/production/CryptCrawler/Ui/Interface.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CryptCrawler/out/production/CryptCrawler/Ui/MiniMapa.class" beforeDir="false" afterPath="$PROJECT_DIR$/CryptCrawler/out/production/CryptCrawler/Ui/MiniMapa.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CryptCrawler/out/production/CryptCrawler/Ui/StatusJogador.class" beforeDir="false" afterPath="$PROJECT_DIR$/CryptCrawler/out/production/CryptCrawler/Ui/StatusJogador.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CryptCrawler/out/production/CryptCrawler/asciiPanel/asciiPanel.jar" beforeDir="false" afterPath="$PROJECT_DIR$/CryptCrawler/out/production/CryptCrawler/asciiPanel/asciiPanel.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CryptCrawler/out/production/CryptCrawler/world/World.class" beforeDir="false" afterPath="$PROJECT_DIR$/CryptCrawler/out/production/CryptCrawler/world/World.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CryptCrawler/src/CryptCrawler.java" beforeDir="false" afterPath="$PROJECT_DIR$/CryptCrawler/src/CryptCrawler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CryptCrawler/src/Ui/Interface.java" beforeDir="false" afterPath="$PROJECT_DIR$/CryptCrawler/src/Ui/Interface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CryptCrawler/src/Ui/MiniMapa.java" beforeDir="false" afterPath="$PROJECT_DIR$/CryptCrawler/src/Ui/MiniMapa.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CryptCrawler/src/Ui/StatusJogador.java" beforeDir="false" afterPath="$PROJECT_DIR$/CryptCrawler/src/Ui/StatusJogador.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CryptCrawler/src/asciiPanel/asciiPanel.jar" beforeDir="false" afterPath="$PROJECT_DIR$/CryptCrawler/src/asciiPanel/asciiPanel.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CryptCrawler/src/world/World.java" beforeDir="false" afterPath="$PROJECT_DIR$/CryptCrawler/src/world/World.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -24,14 +39,14 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "Controle-de-Entidades",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/johnc/Documents/GitHub/CryptCrawler/CryptCrawler"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;Controle-de-Entidades&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/johnc/Documents/GitHub/CryptCrawler/CryptCrawler&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration default="true" type="JetRunConfigurationType">
       <module name="CryptCrawler" />

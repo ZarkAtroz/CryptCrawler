@@ -95,6 +95,13 @@ public class Interface extends JPanel implements KeyListener{
         miniMapa.getTela().repaint();
     }
 
+    public void clear(){
+        telaDeJogo.getTela().clear();
+        relatorioJogo.getTela().clear();
+        statusJogador.getTela().clear();
+        miniMapa.getTela().clear();
+    }
+
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);

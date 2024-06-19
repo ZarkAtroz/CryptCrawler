@@ -36,7 +36,9 @@ public class MiniMapa extends Tela {
                     getTela().write((char)254, x, y, Color.GREEN, Color.BLACK);
                 else
                     getTela().write(tile[i][j], x, y, Color.WHITE, Color.BLACK);
+
             }
+                getTela().repaint();
         }
     }
 

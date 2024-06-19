@@ -3,13 +3,16 @@ package world;
 import Entity.Player;
 import Ui.Exceptions.OutOfMapException;
 
+import java.awt.*;
+import java.io.Serializable;
 import java.util.Random;
 
 /*
 * Mapa completo da Dungeon
 * Deverá ter uma escala (número inteiro)x maior que o minimapa
 */
-public class World {
+public class World implements Serializable {
+    private static final long serialVersionUID = -8400679626980204437L;
 
     /* Size Attributes */
     private int width;
@@ -27,7 +30,7 @@ public class World {
         this.width = width;
         this.height = height;
         this.tiles = new char[width][height];
-        drawMap();
+        // drawMap();
     }
 
     /* Get and Set */
@@ -70,7 +73,33 @@ public class World {
     * Opções: Criar um programa secundário que desenha o mapa e armazena em um arquivo (Utilziando os caracteres personaizados)
     * ao invés de fazer hardcode
      */
+
+    public void readTiles(){
+        for (int i = 0; i < getWidth(); i++) {
+            for (int j = 0; j < getHeight(); j++) {
+                drawTile(i, j, tiles[i][j]);
+            }
+        }
+    }
+
+    public void drawAllCharacters(){
+        // Desenhando no mapa todos os caracteres
+        int x = 80, y = 10;
+
+        for(int i = 0; i < 256; i++){
+            if(i % 16 == 0){
+                x = 80;
+                y++;
+                drawTile(x++, y, (char)i);
+            } else {
+                drawTile(x++, y, (char)i);
+            }
+        }
+    }
+
     private void drawMap() {
+        Random rand = new Random();
+
         this.passableTiles = new boolean[width][height];
         for (int i = 0; i < getWidth(); i++) {
             for (int j = 0; j < getHeight(); j++) {
@@ -82,17 +111,6 @@ public class World {
         drawTile(21, 17, (char)254);
         drawTile(21, 18, (char)254);
         drawTile(22, 18, (char)254);
-
-        // Desenhando no mapa todos os caracteres
-        int x = 30, y = 10;
-
-        for(int i = 0; i < 256; i++){
-            drawTile(x++, y, (char)i);
-            if(i % 16 == 0){
-                x = 60;
-                y++;
-            }
-        }
     }
 
     public boolean isPassable(int x, int y) throws OutOfMapException {
@@ -114,7 +132,7 @@ public class World {
     * No char tile, COLOCAR O CARACTERE PERSONALIZADO
      */
     private void drawTile(int x, int y, char tile) {
-        if(tile == (char)32) {
+        if(tile == (char)0 || (tile >= (char)245 && tile <= (char)250) || (tile >= (char)224 && tile <= (char)227)) {
             tiles[x][y] = tile;
             passableTiles[x][y] = true;
         } else {

@@ -10,7 +10,6 @@ public class StatusJogador extends Tela{
 
     public void printTela(String texto, int x, int y){
         getTela().write(texto, x, y);
-        getTela().repaint();
         // getTela().write(getWidth() + " x " + getHeight(), 1, 2);
     }
 }

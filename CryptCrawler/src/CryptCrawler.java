@@ -8,6 +8,10 @@ import Ui.Interface;
 import Ui.Controller.KeyEventController;
 
 import javax.swing.*;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.util.ArrayList;
 
 /**
@@ -20,7 +24,7 @@ public class CryptCrawler extends JFrame implements GameEventListener {
     private boolean rodando;
 
     // The desired frames per second of the game (Target FPS).
-    private final int framesPerSecond = 60;
+    private final int framesPerSecond = 30;
 
     // The time per loop in nanoseconds, calculated based on Target FPS
     private final int timePerLoop = 1000000000 / framesPerSecond;
@@ -92,7 +96,25 @@ public class CryptCrawler extends JFrame implements GameEventListener {
     public void run(){
 
         // An instance of the World class is created.
-        World dungeonMap = new World(450, 300);
+        World dungeonMap = null;
+
+        try {
+            ObjectInputStream os = new ObjectInputStream(new FileInputStream("world.save"));
+            dungeonMap = (World) os.readObject();
+        } catch (ClassNotFoundException e){
+            e.printStackTrace();
+        } catch (FileNotFoundException e){
+            e.printStackTrace();
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+
+        if(dungeonMap != null){
+            dungeonMap.readTiles();
+            dungeonMap.drawAllCharacters();
+        }
+
+        // World dungeonMap = new World(450, 300);
 
         // An instance of the Player class is created, that represents the player on the map.
         ArrayList<Entidade> entidades = new ArrayList<>();
@@ -141,9 +163,11 @@ public class CryptCrawler extends JFrame implements GameEventListener {
             // Printar o mundo seguindo o player
             // Ao iniciar o jogo, va para a direita para ver todos os caracteres da fonte nova!!!
             interfaceJogo.getTelaDeJogo().printMundo(dungeonMap.getTiles(), playerOnMap, entidades, dungeonMap);
+            interfaceJogo.getTelaDeJogo().getTela().repaint();
 
             if(tick % (framesPerSecond / 15) == 0){
-
+                interfaceJogo.getStatusJogador().clear();
+                interfaceJogo.getRelatorioJogo().clear();
                 /*
                  * by: @john
                  * MUDAR O MINI MAPA!
@@ -163,12 +187,12 @@ public class CryptCrawler extends JFrame implements GameEventListener {
                     interfaceJogo.getRelatorioJogo().atualizarInformacao("> Jogador na posicao (20,20)", 0, 0);
                 }
 
-                interfaceJogo.getStatusJogador().clear();
                 interfaceJogo.getStatusJogador().printTela("VIDA: 07/15", 1, 1);
                 interfaceJogo.getStatusJogador().printTela("MANA: 19/30", 1, 2);
                 interfaceJogo.getStatusJogador().printTela("POSICAO X = " + playerOnMap.getX() + " / Y = " + playerOnMap.getY(), 1, 3);
+
+                interfaceJogo.refresh();
             }
-            interfaceJogo.refresh();
 
             // Executes the next key event in the queue. This method is responsible for processing
             // the user's keyboard input and performing the corresponding actions in the game.
