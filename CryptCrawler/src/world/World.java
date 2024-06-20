@@ -12,7 +12,8 @@ import java.util.Random;
 * Deverá ter uma escala (número inteiro)x maior que o minimapa
 */
 public class World implements Serializable {
-    private static final long serialVersionUID = -8400679626980204437L;
+
+    private static final long serialVersionUID = -3043187160444032741L;
 
     /* Size Attributes */
     private int width;
@@ -22,6 +23,9 @@ public class World implements Serializable {
     private char[][] tiles;
     private boolean[][] passableTiles;
 
+    private Color[][] foregroundColor;
+    private Color[][] backgroundColor;
+
     /* Player displaying on map */
     private Player playerOnMap;
 
@@ -30,7 +34,7 @@ public class World implements Serializable {
         this.width = width;
         this.height = height;
         this.tiles = new char[width][height];
-        // drawMap();
+        drawMap();
     }
 
     /* Get and Set */
@@ -52,6 +56,23 @@ public class World implements Serializable {
     public void setTiles(char[][] tiles) {
         this.tiles = tiles;
     }
+
+    public void setBackgroundColor(Color[][] backgroundColor) {
+        this.backgroundColor = backgroundColor;
+    }
+
+    public Color[][] backgroundColor() {
+        return backgroundColor;
+    }
+
+    public void setForegroundColor(Color[][] foregroundColor) {
+        this.foregroundColor = foregroundColor;
+    }
+
+    public Color[][] foregroundColor() {
+        return foregroundColor;
+    }
+
     public boolean[][] getPassableTiles() {
         return passableTiles;
     }
@@ -77,7 +98,7 @@ public class World implements Serializable {
     public void readTiles(){
         for (int i = 0; i < getWidth(); i++) {
             for (int j = 0; j < getHeight(); j++) {
-                drawTile(i, j, tiles[i][j]);
+                drawPassableTile(i, j, tiles[i][j]);
             }
         }
     }
@@ -100,10 +121,20 @@ public class World implements Serializable {
     private void drawMap() {
         Random rand = new Random();
 
+        this.foregroundColor = new Color[width][height];
+        this.backgroundColor = new Color[width][height];
+        for (int i = 0; i < getWidth(); i++) {
+            for (int j = 0; j < getHeight(); j++) {
+                foregroundColor[i][j] = Color.BLACK;
+                backgroundColor[i][j] = Color.BLACK;
+            }
+        }
+
+
         this.passableTiles = new boolean[width][height];
         for (int i = 0; i < getWidth(); i++) {
             for (int j = 0; j < getHeight(); j++) {
-                drawTile(i, j, (char)32);
+                drawTile(i, j, (char)0);
             }
         }
         drawTile(21, 15, (char)254);
@@ -132,11 +163,21 @@ public class World implements Serializable {
     * No char tile, COLOCAR O CARACTERE PERSONALIZADO
      */
     private void drawTile(int x, int y, char tile) {
+        backgroundColor[x][y] = Color.BLACK;
+        foregroundColor[x][y] = Color.WHITE;
         if(tile == (char)0 || (tile >= (char)245 && tile <= (char)250) || (tile >= (char)224 && tile <= (char)227)) {
             tiles[x][y] = tile;
             passableTiles[x][y] = true;
         } else {
             tiles[x][y] = tile;
+            passableTiles[x][y] = false;
+        }
+    }
+
+    private void drawPassableTile(int x, int y, char tile) {
+        if(tile == (char)0 || (tile >= (char)245 && tile <= (char)250) || (tile >= (char)224 && tile <= (char)227)) {
+            passableTiles[x][y] = true;
+        } else {
             passableTiles[x][y] = false;
         }
     }

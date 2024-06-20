@@ -54,6 +54,18 @@ public class KeyEventController {
                 case KeyEvent.VK_ESCAPE:
                     this.listener.onGameExit();
                     break;
+
+                case KeyEvent.VK_PAGE_UP:
+                    interfaceJogo.getRelatorioJogo().decrementarLinha();
+                    break;
+
+                case KeyEvent.VK_PAGE_DOWN:
+                    interfaceJogo.getRelatorioJogo().encrementarLinha();
+                    break;
+
+                case KeyEvent.VK_END:
+                    interfaceJogo.getRelatorioJogo().setLinhaFim();
+                    break;
             }
         } else if (event instanceof MouseEvent) {
             //

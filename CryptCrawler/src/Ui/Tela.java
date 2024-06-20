@@ -3,9 +3,6 @@ package Ui;
 import asciiPanel.AsciiFont;
 import asciiPanel.AsciiPanel;
 
-import java.awt.*;
-import java.awt.image.BufferedImage;
-
 public class Tela implements ComandosTela{
 
     private int width;

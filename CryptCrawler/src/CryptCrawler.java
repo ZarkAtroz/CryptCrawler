@@ -112,6 +112,9 @@ public class CryptCrawler extends JFrame implements GameEventListener {
         if(dungeonMap != null){
             dungeonMap.readTiles();
             dungeonMap.drawAllCharacters();
+        } else {
+            dungeonMap = new World(450, 300);
+            dungeonMap.drawAllCharacters();
         }
 
         // World dungeonMap = new World(450, 300);
@@ -148,6 +151,8 @@ public class CryptCrawler extends JFrame implements GameEventListener {
         // the time per loop (based on the desired frame rate) and the time the game loop actually took.
         long sleepTime;
 
+        interfaceJogo.getRelatorioJogo().atualizarInformacao("BEM-VINDO AO CRYPT CRAWLER!");
+
         while (true){
             // The start time of the game loop, used to calculate the necessary sleep time
             // to maintain the desired frame rate.
@@ -167,7 +172,7 @@ public class CryptCrawler extends JFrame implements GameEventListener {
 
             if(tick % (framesPerSecond / 15) == 0){
                 interfaceJogo.getStatusJogador().clear();
-                interfaceJogo.getRelatorioJogo().clear();
+
                 /*
                  * by: @john
                  * MUDAR O MINI MAPA!
@@ -177,14 +182,18 @@ public class CryptCrawler extends JFrame implements GameEventListener {
                  */
                 interfaceJogo.getMiniMapa().printMiniMapa(dungeonMap, playerOnMap);
 
+                interfaceJogo.getRelatorioJogo().imprimirRelatorios();
+                if(playerOnMap.getX() < 50 && playerOnMap.getY() < 50){
+                    interfaceJogo.getRelatorioJogo().atualizarInformacao("X = " + playerOnMap.getX() + " / Y = " + playerOnMap.getY());
+                }
                 if(playerOnMap.getX() == 1 && playerOnMap.getY() == 1){
-                    interfaceJogo.getRelatorioJogo().atualizarInformacao("> Jogador na posicao (01,01)", 0, 0);
+                    interfaceJogo.getRelatorioJogo().atualizarInformacao("> Jogador na posicao (01,01)");
                 }
                 if(playerOnMap.getX() == 10 && playerOnMap.getY() == 10){
-                    interfaceJogo.getRelatorioJogo().atualizarInformacao("> Jogador na posicao (10,10)", 0, 0);
+                    interfaceJogo.getRelatorioJogo().atualizarInformacao("> Jogador na posicao (10,10)");
                 }
                 if(playerOnMap.getX() == 20 && playerOnMap.getY() == 20){
-                    interfaceJogo.getRelatorioJogo().atualizarInformacao("> Jogador na posicao (20,20)", 0, 0);
+                    interfaceJogo.getRelatorioJogo().atualizarInformacao("> Jogador na posicao (20,20)");
                 }
 
                 interfaceJogo.getStatusJogador().printTela("VIDA: 07/15", 1, 1);

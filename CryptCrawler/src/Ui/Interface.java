@@ -24,6 +24,11 @@ public class Interface extends JPanel implements KeyListener{
     /* Tamanhos dos painéis */
 
     /* - Tamanho da Tela do Jogo */
+    // Com a fonte do combate (30x30)
+    // Width = 24 | Height = 16
+
+    // Fonte original
+    // Width = 45 | Height = 30
     private final int telaDeJogoWidth = 45; // largura do painel ASCII (em caracteres)
     private final int telaDeJogoHeight = 30;
 
@@ -55,7 +60,6 @@ public class Interface extends JPanel implements KeyListener{
         this.add(statusJogador.getTela());
         relatorioJogo = new RelatorioJogo(relatorioJogoWidth, relatorioJogoHeight, AsciiFont.DRAKE_10x10, FONT_DRAKE_SIZE);
         this.add(relatorioJogo.getTela());
-
         miniMapa = new MiniMapa(miniMapaWidth, miniMapaHeight, AsciiFont.CP437_10x10 , 10);
         this.add(miniMapa.getTela());
 
@@ -126,6 +130,7 @@ public class Interface extends JPanel implements KeyListener{
         g.fillRect(780, 325, miniMapaWidth * 10 + 20, miniMapaHeight * 10 + 20);
 
         telaDeJogo.setBounds(30, 30);
+
         statusJogador.setBounds(30, 545);
         relatorioJogo.setBounds(790, 30);
         miniMapa.setBounds(790, 333);
