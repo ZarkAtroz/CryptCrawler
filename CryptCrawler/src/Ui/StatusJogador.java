@@ -14,4 +14,8 @@ public class StatusJogador extends Tela{
         // getTela().write(getWidth() + " x " + getHeight(), 1, 2);
         getTela().repaint();
     }
+
+    public void limparTela() {
+        getTela().clear();
+    }
 }

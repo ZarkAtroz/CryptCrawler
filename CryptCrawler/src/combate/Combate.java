@@ -49,38 +49,38 @@ public class Combate {
 
         if (turno_heroi) {
             int dano = heroi_atual.dano(heroi_atual.getHbs().get(index_hb), 1, 1, inimigo_atual.getAgilidade());
-            dano = inimigo_atual.getHp_atual() - dano;
-            inimigo_atual.setHp_atual(dano);
+            int n_hp_atual = inimigo_atual.getHp_atual() - dano;
+            inimigo_atual.setHp_atual(n_hp_atual);
 
             turno_heroi = false;
 
-            if (dano >= 0) {
+            if (dano <= 0) {
                 inter_jogo.getRelatorioJogo().textoUnico(heroi_atual.getClass().getSimpleName() + " errou o ataque", 0, 2);
             } else {
-                inter_jogo.getRelatorioJogo().textoUnico(heroi_atual.getClass().getSimpleName() + "acertou o ataque dando: "+ dano, 0, 2);
+                inter_jogo.getRelatorioJogo().textoUnico(heroi_atual.getClass().getSimpleName() + " acertou o ataque dando: "+ dano, 0, 2);
             }
 
         } else {
             index_hb = (int) Math.random() * inimigo_atual.getHbs().size();
 
-            System.out.println("Inimigo LVL: " + inimigo_atual.getLvl());
 
             Habilidade hb = inimigo_atual.returnHabilidade(index_hb);
             int dano = inimigo_atual.dano(hb, 1, 1, heroi_atual.getAgilidade());
-            dano = heroi_atual.getHp_atual() - dano;
-            heroi_atual.setHp_atual(dano);
+            int n_hp_atual = heroi_atual.getHp_atual() - dano;
+            heroi_atual.setHp_atual(n_hp_atual);
 
             turno_heroi = true;
             inimigo_atual.colldownHabilidade();
 
-            if (dano >= 0) {
+
+            if (dano <= 0) {
                 inter_jogo.getRelatorioJogo().textoUnico(inimigo_atual.getClass().getSimpleName() + " errou o ataque", 0, 4);
             } else {
                 inter_jogo.getRelatorioJogo().textoUnico(inimigo_atual.getClass().getSimpleName() + " acertou o ataque dando: "+ dano, 0, 4);
             }
         }
 
-
+        inter_jogo.getStatusJogador().limparTela();
     }
 
     

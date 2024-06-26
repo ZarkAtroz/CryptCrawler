@@ -160,7 +160,6 @@ public class CryptCrawler extends JFrame implements KeyListener, GameEventListen
         // The necessary sleep time to maintain the desired frame rate. Calculated as the difference between
         // the time per loop (based on the desired frame rate) and the time the game loop actually took.
         long sleepTime;
-        c.statusHerois(interfaceJogo);
 
         while (true){
             this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -181,6 +180,7 @@ public class CryptCrawler extends JFrame implements KeyListener, GameEventListen
             // render(); -> imprimir todas as telas, mesmo que não tenha mudado nada (aplicar tudo nesse tópico no render())
 
             // Print the minimap and the game world.
+            c.statusHerois(interfaceJogo);
             interfaceJogo.getMiniMapa().printMatriz();
             if (in_combat) {
 

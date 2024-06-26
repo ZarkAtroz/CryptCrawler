@@ -59,12 +59,6 @@ public class Guerreiro extends Heroi {
 
        boolean acertou = necessario > num_random;
 
-        if (acertou) {
-            TesteCombate.relatorioJogo(getClass().getSimpleName() + " acertou com sucesso");
-        } else {
-            TesteCombate.relatorioJogo(getClass().getSimpleName() + " não teve sucesso no acerto");
-        }
-
         return acertou;
     }
 
