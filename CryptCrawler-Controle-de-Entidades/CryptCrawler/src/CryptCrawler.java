@@ -8,6 +8,7 @@ import Ui.Controller.KeyEventController;
 
 import javax.swing.*;
 import java.io.*;
+import java.lang.reflect.Array;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -19,7 +20,9 @@ public class CryptCrawler extends JFrame implements GameEventListener {
     private final int framesPerSecond = 60;
     private final int timePerLoop = 1000000000 / framesPerSecond;
     private final Interface interfaceJogo;
+
     private boolean in_combat = false;
+    private Combate combate;
 
     public CryptCrawler(){
         this.rodando = true;
@@ -105,20 +108,25 @@ public class CryptCrawler extends JFrame implements GameEventListener {
          * Colocar um variavel booleana em Inimigo, isAlive como um exemplo, caso a vida do inimigo for menor ou igual a 0, mudar a condicao para false, e na funcao colisaoPLayerEnemy, adicionar
          * na condicao se esta variavel é verdadeira.
          */
-        Inimigo vilao = new Inimigo("Vilao", 20, 10, (char)6, playerOnMap);
-        entidades.add(vilao);
 
-        Enemy enemyOnMap = new Enemy(dungeonMap, 36, 26, null);
-        dungeonMap.addEnemyToList(enemyOnMap);
+        ArrayList<Enemy> inimigos = new ArrayList<>();
 
-        enemyOnMap.createParty();
+        Enemy goblin = new Enemy(dungeonMap, 36, 26, "Goblin", (char)21);
+        Enemy goblinForte = new Enemy(dungeonMap, 40, 26, "Goblin Forte", (char)22);
 
-        Combate c = new Combate(0, 0, playerOnMap.getParty(), enemyOnMap.getInimigos());
+        inimigos.add(goblin);
+        inimigos.add(goblinForte);
+
+        for(Enemy ens : inimigos){
+            entidades.add(new Inimigo(ens.getClassName(), ens.getX(), ens.getY(), ens.getIcon(), playerOnMap));
+            dungeonMap.addEnemyToList(ens);
+        }
+
+        combate = new Combate(0, 0, playerOnMap.getParty());
 
         dungeonMap.setPlayerOnMap(playerOnMap);
-        dungeonMap.setEnemyOnMap(enemyOnMap);
 
-        KeyEventController keyEventController = new KeyEventController(this, playerOnMap, entidades, c);
+        KeyEventController keyEventController = new KeyEventController(this, playerOnMap, entidades, combate);
 
         long startTime;
         long endTime;
@@ -132,11 +140,27 @@ public class CryptCrawler extends JFrame implements GameEventListener {
             if(!this.getRodando())
                 System.exit(0);
 
-            c.statusHerois(interfaceJogo);
+            combate.statusHerois(interfaceJogo);
             interfaceJogo.getMiniMapa().printMiniMapa(dungeonMap, playerOnMap);
             if(in_combat){
 
-                if(c.isEmptyEnemyies()){
+                if(combate.isEmptyEnemyies()){
+
+                    int playerX = dungeonMap.getPlayerOnMap().getX();
+                    int playerY = dungeonMap.getPlayerOnMap().getY();
+
+                    Inimigo selectedEnemy = null;
+
+                    for(Entidade ent : entidades){
+                        if(ent instanceof Inimigo){
+                            if(playerX == ent.getX() && playerY == ent.getY()){
+                                selectedEnemy = (Inimigo) ent;
+                            }
+                        }
+                    }
+
+                    if(selectedEnemy != null)
+                        entidades.remove(selectedEnemy);
 
                     interfaceJogo.setCombate();
                     in_combat = !in_combat;
@@ -144,15 +168,15 @@ public class CryptCrawler extends JFrame implements GameEventListener {
                     dungeonMap.deleteEnemyAt(playerOnMap.getX(), playerOnMap.getY());
 
                 } else {
-                    if (!c.isTurno_heroi()) {
-                        c.atacar(0, 0, interfaceJogo);
+                    if (!combate.isTurno_heroi()) {
+                        combate.atacar(0, 0, interfaceJogo);
                     }
 
                     interfaceJogo.refreshCombate();
                 }
 
             } else {
-                interfaceJogo.getTelaDeJogo().printMundo(playerOnMap, entidades, dungeonMap);
+                interfaceJogo.getTelaDeJogo().printMundo(playerOnMap, entidades, dungeonMap, dungeonMap.getEnemies());
                 interfaceJogo.getStatusJogador().printCoords("POSICAO X = " + playerOnMap.getX() + " / Y = " + playerOnMap.getY());
 
                 // Checa colisao de inimigo
@@ -184,10 +208,10 @@ public class CryptCrawler extends JFrame implements GameEventListener {
         int playerX = world.getPlayerOnMap().getX();
         int playerY = world.getPlayerOnMap().getY();
 
-        int enemyX = world.getEnemyOnMap().getX();
-        int enemyY = world.getEnemyOnMap().getY();
-
-        if(world.getEnemyAt(playerX, playerY)){
+        if(world.isEnemyAt(playerX, playerY)){
+            Enemy selectedEnemy = world.getEnemyAt(playerX, playerY);
+            selectedEnemy.createParty();
+            combate.setInimigos(selectedEnemy.getInimigos());
             interfaceJogo.setCombate();
             in_combat = true;
             interfaceJogo.getRelatorioJogo().atualizarInformacao("HEROIS ENTRARAM EM COMBATE!");

@@ -20,24 +20,23 @@ public class Combate {
 
     private boolean turno_heroi;
 
-    public Combate(int i_heroi, int i_inimigo, ArrayList<AliadoClasse> hr, ArrayList<InimigoClasse> in) {
+    public Combate(int i_heroi, int i_inimigo, ArrayList<AliadoClasse> hr) {
         herois = hr;
-        inimigos = in;
 
         index_heroi_atual = i_heroi;
         index_inimigo_atual = i_inimigo;
 
         heroi_atual = herois.get(index_heroi_atual);
-        inimigo_atual = inimigos.get(index_inimigo_atual);
+    }
 
+    public void setInimigos(ArrayList<InimigoClasse> in){
+        this.inimigos = in;
+        inimigo_atual = inimigos.get(0);
         turno_heroi = (heroi_atual.getAgilidade() > inimigo_atual.getAgilidade());
     }
 
     public boolean isEmptyEnemyies(){
-        if(inimigos.isEmpty())
-            return true;
-        else
-            return false;
+        return inimigos.isEmpty();
     }
 
     public void atacar(int index_hb, int index_personagem, Interface inter_jogo) {

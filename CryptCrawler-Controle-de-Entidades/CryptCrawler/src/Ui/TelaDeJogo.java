@@ -1,5 +1,6 @@
 package Ui;
 
+import Entity.Enemy;
 import Entity.Entidade;
 import Entity.Player;
 import Ui.Cor.CoresInfo;
@@ -8,6 +9,7 @@ import world.Tiles;
 import world.World;
 
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -108,9 +110,9 @@ public class TelaDeJogo extends Tela {
         // getTela().write("45 x 30", x, y + 1);
     }
 
-    public void printMundo(Player player, List<Entidade> entidades, World world){
+    public void printMundo(Player player, List<Entidade> entidades, World world, ArrayList<Enemy> enemies){
         getTela().clear();
-        lookAt(player, entidades, world);
+        lookAt(player, entidades, world, enemies);
     }
 
     public Point GetCameraOrigin(int xPlayer, int yPlayer, World world) {
@@ -120,7 +122,7 @@ public class TelaDeJogo extends Tela {
         return new Point(x, y);
     }
 
-    public void lookAt(Player player, List<Entidade> entidades, World world){
+    public void lookAt(Player player, List<Entidade> entidades, World world, ArrayList<Enemy> enemies){
 
         Tiles tile;
         Point origin;
@@ -134,6 +136,7 @@ public class TelaDeJogo extends Tela {
                 //tile = dungeonTiles[origin.x + x][origin.y + y];
 
                 boolean isEntityPresent = false;
+                boolean isEnemyPresent = false;
 
                 for (Entidade entidade : entidades) {
                     if (entidade.getX() == (origin.x + x) && entidade.getY() == (origin.y + y)) {
@@ -153,6 +156,7 @@ public class TelaDeJogo extends Tela {
                         break;  // Exit the loop once an entity is found at this position
                     }
                 }
+
                 if (!isEntityPresent) {
                     getTela().write(tile.getIcon(), x, y, tile.getForegroundColor(), tile.getBackgroundColor());
                 }

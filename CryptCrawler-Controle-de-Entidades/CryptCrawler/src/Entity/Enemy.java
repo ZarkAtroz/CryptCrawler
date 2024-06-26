@@ -9,20 +9,24 @@ import java.util.ArrayList;
 public class Enemy {
     
     private World world; // O jogador/personagem precisa saber em qual mundo ele está
+
     private int x;
     private int y;
-    private String name;
+
+    private String className;
+    private char icon;
 
     // Para usar no combate
     private ArrayList<InimigoClasse> inimigos = new ArrayList<>();
 
     private int index_i_atual = 0;
 
-    public Enemy(World world, int x, int y, String name) {
+    public Enemy(World world, int x, int y, String className, char icon) {
         this.world = world;
         this.x = x;
         this.y = y;
-        this.name = name;
+        this.className = className;
+        this.icon = icon;
     }
 
      //Getter e Setter
@@ -50,14 +54,6 @@ public class Enemy {
         this.y = y;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public int getIndex_i_atual() {
         return index_i_atual;
     }
@@ -74,7 +70,21 @@ public class Enemy {
         this.inimigos = inimigos;
     }
 
+    public String getClassName() {
+        return className;
+    }
 
+    public void setClassName(String className) {
+        this.className = className;
+    }
+
+    public char getIcon() {
+        return icon;
+    }
+
+    public void setIcon(char icon) {
+        this.icon = icon;
+    }
 
     // Gerar party de inimigos aleatoriamente
     public void createParty() {
@@ -82,7 +92,6 @@ public class Enemy {
         int lvl = 1 + (int) Math.random() * 10;
 
         inimigos.add(new Goblin(lvl));
-
     }
 
 }

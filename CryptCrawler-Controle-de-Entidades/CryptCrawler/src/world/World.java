@@ -27,7 +27,6 @@ public class World implements Serializable {
     /* Player displaying on map */
     private Player playerOnMap;
 
-    private Enemy enemyOnMap;
     private ArrayList<Enemy> enemies;
 
     /* Constructor */
@@ -71,20 +70,20 @@ public class World implements Serializable {
         this.playerOnMap = playerOnMap;
     }
 
-    public Enemy getEnemyOnMap() {
-        return enemyOnMap;
-    }
-
-    public void setEnemyOnMap(Enemy inimigo) {
-        this.enemyOnMap = inimigo;
-    }
-
-    public boolean getEnemyAt(int x, int y) {
+    public boolean isEnemyAt(int x, int y) {
         for(Enemy ens : enemies){
             if(ens.getX() == x && ens.getY() == y)
                 return true;
         }
         return false;
+    }
+
+    public Enemy getEnemyAt(int x, int y) {
+        for(Enemy ens : enemies){
+            if(ens.getX() == x && ens.getY() == y)
+                return ens;
+        }
+        return null;
     }
 
     public void deleteEnemyAt(int x, int y){
@@ -101,6 +100,7 @@ public class World implements Serializable {
     }
 
     public void removeEnemy(Enemy enemy){
+        int x = enemy.getX(), y = enemy.getY();
         this.enemies.remove(enemy);
     }
 
@@ -114,6 +114,10 @@ public class World implements Serializable {
 
     public void setEnemies(ArrayList<Enemy> enemies) {
         this.enemies = enemies;
+    }
+
+    public ArrayList<Enemy> getEnemies(){
+        return this.enemies;
     }
 
     /*
