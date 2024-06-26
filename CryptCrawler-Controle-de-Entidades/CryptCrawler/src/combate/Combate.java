@@ -202,8 +202,10 @@ public class Combate {
                 interfaceJogo.getStatusJogador().printTela("SELECIONAR ALIADO:", 1, 1);
                 int i = 1;
                 for (AliadoClasse h: getHerois()) {
-                    interfaceJogo.getStatusJogador().printTela("[" + (i++) + "] " + h.getClass().getSimpleName().toUpperCase(), 1, i);
-
+                    String nomeAliado = h.getClass().getSimpleName().toUpperCase();
+                    if(nomeAliado.equals("MAGOELEMENTAL"))
+                        nomeAliado = "MAGO ELEMENTAL";
+                    interfaceJogo.getStatusJogador().printTela("[" + (i++) + "] " + nomeAliado, 1, i);
                 }
 
                 interfaceJogo.getStatusJogador().printTela("HEROI SELECIONADO:", 24, 1);
