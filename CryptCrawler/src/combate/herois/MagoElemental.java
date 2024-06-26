@@ -32,19 +32,22 @@ public class MagoElemental extends Heroi {
     // Funções da interface
     @Override
     public int dano(Habilidade hb, float buff, int res_ini, int agi_def) {
-        if (acerto(this.agilidade, agi_def)) {
-            int res = res_ini / 2;
-            if (res < 1) {
-                res = 1;
-            }
-            
-            int dmg = (int) (hb.getStatus() * hb.getModficador() * buff);
+        if (this.mp_atual >= hb.getCusto_mp()) {
+            this.mp_atual -= hb.getCusto_mp();
+            if (acerto(this.agilidade, agi_def)) {
+                int res = res_ini / 2;
+                if (res < 1) {
+                    res = 1;
+                }
+                
+                int dmg = (int) (hb.getStatus() * hb.getModficador() * buff);
 
-            if (txcrit()) {
-                dmg = dmg * this.critico;
-            }
+                if (txcrit()) {
+                    dmg = dmg * this.critico;
+                }
 
-            return (int) (dmg / res);
+                return (int) (dmg / res);
+            }
         }
         return 0;
     }

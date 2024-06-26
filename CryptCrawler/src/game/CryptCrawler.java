@@ -189,13 +189,15 @@ public class CryptCrawler extends JFrame implements KeyListener, GameEventListen
                 }
 
             } else {
-                interfaceJogo.getTelaDeJogo().printMundo(dungeonMap.getTiles(), playerOnMap, enemyOnMap);                
+                interfaceJogo.getTelaDeJogo().printMundo(dungeonMap.getTiles(), playerOnMap, enemyOnMap);     
+
+                // Checa colisao de inimigo
+                colisaoPlayerEnemy(dungeonMap);
+                
             }
             /*interfaceJogo.getRelatorioJogo().textoUnico("RELATORIO JOGO", 0, 0);
             interfaceJogo.getRelatorioJogo().atualizarInformacao("OWNDOA", 0, 0);*/
 
-            // Checa colisao de inimigo
-            colisaoPlayerEnemy(dungeonMap);
 
             // Executes the next key event in the queue. This method is responsible for processing
             // the user's keyboard input and performing the corresponding actions in the game.
@@ -228,6 +230,7 @@ public class CryptCrawler extends JFrame implements KeyListener, GameEventListen
         if (world.getEnemyOnMap().getX() == world.getPlayerOnMap().getX() 
             && world.getEnemyOnMap().getY() == world.getPlayerOnMap().getY()) {
             in_combat = true;
+            interfaceJogo.getRelatorioJogo().textoUnico("Herois entraram em combate!!", 0, 5);
         }
     }
 

@@ -40,11 +40,12 @@ public class Combate {
     public void atacar(int index_hb, int index_personagem, Interface inter_jogo) {
 
         if (inimigo_atual.getHp_atual() <= 0) {
+            inter_jogo.getRelatorioJogo().textoUnico(inimigo_atual.getClass().getSimpleName() + " foi de VALA", 0, 19);
             proximoInimigo();
         }
 
         if (heroi_atual.getHp_atual() <= 0) {
-            trocaPersonagem(index_heroi_atual + 1);
+            trocaPersonagem(index_heroi_atual + 1, 0);
         }
 
         if (turno_heroi) {
@@ -86,16 +87,28 @@ public class Combate {
     
     // Gera ataque dos herois
     public void statusHerois(Interface interface_jogo) {
-        int y = 0;
+        int x = 0;
 
         for (Heroi h: getHerois()) {
-            String str = h.getClass().getSimpleName() + " | " + h.getHp_atual() + " / " + h.getHp_max();
-            interface_jogo.getStatusJogador().printTela(str, 0, y);
-            y += 2;
+            interface_jogo.getStatusJogador().printTela(h.getClass().getSimpleName(), x, 0);
+            interface_jogo.getStatusJogador().printTela("HP: " + h.getHp_atual() +"/"+ h.getHp_max(), x, 1);
+            interface_jogo.getStatusJogador().printTela("MP: " + h.getMp_atual() +"/"+ h.getMp_max(), x, 2);
+
+            int y = 3;
+            for (int i = 0; i < h.getHbs().size(); i++) {
+                Habilidade hb_1 = h.getHbs().get(i);
+                interface_jogo.getStatusJogador().printTela("[" + (i+1) + "]" + hb_1.getNome_hab(), x, y);
+                y++;
+            }
+            x += 19;
         }
     }
 
-    public void trocaPersonagem(int index_h) {
+    public void trocaPersonagem(int index_h, int cont) {
+
+        if (cont >= herois.size()) {
+            return;
+        }
 
         if (index_h >= herois.size()) {
             index_h = 0;
@@ -105,7 +118,7 @@ public class Combate {
         heroi_atual = herois.get(index_heroi_atual);
 
         if (heroi_atual.getHp_atual() <= 0) {
-            trocaPersonagem(index_h + 1);
+            trocaPersonagem(index_h + 1, cont + 1);
         }
     }
 

@@ -30,6 +30,10 @@ public class CombateEventController {
                     type_event = 1;
                     break;
             
+                case KeyEvent.VK_B:
+                    interfaceJogo.getRelatorioJogo().atualizarInformacao("", 0, 0);
+                    type_event = 2;
+                    break;
                 default:
                     Log.log("Não selecionou nenhuma opcao");
                     type_event = 0;
@@ -61,6 +65,32 @@ public class CombateEventController {
                 interfaceJogo.getRelatorioJogo().textoUnico("Personagem não tem acesso a essa hab", 0, 20);
             }
             
+        } else if (type_event == 2) {
+            try {
+                switch (keyEvent.getKeyCode()) {
+                    case KeyEvent.VK_1:
+                        combate.trocaPersonagem(0, 0);;
+                        type_event = 0;
+                        break;
+                    case KeyEvent.VK_2:
+                        combate.trocaPersonagem(1, 0);
+                        type_event = 0;
+                        break;
+                    case KeyEvent.VK_3:
+                        combate.trocaPersonagem(2, 0);
+                        type_event = 0;
+                        break;
+                    case KeyEvent.VK_4:
+                        combate.trocaPersonagem(3, 0);
+                        type_event = 0;
+                        break;
+                    default:
+                        break;
+                }
+                interfaceJogo.getRelatorioJogo().textoUnico("Troca de personagem para: " + combate.heroi_atual.getClass().getSimpleName(), 0, 12);
+            } catch (IndexOutOfBoundsException i) {
+                interfaceJogo.getRelatorioJogo().textoUnico("Não existe esse personagem", 0, 20);
+            }
         }
     }
 

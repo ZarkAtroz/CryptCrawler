@@ -13,7 +13,7 @@ public class Guerreiro extends Heroi {
         this.mp_atual = this.mp_max;
 
         addHabs(0, 1, getForca(), 0.25f, "ATK BASICO");
-        addHabs(4, 2, getForca(), 0.40f, "Roda roda Jeckit");
+        addHabs(4, 2, getForca(), 0.40f, "Roda Jeckit");
     }
 
     // Funções da classe PersonagemCombate
@@ -32,21 +32,23 @@ public class Guerreiro extends Heroi {
     // Funções da interface
     @Override
     public int dano(Habilidade hb, float buff, int res_ini, int agi_def) {
-        this.mp_atual -= hb.getCusto_mp();
-        if (acerto(this.agilidade, agi_def)) {
-            int res = res_ini / 2;
-            if (res < 1) {
-                res = 1;
-            }
-            
-            int dmg = (int) (hb.getStatus() * hb.getModficador() * buff);
+        if (this.mp_atual >= hb.getCusto_mp()) {
+            this.mp_atual -= hb.getCusto_mp();
+            if (acerto(this.agilidade, agi_def)) {
+                int res = res_ini / 2;
+                if (res < 1) {
+                    res = 1;
+                }
+                
+                int dmg = (int) (hb.getStatus() * hb.getModficador() * buff);
 
-            if (txcrit()) {
-                dmg = dmg * this.critico;
-            }
+                if (txcrit()) {
+                    dmg = dmg * this.critico;
+                }
 
-            return (int) (dmg / res);
-        }
+                return (int) (dmg / res);
+            }
+        }        
         return 0;
     }
 
