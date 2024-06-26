@@ -96,9 +96,11 @@ public class CryptCrawler extends JFrame implements GameEventListener {
 
         Enemy goblin = new Enemy(dungeonMap, 36, 26, "Goblin", (char)21);
         Enemy goblinForte = new Enemy(dungeonMap, 40, 26, "Goblin Forte", (char)22);
+        Enemy goblinDois = new Enemy(dungeonMap, 25, 25, "Goblin", (char)22);
 
         inimigos.add(goblin);
         inimigos.add(goblinForte);
+        inimigos.add(goblinDois);
 
         for(Enemy ens : inimigos){
             entidades.add(new Inimigo(ens.getClassName(), ens.getX(), ens.getY(), ens.getIcon(), playerOnMap));
@@ -126,11 +128,6 @@ public class CryptCrawler extends JFrame implements GameEventListener {
             interfaceJogo.getMiniMapa().printMiniMapa(dungeonMap, playerOnMap);
             if(in_combat){
 
-                // switch(keyEventController.getCombateTypeEvent())
-
-                // combate.statusHerois(interfaceJogo);
-                combate.updateInterface(interfaceJogo, keyEventController.getCombateTypeEvent());
-
                 if(combate.isEmptyEnemyies()){
 
                     deleteEnemyEntity(dungeonMap, entidades);
@@ -144,6 +141,8 @@ public class CryptCrawler extends JFrame implements GameEventListener {
                     if (!combate.isTurno_heroi()) {
                         combate.atacar(0, 0, interfaceJogo);
                     }
+
+                    combate.updateInterface(interfaceJogo, keyEventController.getCombateTypeEvent());
 
                     interfaceJogo.refreshCombate();
                 }

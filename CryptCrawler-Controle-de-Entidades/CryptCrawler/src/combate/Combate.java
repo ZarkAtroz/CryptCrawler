@@ -155,8 +155,8 @@ public class Combate {
         switch(typeEvent){
             case 0:
                 controles[0] = "CONTROLES:";
-                controles[1] = "[E] SELEICONAR HAB";
-                controles[2] = "[B] TROCAR PERS";
+                controles[1] = "[Q] SELEICONAR HAB";
+                controles[2] = "[E] TROCAR PERS";
                 for(int i = 0; i < 3; i++){
                     interfaceJogo.getStatusJogador().printTela(controles[i], 1, (i + 1));
                 }

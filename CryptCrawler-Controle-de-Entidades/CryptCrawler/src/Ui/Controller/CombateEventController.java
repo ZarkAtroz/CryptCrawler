@@ -5,11 +5,13 @@ import combate.Combate;
 import log.Log;
 
 import java.awt.event.KeyEvent;
+import java.util.Stack;
 
 public class CombateEventController {
     
     private Combate combate;
     private int type_event = 0;
+    private Stack<Integer> menuStack = new Stack<>();
 
     /*
      * 0 = Selecionar opcao
@@ -26,12 +28,21 @@ public class CombateEventController {
     }
 
     public void processesKeyEvent(KeyEvent keyEvent, Interface interfaceJogo) {
-        if (type_event == 0) {
+
+        if(keyEvent.getKeyCode() == KeyEvent.VK_ESCAPE){
+            if(!menuStack.isEmpty()){
+                type_event = menuStack.pop();
+            } else {
+                Log.log("NAO HA MENU ANTERIOR");
+            }
+        }else if (type_event == 0) {
             switch (keyEvent.getKeyCode()) {
-                case KeyEvent.VK_SPACE:
+                case KeyEvent.VK_Q:
+                    menuStack.push(type_event);
                     type_event = 1;
                     break;
-                case KeyEvent.VK_B:
+                case KeyEvent.VK_E:
+                    menuStack.push(type_event);
                     type_event = 2;
                     break;
                 case KeyEvent.VK_PAGE_UP:
