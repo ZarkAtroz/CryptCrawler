@@ -2,7 +2,7 @@ package combate.herois;
 
 import combate.Habilidade;
 
-public class Healer extends Heroi {
+public class Healer extends AliadoClasse {
 
     // Construtor
     public Healer(int lvl) {

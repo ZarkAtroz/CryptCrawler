@@ -2,7 +2,7 @@ package combate.herois;
 
 import combate.Habilidade;
 
-public class Rogue extends Heroi {
+public class Rogue extends AliadoClasse {
 
     
     // Construtor

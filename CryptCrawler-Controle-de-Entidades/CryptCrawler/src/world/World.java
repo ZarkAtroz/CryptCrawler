@@ -6,6 +6,7 @@ import Ui.Exceptions.OutOfMapException;
 
 import java.awt.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Random;
 
 /*
@@ -26,6 +27,7 @@ public class World implements Serializable {
     private Player playerOnMap;
 
     private Enemy enemyOnMap;
+    private ArrayList<Enemy> enemies = new ArrayList<>();
 
     /* Constructor */
     public World(int width, int height) {
@@ -72,6 +74,29 @@ public class World implements Serializable {
 
     public void setEnemyOnMap(Enemy inimigo) {
         this.enemyOnMap = inimigo;
+    }
+
+    public Enemy getEnemyAt(int x, int y) {
+        for(Enemy ens : enemies){
+            if(ens.getX() == x && ens.getY() == y)
+                return ens;
+        }
+        return null;
+    }
+
+    public void deleteEnemyAt(int x, int y){
+        for(Enemy ens : enemies){
+            if(ens.getX() == x && ens.getY() == y)
+                enemies.remove(ens);
+        }
+    }
+
+    public void addEnemyToList(Enemy newEnemy){
+        enemies.add(newEnemy);
+    }
+
+    public void setEnemies(ArrayList<Enemy> enemies) {
+        this.enemies = enemies;
     }
 
     /*

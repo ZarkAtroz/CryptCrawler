@@ -18,7 +18,7 @@ public class Player extends Entidade {
 
     private String name;
 
-    private ArrayList<Heroi> party = new ArrayList<>();
+    private ArrayList<AliadoClasse> party = new ArrayList<>();
     private int index_h_atual = 0;
 
     public Player(String name, int x, int y, World world, int icone, int maximoTrilha) {
@@ -41,11 +41,11 @@ public class Player extends Entidade {
         this.maximoTrilha = maximoTrilha;
     }
 
-    public ArrayList<Heroi> getParty() {
+    public ArrayList<AliadoClasse> getParty() {
         return party;
     }
 
-    public void setParty(ArrayList<Heroi> party) {
+    public void setParty(ArrayList<AliadoClasse> party) {
         this.party = party;
     }
 

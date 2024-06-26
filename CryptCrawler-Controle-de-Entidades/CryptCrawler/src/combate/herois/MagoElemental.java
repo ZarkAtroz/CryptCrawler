@@ -2,7 +2,7 @@ package combate.herois;
 
 import combate.Habilidade;
 
-public class MagoElemental extends Heroi {
+public class MagoElemental extends AliadoClasse {
 
     // Construtor
     public MagoElemental(int lvl) {

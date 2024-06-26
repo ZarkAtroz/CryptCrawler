@@ -2,7 +2,7 @@ package combate.inimigos;
 
 import combate.Habilidade;
 
-public class Goblin extends Inimigo {
+public class Goblin extends InimigoClasse {
 
     public Goblin(int lvl) {
         super(lvl);

@@ -1,7 +1,4 @@
-import Entity.Aliado;
-import Entity.Enemy;
-import Entity.Entidade;
-import Entity.Player;
+import Entity.*;
 import Ui.Controller.GameEventListener;
 import combate.Combate;
 import log.Log;
@@ -91,6 +88,25 @@ public class CryptCrawler extends JFrame implements GameEventListener {
 
         playerOnMap.setMaximoTrilha(2);
 
+        /*
+         * FAZER OS INIMIGOS APARECEM NO MAPA!
+         * Mudar a classe Inimigo.java para adicionar funcoes da classe Enemy.java, pois a classe Enemy nao aparece na tela de jogo, pelo motivo de nao ser
+         * uma entidade em si.
+         *
+         * TELA PISCANDO AO FINZALIZAR COMBATE!
+         * Para entrar no combate, é preciso ficar na mesma posicao X e Y do inimigo, porem ao matar os inimigos (finalizando o combate), a tela fica piscando,
+         * pois o inimigo ainda existe na posicao X e Y, mas ele está morto, fazendo com o que o combate inicie e logo em seguida termine. Para sair dessa piscada, precisa mover
+         * o personagem para outra posicao.
+         *
+         * HIPOTESE DE SOLUCAO
+         * Ao terminar o combate, remover o inimigo do ArrayList de combate, pegando as informacoes de X e Y (LEMBRAR QUE O PLAYER TAMBEM ESTA NA POSICAO, usar o getClass() na condicao),
+         * pode ocasionar em algum tipo de erro, como aconteceu na sala.
+         * Colocar um variavel booleana em Inimigo, isAlive como um exemplo, caso a vida do inimigo for menor ou igual a 0, mudar a condicao para false, e na funcao colisaoPLayerEnemy, adicionar
+         * na condicao se esta variavel é verdadeira.
+         */
+        Inimigo vilao = new Inimigo("Vilao", 20, 10, (char)6, playerOnMap);
+        entidades.add(vilao);
+
         Enemy enemyOnMap = new Enemy(dungeonMap, 36, 26, null);
 
         enemyOnMap.createParty();
@@ -119,8 +135,12 @@ public class CryptCrawler extends JFrame implements GameEventListener {
             if(in_combat){
 
                 if(c.isEmptyEnemyies()){
+
                     interfaceJogo.setCombate();
                     in_combat = !in_combat;
+
+                    
+
                 } else {
                     if (!c.isTurno_heroi()) {
                         c.atacar(0, 0, interfaceJogo);
@@ -131,7 +151,6 @@ public class CryptCrawler extends JFrame implements GameEventListener {
 
             } else {
                 interfaceJogo.getTelaDeJogo().printMundo(playerOnMap, entidades, dungeonMap);
-
                 interfaceJogo.getStatusJogador().printCoords("POSICAO X = " + playerOnMap.getX() + " / Y = " + playerOnMap.getY());
 
                 // Checa colisao de inimigo
@@ -158,12 +177,19 @@ public class CryptCrawler extends JFrame implements GameEventListener {
     }
 
     public void colisaoPlayerEnemy(World world) {
-        if (world.getEnemyOnMap().getX() == world.getPlayerOnMap().getX()
-                && world.getEnemyOnMap().getY() == world.getPlayerOnMap().getY()) {
+
+        int playerX = world.getPlayerOnMap().getX();
+        int playerY = world.getPlayerOnMap().getY();
+
+        int enemyX = world.getEnemyOnMap().getX();
+        int enemyY = world.getEnemyOnMap().getY();
+
+        if (enemyX == playerX && enemyY == playerY) {
             interfaceJogo.setCombate();
             in_combat = true;
-            interfaceJogo.getRelatorioJogo().textoUnico("Herois entraram em combate!!", 0, 5);
+            interfaceJogo.getRelatorioJogo().atualizarInformacao("HEROIS ENTRARAM EM COMBATE!");
         }
+
     }
 
     @Override

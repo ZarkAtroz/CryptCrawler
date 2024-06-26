@@ -2,7 +2,7 @@ package combate.herois;
 
 import combate.Habilidade;
 
-public class Guerreiro extends Heroi {
+public class Guerreiro extends AliadoClasse {
 
     // Construtor
     public Guerreiro(int lvl) {

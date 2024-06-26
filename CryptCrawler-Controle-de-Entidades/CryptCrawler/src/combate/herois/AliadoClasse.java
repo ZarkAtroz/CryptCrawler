@@ -4,14 +4,14 @@ import combate.Combatente;
 import combate.Habilidade;
 import combate.PersonagemCombate;
 
-public abstract class Heroi extends PersonagemCombate implements Combatente {
+public abstract class AliadoClasse extends PersonagemCombate implements Combatente {
 
     protected int hp_atual;
     protected int hp_max;
     protected int mp_atual;
     protected int mp_max;
 
-    public Heroi(int lvl) {
+    public AliadoClasse(int lvl) {
         super(lvl);
     }
 

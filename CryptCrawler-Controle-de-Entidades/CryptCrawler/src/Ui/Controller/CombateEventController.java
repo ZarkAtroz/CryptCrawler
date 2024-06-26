@@ -15,13 +15,11 @@ public class CombateEventController {
      * 1 = Selecionar Hab
      * 2 = Trocar personagem ativo
      */
-    
 
     public CombateEventController(Combate combate) {
         this.combate = combate;
     }
 
-    
     public void processesKeyEvent(KeyEvent keyEvent, Interface interfaceJogo) {
         if (type_event == 0) {
             switch (keyEvent.getKeyCode()) {
@@ -32,8 +30,19 @@ public class CombateEventController {
                 case KeyEvent.VK_B:
                     type_event = 2;
                     break;
+
+                case KeyEvent.VK_PAGE_UP:
+                    interfaceJogo.getRelatorioJogo().decrementarLinha();
+                    break;
+                case KeyEvent.VK_PAGE_DOWN:
+                    interfaceJogo.getRelatorioJogo().encrementarLinha();
+                    break;
+                case KeyEvent.VK_END:
+                    interfaceJogo.getRelatorioJogo().setLinhaFim();
+                    break;
+
                 default:
-                    Log.log("Não selecionou nenhuma opcao");
+                    Log.log("NAO SELECIONOU NENHUM OPCAO");
                     type_event = 0;
                     break;
             }
@@ -56,11 +65,22 @@ public class CombateEventController {
                         combate.atacar(3, 0, interfaceJogo);
                         type_event = 0;
                         break;
+
+                    case KeyEvent.VK_PAGE_UP:
+                        interfaceJogo.getRelatorioJogo().decrementarLinha();
+                        break;
+                    case KeyEvent.VK_PAGE_DOWN:
+                        interfaceJogo.getRelatorioJogo().encrementarLinha();
+                        break;
+                    case KeyEvent.VK_END:
+                        interfaceJogo.getRelatorioJogo().setLinhaFim();
+                        break;
+
                     default:
                         break;
                 }
             } catch (IndexOutOfBoundsException i) {
-                interfaceJogo.getRelatorioJogo().atualizarInformacao("Personagem não tem acesso a essa hab");
+                interfaceJogo.getRelatorioJogo().atualizarInformacao("ALIADO SEM ACESSO A HABILIDADE");
             }
             
         } else if (type_event == 2) {
@@ -82,12 +102,23 @@ public class CombateEventController {
                         combate.trocaPersonagem(3, 0);
                         type_event = 0;
                         break;
+
+                    case KeyEvent.VK_PAGE_UP:
+                        interfaceJogo.getRelatorioJogo().decrementarLinha();
+                        break;
+                    case KeyEvent.VK_PAGE_DOWN:
+                        interfaceJogo.getRelatorioJogo().encrementarLinha();
+                        break;
+                    case KeyEvent.VK_END:
+                        interfaceJogo.getRelatorioJogo().setLinhaFim();
+                        break;
+
                     default:
                         break;
                 }
-                interfaceJogo.getRelatorioJogo().atualizarInformacao("Troca de personagem para: " + combate.heroi_atual.getClass().getSimpleName());
+                interfaceJogo.getRelatorioJogo().atualizarInformacao("ALIADO SELECIONADO: " + combate.heroi_atual.getClass().getSimpleName().toUpperCase());
             } catch (IndexOutOfBoundsException i) {
-                interfaceJogo.getRelatorioJogo().atualizarInformacao("Não existe esse personagem");
+                interfaceJogo.getRelatorioJogo().atualizarInformacao("ALIADO INEXISTENTE...");
             }
         }
     }

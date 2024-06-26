@@ -76,19 +76,6 @@ public class KeyEventController {
                         break;
                 }
             } else {
-                switch (keypress.getKeyCode()){
-                    case KeyEvent.VK_PAGE_UP:
-                        interfaceJogo.getRelatorioJogo().decrementarLinha();
-                        break;
-
-                    case KeyEvent.VK_PAGE_DOWN:
-                        interfaceJogo.getRelatorioJogo().encrementarLinha();
-                        break;
-
-                    case KeyEvent.VK_END:
-                        interfaceJogo.getRelatorioJogo().setLinhaFim();
-                        break;
-                }
                 combateEventController.processesKeyEvent(keypress, interfaceJogo);
             }
         } else if (event instanceof MouseEvent) {

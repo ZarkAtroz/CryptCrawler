@@ -1,28 +1,26 @@
 package combate;
 
 import Ui.Interface;
-import combate.herois.Heroi;
-import combate.inimigos.Inimigo;
+import combate.herois.AliadoClasse;
+import combate.inimigos.InimigoClasse;
 
 import java.util.ArrayList;
 
 public class Combate {
 
-    private ArrayList<Heroi> herois = new ArrayList<>();
+    private ArrayList<AliadoClasse> herois = new ArrayList<>();
 
-    private ArrayList<Inimigo> inimigos = new ArrayList<>();
+    private ArrayList<InimigoClasse> inimigos = new ArrayList<>();
 
     private int index_heroi_atual; // Colocar no construtor depois
     private int index_inimigo_atual;
 
-    public Heroi heroi_atual;
-    public Inimigo inimigo_atual;
+    public AliadoClasse heroi_atual;
+    public InimigoClasse inimigo_atual;
 
     private boolean turno_heroi;
 
-    public Combate(){}
-
-    public Combate(int i_heroi, int i_inimigo, ArrayList<Heroi> hr, ArrayList<Inimigo> in) {
+    public Combate(int i_heroi, int i_inimigo, ArrayList<AliadoClasse> hr, ArrayList<InimigoClasse> in) {
         herois = hr;
         inimigos = in;
 
@@ -45,7 +43,7 @@ public class Combate {
     public void atacar(int index_hb, int index_personagem, Interface inter_jogo) {
 
         if (inimigo_atual.getHp_atual() <= 0) {
-            inter_jogo.getRelatorioJogo().atualizarInformacao(inimigo_atual.getClass().getSimpleName() + " foi de VALA");
+            inter_jogo.getRelatorioJogo().atualizarInformacao(inimigo_atual.getClass().getSimpleName().toUpperCase() + " MORREU!");
             inimigos.remove(inimigo_atual);
             proximoInimigo();
         }
@@ -62,9 +60,9 @@ public class Combate {
             turno_heroi = false;
 
             if (dano <= 0) {
-                inter_jogo.getRelatorioJogo().atualizarInformacao(heroi_atual.getClass().getSimpleName() + " errou o ataque");
+                inter_jogo.getRelatorioJogo().atualizarInformacao(heroi_atual.getClass().getSimpleName().toUpperCase() + " ERROU O ATAQUE...");
             } else {
-                inter_jogo.getRelatorioJogo().atualizarInformacao(heroi_atual.getClass().getSimpleName() + " acertou o ataque dando: "+ dano);
+                inter_jogo.getRelatorioJogo().atualizarInformacao(heroi_atual.getClass().getSimpleName().toUpperCase() + " ACERTOU O ATAQUE DANDO: " + dano);
             }
 
         } else {
@@ -81,20 +79,19 @@ public class Combate {
 
 
             if (dano <= 0) {
-                inter_jogo.getRelatorioJogo().atualizarInformacao(inimigo_atual.getClass().getSimpleName() + " errou o ataque");
+                inter_jogo.getRelatorioJogo().atualizarInformacao(inimigo_atual.getClass().getSimpleName().toUpperCase() + " ERROU O ATAQUE...");
             } else {
-                inter_jogo.getRelatorioJogo().atualizarInformacao(inimigo_atual.getClass().getSimpleName() + " acertou o ataque dando: "+ dano);
+                inter_jogo.getRelatorioJogo().atualizarInformacao(inimigo_atual.getClass().getSimpleName().toUpperCase() + " ACERTOU O ATAQUE DANDO: "+ dano);
             }
         }
 
     }
 
-    
     // Gera ataque dos herois
     public void statusHerois(Interface interface_jogo) {
         int x = 0;
 
-        for (Heroi h: getHerois()) {
+        for (AliadoClasse h: getHerois()) {
             interface_jogo.getStatusJogador().printTela(h.getClass().getSimpleName(), x, 0);
             interface_jogo.getStatusJogador().printTela("HP: " + h.getHp_atual() +"/"+ h.getHp_max(), x, 1);
             interface_jogo.getStatusJogador().printTela("MP: " + h.getMp_atual() +"/"+ h.getMp_max(), x, 2);
@@ -140,10 +137,9 @@ public class Combate {
         }
         return true;
     }
-    
 
     // Getter Setter
-    public ArrayList<Heroi> getHerois() {
+    public ArrayList<AliadoClasse> getHerois() {
         return herois;
     }
 

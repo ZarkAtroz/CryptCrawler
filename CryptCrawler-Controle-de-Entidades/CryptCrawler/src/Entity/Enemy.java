@@ -1,8 +1,7 @@
 package Entity;
 
 import combate.inimigos.Goblin;
-import combate.inimigos.GoblinForte;
-import combate.inimigos.Inimigo;
+import combate.inimigos.InimigoClasse;
 import world.World;
 
 import java.util.ArrayList;
@@ -15,7 +14,7 @@ public class Enemy {
     private String name;
 
     // Para usar no combate
-    private ArrayList<Inimigo> inimigos = new ArrayList<>();
+    private ArrayList<InimigoClasse> inimigos = new ArrayList<>();
 
     private int index_i_atual = 0;
 
@@ -67,11 +66,11 @@ public class Enemy {
         this.index_i_atual = index_i_atual;
     }
 
-    public ArrayList<Inimigo> getInimigos() {
+    public ArrayList<InimigoClasse> getInimigos() {
         return inimigos;
     }
 
-    public void setInimigos(ArrayList<Inimigo> inimigos) {
+    public void setInimigos(ArrayList<InimigoClasse> inimigos) {
         this.inimigos = inimigos;
     }
 
