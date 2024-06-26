@@ -1,20 +1,16 @@
 package Entity;
 
-import java.awt.*;
+public class Entidade {
 
-public abstract class Entidade {
-
-    public int x;
-    public int y;
+    private int x;
+    private int y;
 
     private String nome;
     private boolean bloqueado;
-    private int icone;
 
-    public Entidade(boolean bloqueado, String nome, int x, int y, int icone) {
+    public Entidade(boolean bloqueado, String nome, int x, int y) {
         this.bloqueado = bloqueado;
         this.nome = nome;
-        this.icone = icone;
         this.x = x;
         this.y = y;
     }
@@ -50,9 +46,5 @@ public abstract class Entidade {
     public void setY(int y) {
         this.y = y;
     }
-
-    public void setIcone(int icone) {this.icone = icone;};
-
-    public int getIcone() {return icone;};
 
 }

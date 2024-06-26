@@ -1,6 +1,7 @@
 package combate.herois;
 
 import combate.Habilidade;
+import combate.TesteCombate;
 
 public class Healer extends Heroi {
 

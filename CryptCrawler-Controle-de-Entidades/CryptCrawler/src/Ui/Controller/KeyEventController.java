@@ -1,16 +1,13 @@
 package Ui.Controller;
-import Entity.Aliado;
-import Entity.Inimigo;
-import combate.Combate;
-import Entity.Entidade;
+
 import Entity.Player;
 import Ui.Interface;
+import combate.Combate;
 import log.Log;
 
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
 
 /*
 * Classe responsável por controlar os eventos de teclado
@@ -23,6 +20,7 @@ public class KeyEventController {
 
     private final GameEventListener listener;
     private final PlayerMovementController playerMovementController;
+    private CombateEventController combateEventController;
 
     /**
      * Constructor for the KeyEventController class.
@@ -31,9 +29,10 @@ public class KeyEventController {
      * @param listener The game event listener
      * @param playerOnMap The player on the map
      */
-    public KeyEventController(GameEventListener listener, Player playerOnMap, ArrayList<Entidade> entidades) {
+    public KeyEventController(GameEventListener listener, Player playerOnMap, Combate combate) {
         this.listener = listener;
-        this.playerMovementController = new PlayerMovementController(playerOnMap, entidades);
+        this.playerMovementController = new PlayerMovementController(playerOnMap);
+        this.combateEventController = new CombateEventController(combate);
     }
 
     /**
@@ -44,35 +43,25 @@ public class KeyEventController {
      *
      * @param interfaceJogo The game interface
      */
-    public void executeKeyEvent(Interface interfaceJogo) {
+    public void executeKeyEvent(Interface interfaceJogo, boolean em_combate) {
         InputEvent event = interfaceJogo.getNextInput();
-        if (event instanceof KeyEvent keypress) {
-            switch (keypress.getKeyCode()) {
-                case KeyEvent.VK_W, KeyEvent.VK_A, KeyEvent.VK_S, KeyEvent.VK_D:
-                    Log.logInfo("Posição do jogador: (" + playerMovementController.getPlayerX() + ", " + playerMovementController.getPlayerY() + ")");
-                    playerMovementController.processKeyEvent(keypress);
-                    break;
-
-                case KeyEvent.VK_ESCAPE:
-                    this.listener.onGameExit();
-                    break;
+        if (event instanceof KeyEvent keypress){
+            if (!em_combate) {
+                switch (keypress.getKeyCode()){
+                    case KeyEvent.VK_W, KeyEvent.VK_A, KeyEvent.VK_S, KeyEvent.VK_D:
+                        Log.logInfo("Posição do jogador: (" + playerMovementController.getPlayerX() + ", " + playerMovementController.getPlayerY() + ")");
+                        playerMovementController.processKeyEvent(keypress);
+                        break;
+    
+                    case KeyEvent.VK_ESCAPE:
+                        this.listener.onGameExit();
+                        break;
+                }
+            } else {
+                combateEventController.processesKeyEvent(keypress, interfaceJogo);
             }
         } else if (event instanceof MouseEvent) {
             //
-        }
-    }
-    int y = 1;
-    public void executeKeyCombatEvent(Interface interfaceJogo, CombatController controller, ArrayList<Aliado> aliados, ArrayList<Inimigo> inimigos, Combate combate) {
-        interfaceJogo.updateCombatOptions(aliados, inimigos);
-        InputEvent event = interfaceJogo.getNextInput();
-        if (event instanceof KeyEvent keypress) {
-            switch (keypress.getKeyCode()) {
-                case KeyEvent.VK_1, KeyEvent.VK_2, KeyEvent.VK_3, KeyEvent.VK_4:
-                    interfaceJogo.getStatusJogador().clear();
-                    playerMovementController.processCombatMenu(keypress, controller, combate);
-            }
-        } else if (event instanceof MouseEvent) {
-
         }
     }
 }

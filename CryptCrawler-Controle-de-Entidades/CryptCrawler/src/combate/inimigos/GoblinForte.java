@@ -3,26 +3,28 @@ package combate.inimigos;
 import combate.Habilidade;
 import combate.TesteCombate;
 
-public class Goblin extends Inimigo {
+public class GoblinForte extends Inimigo {
 
-    public Goblin(int lvl) {
+    public GoblinForte(int lvl) {
         super(lvl);
         leveling();
         this.hp_atual = this.hp_max;
 
         addHabs(0, 1, getForca(), 0.25f, "ATK BAS");
+        addHabs(2, 2, getInteligencia(), 0.30f, "Hab4");
         addHabs(2, 2, getForca(), 0.40f, "Hab1");
+        addHabs(3, 2, getInteligencia(), 0.50f, "Hab2");
     }
 
     @Override
     public void leveling() {
-        this.forca = 3 + (1 * this.lvl);
-        this.inteligencia = 1 + (1 * this.lvl);
-        this.agilidade = 1 + (1 * this.lvl);
-        this.sorte = 1 + (1 * this.lvl);
+        this.forca = 4 + (1 * this.lvl);
+        this.inteligencia = 4 + (1 * this.lvl);
+        this.agilidade = 3 + (1 * this.lvl);
+        this.sorte = 2 + (1 * this.lvl);
         this.critico = 1;
 
-        this.hp_max = (7 + this.forca) + (1 * this.lvl);         
+        this.hp_max = (12 + this.forca) + (1 * this.lvl);
     }
 
     @Override

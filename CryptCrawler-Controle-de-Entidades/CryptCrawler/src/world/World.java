@@ -1,9 +1,8 @@
 package world;
 
+import Entity.Enemy;
 import Entity.Player;
 import Ui.Exceptions.OutOfMapException;
-
-import java.util.Random;
 
 /*
 * Mapa completo da Dungeon
@@ -21,6 +20,8 @@ public class World {
 
     /* Player displaying on map */
     private Player playerOnMap;
+
+    private Enemy enemyOnMap;
 
     /* Constructor */
     public World(int width, int height) {
@@ -63,6 +64,14 @@ public class World {
         this.playerOnMap = playerOnMap;
     }
 
+    public Enemy getEnemyOnMap() {
+        return enemyOnMap;
+    }
+
+    public void setEnemyOnMap(Enemy inimigo) {
+        this.enemyOnMap = inimigo;
+    }
+
     /*
     * Irá desenhar o mapa inicialmente
     * O mapa será feito em ASCII
@@ -82,17 +91,6 @@ public class World {
         drawTile(21, 17, (char)254);
         drawTile(21, 18, (char)254);
         drawTile(22, 18, (char)254);
-
-        // Desenhando no mapa todos os caracteres
-        int x = 30, y = 10;
-
-        for(int i = 0; i < 256; i++){
-            drawTile(x++, y, (char)i);
-            if(i % 16 == 0){
-                x = 60;
-                y++;
-            }
-        }
     }
 
     public boolean isPassable(int x, int y) throws OutOfMapException {

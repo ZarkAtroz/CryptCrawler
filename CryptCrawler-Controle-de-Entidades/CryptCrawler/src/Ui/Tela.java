@@ -3,9 +3,6 @@ package Ui;
 import asciiPanel.AsciiFont;
 import asciiPanel.AsciiPanel;
 
-import java.awt.*;
-import java.awt.image.BufferedImage;
-
 public class Tela implements ComandosTela{
 
     private int width;
@@ -23,13 +20,6 @@ public class Tela implements ComandosTela{
         this.tela = new AsciiPanel(width, height, font);
         this.tela.setSize(width * FONT_SIZE, height * FONT_SIZE);
         this.tela.setBounds(width * FONT_SIZE, height * FONT_SIZE, width * FONT_SIZE, height * FONT_SIZE);
-
-        tiles = new char[width][height];
-        for (int i = 0; i < getWidth(); i++) {
-            for (int j = 0; j < getHeight(); j++) {
-                tiles[i][j] = ' ';
-            }
-        }
     }
 
     public int getHeight() {
@@ -69,7 +59,7 @@ public class Tela implements ComandosTela{
     }
 
     @Override
-    public void clear() {
-        tela.clear();
+    public void setSize(int width, int height) {
+
     }
 }

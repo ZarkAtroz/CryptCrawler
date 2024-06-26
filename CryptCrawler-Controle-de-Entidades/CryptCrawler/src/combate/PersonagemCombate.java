@@ -1,7 +1,5 @@
 package combate;
 
-import log.Log;
-
 import java.util.ArrayList;
 
 public abstract class PersonagemCombate {
@@ -63,14 +61,6 @@ public abstract class PersonagemCombate {
 
     public ArrayList<Habilidade> getHbs() {
         return hbs;
-    }
-
-    public Habilidade get_Hab(int index_hab){
-        if(index_hab < 0 || index_hab >= hbs.size()) {
-            Log.logInfo("Habilidade não encontrada");
-            return null;
-        }
-        return hbs.get(index_hab);
     }
 
 }

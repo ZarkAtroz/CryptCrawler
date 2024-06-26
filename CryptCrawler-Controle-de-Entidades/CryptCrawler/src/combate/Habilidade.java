@@ -2,7 +2,7 @@ package combate;
 
 public class Habilidade {
     private int cd; // Colldown da habilidade
-    private boolean em_cd; // está em colldown a habilidade
+    private int em_cd; // está em colldown a habilidade
 
     private int custo_mp;
 
@@ -34,6 +34,7 @@ public class Habilidade {
     public void inimigoHab(int cd) {
         this.cd = cd;
     }
+    
 
 
 // Getters e Setters
@@ -44,11 +45,10 @@ public class Habilidade {
         this.cd = cd;
     }
 
-
-    public boolean isEm_cd() {
+    public int getEm_cd() {
         return em_cd;
     }
-    public void setEm_cd(boolean em_cd) {
+    public void setEm_cd(int em_cd) {
         this.em_cd = em_cd;
     }
 
