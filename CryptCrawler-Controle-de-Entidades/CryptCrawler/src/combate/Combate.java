@@ -88,6 +88,8 @@ public class Combate {
 
     // Gera ataque dos herois
     public void statusHerois(Interface interface_jogo) {
+        interface_jogo.getStatusJogador().clear();
+
         int x = 0;
 
         for (AliadoClasse h: getHerois()) {

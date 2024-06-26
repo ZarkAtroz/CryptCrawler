@@ -13,7 +13,7 @@ import asciiPanel.*;
 
 public class Interface extends JPanel implements KeyListener{
 
-    private boolean isComabte = false;
+    private boolean isCombate = false;
 
     private Queue<InputEvent> inputQueue;
 
@@ -100,7 +100,7 @@ public class Interface extends JPanel implements KeyListener{
     public InputEvent getNextInput() { return inputQueue.poll(); }
 
     public void setCombate(){
-        this.isComabte = !this.isComabte;
+        this.isCombate = !this.isCombate;
         statusJogador.getTela().clear();
         telaCombate.printPersonagens();
         repaint();
@@ -139,7 +139,7 @@ public class Interface extends JPanel implements KeyListener{
         g.setColor(Color.GRAY);
 
         // Tela de jogo
-        if(!isComabte){
+        if(!isCombate){
             g.fillRect(20, 20, telaDeJogoWidth * FONT_AEROSMATICA_SIZE + 20, telaDeJogoHeight * FONT_AEROSMATICA_SIZE + 20);
             telaDeJogo.getTela().setBounds(30, 30, telaDeJogoWidth * FONT_AEROSMATICA_SIZE, telaDeJogoHeight * FONT_AEROSMATICA_SIZE);
             telaCombate.getTela().setBounds(30, 30, 0, 0);
@@ -162,7 +162,11 @@ public class Interface extends JPanel implements KeyListener{
         relatorioJogo.setBounds(790, 30);
         miniMapa.setBounds(790, 333);
 
-        telaDeJogo.getTela().repaint();
+        if(!isCombate){
+            telaDeJogo.getTela().repaint();
+        } else {
+            telaCombate.getTela().clear();
+        }
         relatorioJogo.getTela().repaint();
         statusJogador.getTela().repaint();
         miniMapa.getTela().repaint();

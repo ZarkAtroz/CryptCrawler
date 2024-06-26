@@ -1,6 +1,7 @@
 package Entity;
 
 import combate.inimigos.Goblin;
+import combate.inimigos.GoblinForte;
 import combate.inimigos.InimigoClasse;
 import world.World;
 
@@ -91,6 +92,9 @@ public class Enemy {
         int i = (int) Math.random() * 2;
         int lvl = 1 + (int) Math.random() * 10;
 
+        inimigos.add(new Goblin(lvl));
+        inimigos.add(new GoblinForte(lvl));
+        inimigos.add(new Goblin(lvl));
         inimigos.add(new Goblin(lvl));
     }
 

@@ -146,21 +146,7 @@ public class CryptCrawler extends JFrame implements GameEventListener {
 
                 if(combate.isEmptyEnemyies()){
 
-                    int playerX = dungeonMap.getPlayerOnMap().getX();
-                    int playerY = dungeonMap.getPlayerOnMap().getY();
-
-                    Inimigo selectedEnemy = null;
-
-                    for(Entidade ent : entidades){
-                        if(ent instanceof Inimigo){
-                            if(playerX == ent.getX() && playerY == ent.getY()){
-                                selectedEnemy = (Inimigo) ent;
-                            }
-                        }
-                    }
-
-                    if(selectedEnemy != null)
-                        entidades.remove(selectedEnemy);
+                    deleteEnemyEntity(dungeonMap, entidades);
 
                     interfaceJogo.setCombate();
                     in_combat = !in_combat;
@@ -217,6 +203,24 @@ public class CryptCrawler extends JFrame implements GameEventListener {
             interfaceJogo.getRelatorioJogo().atualizarInformacao("HEROIS ENTRARAM EM COMBATE!");
         }
 
+    }
+
+    public void deleteEnemyEntity(World dungeonMap, ArrayList<Entidade> entidades){
+        int playerX = dungeonMap.getPlayerOnMap().getX();
+        int playerY = dungeonMap.getPlayerOnMap().getY();
+
+        Inimigo selectedEnemy = null;
+
+        for(Entidade ent : entidades){
+            if(ent instanceof Inimigo){
+                if(playerX == ent.getX() && playerY == ent.getY()){
+                    selectedEnemy = (Inimigo) ent;
+                }
+            }
+        }
+
+        if(selectedEnemy != null)
+            entidades.remove(selectedEnemy);
     }
 
     @Override

@@ -10,6 +10,7 @@ public class CombateEventController {
     
     private Combate combate;
     private int type_event = 0;
+
     /*
      * 0 = Selecionar opcao
      * 1 = Selecionar Hab
@@ -26,7 +27,6 @@ public class CombateEventController {
                 case KeyEvent.VK_SPACE:
                     type_event = 1;
                     break;
-            
                 case KeyEvent.VK_B:
                     type_event = 2;
                     break;
