@@ -2,20 +2,83 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cd81eca7-8282-4515-b0e4-cc228301eed5" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/CryptCrawler/.idea/material_theme_project_new.xml" beforeDir="false" afterPath="$PROJECT_DIR$/CryptCrawler/.idea/material_theme_project_new.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CryptCrawler/Biblioteca/asciiPanel.jar" beforeDir="false" afterPath="$PROJECT_DIR$/CryptCrawler/Biblioteca/asciiPanel.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CryptCrawler/out/production/CryptCrawler/CryptCrawler.class" beforeDir="false" afterPath="$PROJECT_DIR$/CryptCrawler/out/production/CryptCrawler/CryptCrawler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CryptCrawler/out/production/CryptCrawler/Ui/Interface.class" beforeDir="false" afterPath="$PROJECT_DIR$/CryptCrawler/out/production/CryptCrawler/Ui/Interface.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CryptCrawler/out/production/CryptCrawler/Ui/MiniMapa.class" beforeDir="false" afterPath="$PROJECT_DIR$/CryptCrawler/out/production/CryptCrawler/Ui/MiniMapa.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CryptCrawler/out/production/CryptCrawler/Ui/StatusJogador.class" beforeDir="false" afterPath="$PROJECT_DIR$/CryptCrawler/out/production/CryptCrawler/Ui/StatusJogador.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CryptCrawler/out/production/CryptCrawler/asciiPanel/asciiPanel.jar" beforeDir="false" afterPath="$PROJECT_DIR$/CryptCrawler/out/production/CryptCrawler/asciiPanel/asciiPanel.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CryptCrawler/out/production/CryptCrawler/world/World.class" beforeDir="false" afterPath="$PROJECT_DIR$/CryptCrawler/out/production/CryptCrawler/world/World.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CryptCrawler/src/CryptCrawler.java" beforeDir="false" afterPath="$PROJECT_DIR$/CryptCrawler/src/CryptCrawler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CryptCrawler/src/Ui/Interface.java" beforeDir="false" afterPath="$PROJECT_DIR$/CryptCrawler/src/Ui/Interface.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CryptCrawler/src/Ui/MiniMapa.java" beforeDir="false" afterPath="$PROJECT_DIR$/CryptCrawler/src/Ui/MiniMapa.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CryptCrawler/src/Ui/StatusJogador.java" beforeDir="false" afterPath="$PROJECT_DIR$/CryptCrawler/src/Ui/StatusJogador.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CryptCrawler/src/asciiPanel/asciiPanel.jar" beforeDir="false" afterPath="$PROJECT_DIR$/CryptCrawler/src/asciiPanel/asciiPanel.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CryptCrawler/src/world/World.java" beforeDir="false" afterPath="$PROJECT_DIR$/CryptCrawler/src/world/World.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CryptCrawler-Controle-de-Entidades/CryptCrawler/.idea/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/CryptCrawler-Controle-de-Entidades/CryptCrawler/.idea/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CryptCrawler-Controle-de-Entidades/CryptCrawler/.idea/libraries/asciiPanel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/CryptCrawler-Controle-de-Entidades/CryptCrawler/.idea/libraries/asciiPanel.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CryptCrawler-Controle-de-Entidades/CryptCrawler/.idea/material_theme_project_new.xml" beforeDir="false" afterPath="$PROJECT_DIR$/CryptCrawler-Controle-de-Entidades/CryptCrawler/.idea/material_theme_project_new.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CryptCrawler-Controle-de-Entidades/CryptCrawler/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/CryptCrawler-Controle-de-Entidades/CryptCrawler/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CryptCrawler-Controle-de-Entidades/CryptCrawler/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/CryptCrawler-Controle-de-Entidades/CryptCrawler/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CryptCrawler-Controle-de-Entidades/CryptCrawler/.idea/uiDesigner.xml" beforeDir="false" afterPath="$PROJECT_DIR$/CryptCrawler-Controle-de-Entidades/CryptCrawler/.idea/uiDesigner.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CryptCrawler-Controle-de-Entidades/CryptCrawler/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/CryptCrawler-Controle-de-Entidades/CryptCrawler/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CryptCrawler-Controle-de-Entidades/CryptCrawler/.vscode/settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/CryptCrawler-Controle-de-Entidades/CryptCrawler/.vscode/settings.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CryptCrawler-Controle-de-Entidades/CryptCrawler/Biblioteca/asciiPanel.jar" beforeDir="false" afterPath="$PROJECT_DIR$/CryptCrawler-Controle-de-Entidades/CryptCrawler/Biblioteca/asciiPanel.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CryptCrawler-Controle-de-Entidades/CryptCrawler/CryptCrawler.iml" beforeDir="false" afterPath="$PROJECT_DIR$/CryptCrawler-Controle-de-Entidades/CryptCrawler/CryptCrawler.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CryptCrawler-Controle-de-Entidades/CryptCrawler/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/CryptCrawler-Controle-de-Entidades/CryptCrawler/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CryptCrawler-Controle-de-Entidades/CryptCrawler/bin/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/CryptCrawler-Controle-de-Entidades/CryptCrawler/bin/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CryptCrawler-Controle-de-Entidades/CryptCrawler/bin/Ui.class" beforeDir="false" afterPath="$PROJECT_DIR$/CryptCrawler-Controle-de-Entidades/CryptCrawler/bin/Ui.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CryptCrawler-Controle-de-Entidades/CryptCrawler/bin/combate/Combate.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CryptCrawler-Controle-de-Entidades/CryptCrawler/bin/combate/Combatente.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CryptCrawler-Controle-de-Entidades/CryptCrawler/bin/combate/Habilidade.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CryptCrawler-Controle-de-Entidades/CryptCrawler/bin/combate/PersonagemCombate.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CryptCrawler-Controle-de-Entidades/CryptCrawler/bin/combate/jogador/Rogue.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CryptCrawler-Controle-de-Entidades/CryptCrawler/out/production/CryptCrawler/CryptCrawler.class" beforeDir="false" afterPath="$PROJECT_DIR$/CryptCrawler-Controle-de-Entidades/CryptCrawler/out/production/CryptCrawler/CryptCrawler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CryptCrawler-Controle-de-Entidades/CryptCrawler/out/production/CryptCrawler/Entity/Entidade.class" beforeDir="false" afterPath="$PROJECT_DIR$/CryptCrawler-Controle-de-Entidades/CryptCrawler/out/production/CryptCrawler/Entity/Entidade.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CryptCrawler-Controle-de-Entidades/CryptCrawler/out/production/CryptCrawler/Entity/Player.class" beforeDir="false" afterPath="$PROJECT_DIR$/CryptCrawler-Controle-de-Entidades/CryptCrawler/out/production/CryptCrawler/Entity/Player.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CryptCrawler-Controle-de-Entidades/CryptCrawler/out/production/CryptCrawler/Mundo/Mundo.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CryptCrawler-Controle-de-Entidades/CryptCrawler/out/production/CryptCrawler/Ui/ComandosTela.class" beforeDir="false" afterPath="$PROJECT_DIR$/CryptCrawler-Controle-de-Entidades/CryptCrawler/out/production/CryptCrawler/Ui/ComandosTela.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CryptCrawler-Controle-de-Entidades/CryptCrawler/out/production/CryptCrawler/Ui/Controller/KeyEventController.class" beforeDir="false" afterPath="$PROJECT_DIR$/CryptCrawler-Controle-de-Entidades/CryptCrawler/out/production/CryptCrawler/Ui/Controller/KeyEventController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CryptCrawler-Controle-de-Entidades/CryptCrawler/out/production/CryptCrawler/Ui/Controller/PlayerMovementController.class" beforeDir="false" afterPath="$PROJECT_DIR$/CryptCrawler-Controle-de-Entidades/CryptCrawler/out/production/CryptCrawler/Ui/Controller/PlayerMovementController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CryptCrawler-Controle-de-Entidades/CryptCrawler/out/production/CryptCrawler/Ui/Interface.class" beforeDir="false" afterPath="$PROJECT_DIR$/CryptCrawler-Controle-de-Entidades/CryptCrawler/out/production/CryptCrawler/Ui/Interface.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CryptCrawler-Controle-de-Entidades/CryptCrawler/out/production/CryptCrawler/Ui/MiniMapa.class" beforeDir="false" afterPath="$PROJECT_DIR$/CryptCrawler-Controle-de-Entidades/CryptCrawler/out/production/CryptCrawler/Ui/MiniMapa.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CryptCrawler-Controle-de-Entidades/CryptCrawler/out/production/CryptCrawler/Ui/RelatorioJogo.class" beforeDir="false" afterPath="$PROJECT_DIR$/CryptCrawler-Controle-de-Entidades/CryptCrawler/out/production/CryptCrawler/Ui/RelatorioJogo.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CryptCrawler-Controle-de-Entidades/CryptCrawler/out/production/CryptCrawler/Ui/StatusJogador.class" beforeDir="false" afterPath="$PROJECT_DIR$/CryptCrawler-Controle-de-Entidades/CryptCrawler/out/production/CryptCrawler/Ui/StatusJogador.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CryptCrawler-Controle-de-Entidades/CryptCrawler/out/production/CryptCrawler/Ui/Tela.class" beforeDir="false" afterPath="$PROJECT_DIR$/CryptCrawler-Controle-de-Entidades/CryptCrawler/out/production/CryptCrawler/Ui/Tela.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CryptCrawler-Controle-de-Entidades/CryptCrawler/out/production/CryptCrawler/Ui/TelaDeJogo.class" beforeDir="false" afterPath="$PROJECT_DIR$/CryptCrawler-Controle-de-Entidades/CryptCrawler/out/production/CryptCrawler/Ui/TelaDeJogo.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CryptCrawler-Controle-de-Entidades/CryptCrawler/out/production/CryptCrawler/asciiPanel/asciiPanel.jar" beforeDir="false" afterPath="$PROJECT_DIR$/CryptCrawler-Controle-de-Entidades/CryptCrawler/out/production/CryptCrawler/asciiPanel/asciiPanel.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CryptCrawler-Controle-de-Entidades/CryptCrawler/out/production/CryptCrawler/blocos.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CryptCrawler-Controle-de-Entidades/CryptCrawler/out/production/CryptCrawler/game/CryptCrawler.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CryptCrawler-Controle-de-Entidades/CryptCrawler/out/production/CryptCrawler/game/Main.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CryptCrawler-Controle-de-Entidades/CryptCrawler/out/production/CryptCrawler/mundo.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CryptCrawler-Controle-de-Entidades/CryptCrawler/out/production/CryptCrawler/world/World.class" beforeDir="false" afterPath="$PROJECT_DIR$/CryptCrawler-Controle-de-Entidades/CryptCrawler/out/production/CryptCrawler/world/World.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CryptCrawler-Controle-de-Entidades/CryptCrawler/src/CryptCrawler.java" beforeDir="false" afterPath="$PROJECT_DIR$/CryptCrawler-Controle-de-Entidades/CryptCrawler/src/CryptCrawler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CryptCrawler-Controle-de-Entidades/CryptCrawler/src/Entity/Enemy.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CryptCrawler-Controle-de-Entidades/CryptCrawler/src/Entity/Entidade.java" beforeDir="false" afterPath="$PROJECT_DIR$/CryptCrawler-Controle-de-Entidades/CryptCrawler/src/Entity/Entidade.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CryptCrawler-Controle-de-Entidades/CryptCrawler/src/Entity/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/CryptCrawler-Controle-de-Entidades/CryptCrawler/src/Entity/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CryptCrawler-Controle-de-Entidades/CryptCrawler/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/CryptCrawler-Controle-de-Entidades/CryptCrawler/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CryptCrawler-Controle-de-Entidades/CryptCrawler/src/Mundo/Mundo.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CryptCrawler-Controle-de-Entidades/CryptCrawler/src/Ui/ComandosTela.java" beforeDir="false" afterPath="$PROJECT_DIR$/CryptCrawler-Controle-de-Entidades/CryptCrawler/src/Ui/ComandosTela.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CryptCrawler-Controle-de-Entidades/CryptCrawler/src/Ui/Controller/CombateEventController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CryptCrawler-Controle-de-Entidades/CryptCrawler/src/Ui/Controller/GameEventListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/CryptCrawler-Controle-de-Entidades/CryptCrawler/src/Ui/Controller/GameEventListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CryptCrawler-Controle-de-Entidades/CryptCrawler/src/Ui/Controller/KeyEventController.java" beforeDir="false" afterPath="$PROJECT_DIR$/CryptCrawler-Controle-de-Entidades/CryptCrawler/src/Ui/Controller/KeyEventController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CryptCrawler-Controle-de-Entidades/CryptCrawler/src/Ui/Controller/PlayerMovementController.java" beforeDir="false" afterPath="$PROJECT_DIR$/CryptCrawler-Controle-de-Entidades/CryptCrawler/src/Ui/Controller/PlayerMovementController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CryptCrawler-Controle-de-Entidades/CryptCrawler/src/Ui/Exceptions/OutOfMapException.java" beforeDir="false" afterPath="$PROJECT_DIR$/CryptCrawler-Controle-de-Entidades/CryptCrawler/src/Ui/Exceptions/OutOfMapException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CryptCrawler-Controle-de-Entidades/CryptCrawler/src/Ui/Interface.java" beforeDir="false" afterPath="$PROJECT_DIR$/CryptCrawler-Controle-de-Entidades/CryptCrawler/src/Ui/Interface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CryptCrawler-Controle-de-Entidades/CryptCrawler/src/Ui/MiniMapa.java" beforeDir="false" afterPath="$PROJECT_DIR$/CryptCrawler-Controle-de-Entidades/CryptCrawler/src/Ui/MiniMapa.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CryptCrawler-Controle-de-Entidades/CryptCrawler/src/Ui/RelatorioJogo.java" beforeDir="false" afterPath="$PROJECT_DIR$/CryptCrawler-Controle-de-Entidades/CryptCrawler/src/Ui/RelatorioJogo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CryptCrawler-Controle-de-Entidades/CryptCrawler/src/Ui/StatusJogador.java" beforeDir="false" afterPath="$PROJECT_DIR$/CryptCrawler-Controle-de-Entidades/CryptCrawler/src/Ui/StatusJogador.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CryptCrawler-Controle-de-Entidades/CryptCrawler/src/Ui/Tela.java" beforeDir="false" afterPath="$PROJECT_DIR$/CryptCrawler-Controle-de-Entidades/CryptCrawler/src/Ui/Tela.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CryptCrawler-Controle-de-Entidades/CryptCrawler/src/Ui/TelaDeJogo.java" beforeDir="false" afterPath="$PROJECT_DIR$/CryptCrawler-Controle-de-Entidades/CryptCrawler/src/Ui/TelaDeJogo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CryptCrawler-Controle-de-Entidades/CryptCrawler/src/asciiPanel/asciiPanel.jar" beforeDir="false" afterPath="$PROJECT_DIR$/CryptCrawler-Controle-de-Entidades/CryptCrawler/src/asciiPanel/asciiPanel.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CryptCrawler-Controle-de-Entidades/CryptCrawler/src/blocos.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CryptCrawler-Controle-de-Entidades/CryptCrawler/src/combate/BatalhaFila.java" beforeDir="false" afterPath="$PROJECT_DIR$/CryptCrawler-Controle-de-Entidades/CryptCrawler/src/combate/BatalhaFila.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CryptCrawler-Controle-de-Entidades/CryptCrawler/src/combate/Combate.java" beforeDir="false" afterPath="$PROJECT_DIR$/CryptCrawler-Controle-de-Entidades/CryptCrawler/src/combate/Combate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CryptCrawler-Controle-de-Entidades/CryptCrawler/src/combate/Combatente.java" beforeDir="false" afterPath="$PROJECT_DIR$/CryptCrawler-Controle-de-Entidades/CryptCrawler/src/combate/Combatente.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CryptCrawler-Controle-de-Entidades/CryptCrawler/src/combate/Habilidade.java" beforeDir="false" afterPath="$PROJECT_DIR$/CryptCrawler-Controle-de-Entidades/CryptCrawler/src/combate/Habilidade.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CryptCrawler-Controle-de-Entidades/CryptCrawler/src/combate/PersonagemCombate.java" beforeDir="false" afterPath="$PROJECT_DIR$/CryptCrawler-Controle-de-Entidades/CryptCrawler/src/combate/PersonagemCombate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CryptCrawler-Controle-de-Entidades/CryptCrawler/src/combate/herois/Guerreiro.java" beforeDir="false" afterPath="$PROJECT_DIR$/CryptCrawler-Controle-de-Entidades/CryptCrawler/src/combate/herois/Guerreiro.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CryptCrawler-Controle-de-Entidades/CryptCrawler/src/combate/herois/Healer.java" beforeDir="false" afterPath="$PROJECT_DIR$/CryptCrawler-Controle-de-Entidades/CryptCrawler/src/combate/herois/Healer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CryptCrawler-Controle-de-Entidades/CryptCrawler/src/combate/herois/Heroi.java" beforeDir="false" afterPath="$PROJECT_DIR$/CryptCrawler-Controle-de-Entidades/CryptCrawler/src/combate/herois/Heroi.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CryptCrawler-Controle-de-Entidades/CryptCrawler/src/combate/herois/MagoElemental.java" beforeDir="false" afterPath="$PROJECT_DIR$/CryptCrawler-Controle-de-Entidades/CryptCrawler/src/combate/herois/MagoElemental.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CryptCrawler-Controle-de-Entidades/CryptCrawler/src/combate/herois/Rogue.java" beforeDir="false" afterPath="$PROJECT_DIR$/CryptCrawler-Controle-de-Entidades/CryptCrawler/src/combate/herois/Rogue.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CryptCrawler-Controle-de-Entidades/CryptCrawler/src/combate/inimigos/Goblin.java" beforeDir="false" afterPath="$PROJECT_DIR$/CryptCrawler-Controle-de-Entidades/CryptCrawler/src/combate/inimigos/Goblin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CryptCrawler-Controle-de-Entidades/CryptCrawler/src/combate/inimigos/GoblinForte.java" beforeDir="false" afterPath="$PROJECT_DIR$/CryptCrawler-Controle-de-Entidades/CryptCrawler/src/combate/inimigos/GoblinForte.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CryptCrawler-Controle-de-Entidades/CryptCrawler/src/combate/inimigos/Inimigo.java" beforeDir="false" afterPath="$PROJECT_DIR$/CryptCrawler-Controle-de-Entidades/CryptCrawler/src/combate/inimigos/Inimigo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CryptCrawler-Controle-de-Entidades/CryptCrawler/src/game/CryptCrawler.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CryptCrawler-Controle-de-Entidades/CryptCrawler/src/game/Main.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CryptCrawler-Controle-de-Entidades/CryptCrawler/src/game/save/GameState.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CryptCrawler-Controle-de-Entidades/CryptCrawler/src/game/save/SaveGame.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CryptCrawler-Controle-de-Entidades/CryptCrawler/src/log/Log.java" beforeDir="false" afterPath="$PROJECT_DIR$/CryptCrawler-Controle-de-Entidades/CryptCrawler/src/log/Log.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CryptCrawler-Controle-de-Entidades/CryptCrawler/src/mundo.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CryptCrawler-Controle-de-Entidades/CryptCrawler/src/world/World.java" beforeDir="false" afterPath="$PROJECT_DIR$/CryptCrawler-Controle-de-Entidades/CryptCrawler/src/world/World.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,14 +102,14 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;Controle-de-Entidades&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/johnc/Documents/GitHub/CryptCrawler/CryptCrawler&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "teste-combates-baguncado",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/johnc/Documents/GitHub/CryptCrawler/CryptCrawler-Controle-de-Entidades"
   }
-}</component>
+}]]></component>
   <component name="RunManager">
     <configuration default="true" type="JetRunConfigurationType">
       <module name="CryptCrawler" />

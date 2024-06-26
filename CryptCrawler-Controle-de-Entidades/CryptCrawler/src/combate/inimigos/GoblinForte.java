@@ -1,7 +1,6 @@
 package combate.inimigos;
 
 import combate.Habilidade;
-import combate.TesteCombate;
 
 public class GoblinForte extends Inimigo {
 

@@ -1,7 +1,6 @@
 package combate.herois;
 
 import combate.Habilidade;
-import combate.TesteCombate;
 
 public class Guerreiro extends Heroi {
 
@@ -12,7 +11,7 @@ public class Guerreiro extends Heroi {
         this.hp_atual = this.hp_max;
         this.mp_atual = this.mp_max;
 
-        addHabs(0, 1, getForca(), 0.25f, "ATK BASICO");
+        addHabs(0, 1, getForca(), 5f, "ATK BASICO");
         addHabs(4, 2, getForca(), 0.40f, "Roda Jeckit");
     }
 

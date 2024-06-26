@@ -13,6 +13,8 @@ import asciiPanel.*;
 
 public class Interface extends JPanel implements KeyListener{
 
+    private boolean isComabte = false;
+
     private Queue<InputEvent> inputQueue;
 
     /* Declarando as telas do jogo */
@@ -21,9 +23,16 @@ public class Interface extends JPanel implements KeyListener{
     private final RelatorioJogo relatorioJogo;
     private final MiniMapa miniMapa;
 
+    private final TelaCombate telaCombate;
+
     /* Tamanhos dos painéis */
 
     /* - Tamanho da Tela do Jogo */
+    // Com a fonte do combate (30x30)
+    // Width = 24 | Height = 16
+
+    // Fonte original
+    // Width = 45 | Height = 30
     private final int telaDeJogoWidth = 45; // largura do painel ASCII (em caracteres)
     private final int telaDeJogoHeight = 30;
 
@@ -36,8 +45,8 @@ public class Interface extends JPanel implements KeyListener{
     private final int relatorioJogoHeight = 30;
 
     /* - Tamanho da Tela do Mini Mapa */
-    private final int miniMapaWidth = 49;
-    private final int miniMapaHeight = 35;
+    private final int miniMapaWidth = 44;
+    private final int miniMapaHeight = 32;
 
     /* Tamanho das fontes */
     private static final int FONT_AEROSMATICA_SIZE = 16;
@@ -49,14 +58,17 @@ public class Interface extends JPanel implements KeyListener{
         this.setFocusable(true); // Para o KeyListener funcionar - Quando o painel é focado, ele pode receber eventos de teclado
 
         /* Inicializando as telas do jogo e adicionando no painel */
-        telaDeJogo = new TelaDeJogo(telaDeJogoWidth, telaDeJogoHeight, AsciiFont.AEROSMATICA_16_16, FONT_AEROSMATICA_SIZE);
+        telaDeJogo = new TelaDeJogo(telaDeJogoWidth, telaDeJogoHeight, AsciiFont.CP437_16x16, FONT_AEROSMATICA_SIZE);
         this.add(telaDeJogo.getTela());
         statusJogador = new StatusJogador(statusJogadorWidth, statusJogadorHeight, AsciiFont.DRAKE_10x10, FONT_DRAKE_SIZE);
         this.add(statusJogador.getTela());
         relatorioJogo = new RelatorioJogo(relatorioJogoWidth, relatorioJogoHeight, AsciiFont.DRAKE_10x10, FONT_DRAKE_SIZE);
         this.add(relatorioJogo.getTela());
-        miniMapa = new MiniMapa(miniMapaWidth, miniMapaHeight, AsciiFont.DRAKE_10x10, FONT_DRAKE_SIZE);
+        miniMapa = new MiniMapa(miniMapaWidth, miniMapaHeight, AsciiFont.CP437_10x10 , 10);
         this.add(miniMapa.getTela());
+
+        this.telaCombate = new TelaCombate(24, 16, AsciiFont.SR_HENRY_32_32, 30);
+        this.add(telaCombate.getTela());
 
         super.addKeyListener(this); // Adicionando o KeyListener ao painel - "Registrando" a classe Interface como ouvinte de eventos de teclado
     }
@@ -87,51 +99,32 @@ public class Interface extends JPanel implements KeyListener{
 
     public InputEvent getNextInput() { return inputQueue.poll(); }
 
-    // Imprimir | Atualizar todos os painéis da Interface
-    public void updateAsciiPanel(){
+    public void setCombate(){
+        this.isComabte = !this.isComabte;
+        statusJogador.getTela().clear();
+        telaCombate.printPersonagens();
+        repaint();
+    }
 
-        char[][] matriz = new char[45][30];
-        for (int i = 0; i < 45; i++) {
-            for (int j = 0; j < 30; j++) {
-                matriz[i][j] = 'A';
-            }
-        }
+    public void refresh(){
+        telaDeJogo.getTela().repaint();
+        relatorioJogo.getTela().repaint();
+        statusJogador.getTela().repaint();
+        miniMapa.getTela().repaint();
+    }
 
-        //telaDeJogo.printMundo(matriz);
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        telaDeJogo.printTexto("TELA DE JOGO", 1, 1);
+    public void refreshCombate(){
+        telaCombate.getTela().repaint();
+        relatorioJogo.getTela().repaint();
+        statusJogador.getTela().repaint();
+        miniMapa.getTela().repaint();
+    }
 
-        // Teste da lógica para adicionar informações
-        relatorioJogo.textoUnico("t", 0, 0);
-
-        for(int i = 0; i < 40; i++){
-           relatorioJogo.atualizarInformacao("texto " + i, 1, 0);
-            try {
-                Thread.sleep(200);
-            } catch (InterruptedException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-        }
-
-        relatorioJogo.textoUnico("RELATORIO JOGO", 1, 1);
-        statusJogador.printTela("STATUS JOGADOR", 1 , 1);
-        miniMapa.printMatriz();
-
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-
-        miniMapa.printTela("MINI MAPA", 1, 1);
-
+    public void clear(){
+        telaDeJogo.getTela().clear();
+        relatorioJogo.getTela().clear();
+        statusJogador.getTela().clear();
+        miniMapa.getTela().clear();
     }
 
     @Override
@@ -142,10 +135,19 @@ public class Interface extends JPanel implements KeyListener{
         g.setColor(Color.BLACK);
         g.fillRect(0, 0, getWidth(), getHeight());
 
+        // Desenha as bordas das telas
         g.setColor(Color.GRAY);
 
         // Tela de jogo
-        g.fillRect(20, 20, telaDeJogoWidth * FONT_AEROSMATICA_SIZE + 20, telaDeJogoHeight * FONT_AEROSMATICA_SIZE + 20);
+        if(!isComabte){
+            g.fillRect(20, 20, telaDeJogoWidth * FONT_AEROSMATICA_SIZE + 20, telaDeJogoHeight * FONT_AEROSMATICA_SIZE + 20);
+            telaDeJogo.getTela().setBounds(30, 30, telaDeJogoWidth * FONT_AEROSMATICA_SIZE, telaDeJogoHeight * FONT_AEROSMATICA_SIZE);
+            telaCombate.getTela().setBounds(30, 30, 0, 0);
+        } else {
+            g.fillRect(20, 20, 24 * 30 + 20, 16 * 30 + 20);
+            telaCombate.getTela().setBounds(30, 30, 24 * 30, 16 * 30);
+            telaDeJogo.getTela().setBounds(30, 30, 0, 0);
+        }
 
         // Status jogador
         g.fillRect(20, 535, statusJogadorWidth * FONT_DRAKE_SIZE + 20, statusJogadorHeight * FONT_DRAKE_SIZE + 20);
@@ -154,23 +156,26 @@ public class Interface extends JPanel implements KeyListener{
         g.fillRect(780, 20, relatorioJogoWidth * FONT_DRAKE_SIZE + 20, relatorioJogoHeight * FONT_DRAKE_SIZE + 20);
 
         // Mini mapa
-        g.fillRect(780, 325, miniMapaWidth * FONT_DRAKE_SIZE + 20, miniMapaHeight * FONT_DRAKE_SIZE + 20 + 3);
+        g.fillRect(780, 325, miniMapaWidth * 10 + 20, miniMapaHeight * 10 + 20);
 
-        telaDeJogo.setBounds(30, 30);
         statusJogador.setBounds(30, 545);
         relatorioJogo.setBounds(790, 30);
         miniMapa.setBounds(790, 333);
 
+        telaDeJogo.getTela().repaint();
+        relatorioJogo.getTela().repaint();
+        statusJogador.getTela().repaint();
+        miniMapa.getTela().repaint();
     }
-
-    @Override
-    public void keyTyped(KeyEvent e) { }
 
     @Override
     public void keyPressed(KeyEvent e) {
         inputQueue.add(e);
         System.out.println("Pressed Key: " + e.getKeyCode());
     }
+
+    @Override
+    public void keyTyped(KeyEvent e) { }
 
     @Override
     public void keyReleased(KeyEvent e) { }

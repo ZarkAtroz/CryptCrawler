@@ -1,10 +1,10 @@
 package Ui.Controller;
 
-import java.awt.event.KeyEvent;
-
 import Ui.Interface;
 import combate.Combate;
 import log.Log;
+
+import java.awt.event.KeyEvent;
 
 public class CombateEventController {
     
@@ -26,12 +26,10 @@ public class CombateEventController {
         if (type_event == 0) {
             switch (keyEvent.getKeyCode()) {
                 case KeyEvent.VK_SPACE:
-                    interfaceJogo.getRelatorioJogo().atualizarInformacao("", 0, 0);
                     type_event = 1;
                     break;
             
                 case KeyEvent.VK_B:
-                    interfaceJogo.getRelatorioJogo().atualizarInformacao("", 0, 0);
                     type_event = 2;
                     break;
                 default:
@@ -62,7 +60,7 @@ public class CombateEventController {
                         break;
                 }
             } catch (IndexOutOfBoundsException i) {
-                interfaceJogo.getRelatorioJogo().textoUnico("Personagem não tem acesso a essa hab", 0, 20);
+                interfaceJogo.getRelatorioJogo().atualizarInformacao("Personagem não tem acesso a essa hab");
             }
             
         } else if (type_event == 2) {
@@ -87,9 +85,9 @@ public class CombateEventController {
                     default:
                         break;
                 }
-                interfaceJogo.getRelatorioJogo().textoUnico("Troca de personagem para: " + combate.heroi_atual.getClass().getSimpleName(), 0, 12);
+                interfaceJogo.getRelatorioJogo().atualizarInformacao("Troca de personagem para: " + combate.heroi_atual.getClass().getSimpleName());
             } catch (IndexOutOfBoundsException i) {
-                interfaceJogo.getRelatorioJogo().textoUnico("Não existe esse personagem", 0, 20);
+                interfaceJogo.getRelatorioJogo().atualizarInformacao("Não existe esse personagem");
             }
         }
     }

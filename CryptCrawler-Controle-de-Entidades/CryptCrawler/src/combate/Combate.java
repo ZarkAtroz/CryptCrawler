@@ -1,12 +1,10 @@
 package combate;
 
-import java.awt.event.KeyEvent;
-import java.util.ArrayList;
-import java.util.Scanner;
-
 import Ui.Interface;
 import combate.herois.Heroi;
 import combate.inimigos.Inimigo;
+
+import java.util.ArrayList;
 
 public class Combate {
 
@@ -37,10 +35,18 @@ public class Combate {
         turno_heroi = (heroi_atual.getAgilidade() > inimigo_atual.getAgilidade());
     }
 
+    public boolean isEmptyEnemyies(){
+        if(inimigos.isEmpty())
+            return true;
+        else
+            return false;
+    }
+
     public void atacar(int index_hb, int index_personagem, Interface inter_jogo) {
 
         if (inimigo_atual.getHp_atual() <= 0) {
-            inter_jogo.getRelatorioJogo().textoUnico(inimigo_atual.getClass().getSimpleName() + " foi de VALA", 0, 19);
+            inter_jogo.getRelatorioJogo().atualizarInformacao(inimigo_atual.getClass().getSimpleName() + " foi de VALA");
+            inimigos.remove(inimigo_atual);
             proximoInimigo();
         }
 
@@ -56,9 +62,9 @@ public class Combate {
             turno_heroi = false;
 
             if (dano <= 0) {
-                inter_jogo.getRelatorioJogo().textoUnico(heroi_atual.getClass().getSimpleName() + " errou o ataque", 0, 2);
+                inter_jogo.getRelatorioJogo().atualizarInformacao(heroi_atual.getClass().getSimpleName() + " errou o ataque");
             } else {
-                inter_jogo.getRelatorioJogo().textoUnico(heroi_atual.getClass().getSimpleName() + " acertou o ataque dando: "+ dano, 0, 2);
+                inter_jogo.getRelatorioJogo().atualizarInformacao(heroi_atual.getClass().getSimpleName() + " acertou o ataque dando: "+ dano);
             }
 
         } else {
@@ -75,13 +81,12 @@ public class Combate {
 
 
             if (dano <= 0) {
-                inter_jogo.getRelatorioJogo().textoUnico(inimigo_atual.getClass().getSimpleName() + " errou o ataque", 0, 4);
+                inter_jogo.getRelatorioJogo().atualizarInformacao(inimigo_atual.getClass().getSimpleName() + " errou o ataque");
             } else {
-                inter_jogo.getRelatorioJogo().textoUnico(inimigo_atual.getClass().getSimpleName() + " acertou o ataque dando: "+ dano, 0, 4);
+                inter_jogo.getRelatorioJogo().atualizarInformacao(inimigo_atual.getClass().getSimpleName() + " acertou o ataque dando: "+ dano);
             }
         }
 
-        inter_jogo.getStatusJogador().limparTela();
     }
 
     

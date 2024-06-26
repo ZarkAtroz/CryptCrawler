@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="asciiPanel2">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/CryptCrawler/src/asciiPanel/asciiPanel.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

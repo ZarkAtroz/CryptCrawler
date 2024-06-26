@@ -1,11 +1,11 @@
 package Entity;
 
-import java.util.ArrayList;
-
 import combate.inimigos.Goblin;
 import combate.inimigos.GoblinForte;
 import combate.inimigos.Inimigo;
 import world.World;
+
+import java.util.ArrayList;
 
 public class Enemy {
     
@@ -82,18 +82,8 @@ public class Enemy {
         int i = (int) Math.random() * 2;
         int lvl = 1 + (int) Math.random() * 10;
 
-        if (i == 0) {
-            inimigos.add(new Goblin(lvl));
-        } else if (i == 1) {
-            inimigos.add(new GoblinForte(lvl));
-        }
+        inimigos.add(new Goblin(lvl));
 
-        if (inimigos.size() <= 4) {
-            int add = (int) Math.random() * 2;
-            if (add == 0) {
-                createParty();
-            }
-        }
     }
 
 }
