@@ -82,4 +82,8 @@ public class KeyEventController {
             //
         }
     }
+
+    public int getCombateTypeEvent(){
+        return combateEventController.getTypeEvent();
+    }
 }

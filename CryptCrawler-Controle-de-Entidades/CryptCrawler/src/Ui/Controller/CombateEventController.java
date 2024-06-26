@@ -21,6 +21,10 @@ public class CombateEventController {
         this.combate = combate;
     }
 
+    public int getTypeEvent(){
+        return this.type_event;
+    }
+
     public void processesKeyEvent(KeyEvent keyEvent, Interface interfaceJogo) {
         if (type_event == 0) {
             switch (keyEvent.getKeyCode()) {
@@ -30,7 +34,6 @@ public class CombateEventController {
                 case KeyEvent.VK_B:
                     type_event = 2;
                     break;
-
                 case KeyEvent.VK_PAGE_UP:
                     interfaceJogo.getRelatorioJogo().decrementarLinha();
                     break;
@@ -40,7 +43,6 @@ public class CombateEventController {
                 case KeyEvent.VK_END:
                     interfaceJogo.getRelatorioJogo().setLinhaFim();
                     break;
-
                 default:
                     Log.log("NAO SELECIONOU NENHUM OPCAO");
                     type_event = 0;
@@ -65,7 +67,6 @@ public class CombateEventController {
                         combate.atacar(3, 0, interfaceJogo);
                         type_event = 0;
                         break;
-
                     case KeyEvent.VK_PAGE_UP:
                         interfaceJogo.getRelatorioJogo().decrementarLinha();
                         break;
@@ -75,19 +76,17 @@ public class CombateEventController {
                     case KeyEvent.VK_END:
                         interfaceJogo.getRelatorioJogo().setLinhaFim();
                         break;
-
                     default:
                         break;
                 }
             } catch (IndexOutOfBoundsException i) {
                 interfaceJogo.getRelatorioJogo().atualizarInformacao("ALIADO SEM ACESSO A HABILIDADE");
             }
-            
         } else if (type_event == 2) {
             try {
                 switch (keyEvent.getKeyCode()) {
                     case KeyEvent.VK_1:
-                        combate.trocaPersonagem(0, 0);;
+                        combate.trocaPersonagem(0, 0);
                         type_event = 0;
                         break;
                     case KeyEvent.VK_2:
@@ -102,7 +101,6 @@ public class CombateEventController {
                         combate.trocaPersonagem(3, 0);
                         type_event = 0;
                         break;
-
                     case KeyEvent.VK_PAGE_UP:
                         interfaceJogo.getRelatorioJogo().decrementarLinha();
                         break;
@@ -112,7 +110,6 @@ public class CombateEventController {
                     case KeyEvent.VK_END:
                         interfaceJogo.getRelatorioJogo().setLinhaFim();
                         break;
-
                     default:
                         break;
                 }
@@ -121,6 +118,7 @@ public class CombateEventController {
                 interfaceJogo.getRelatorioJogo().atualizarInformacao("ALIADO INEXISTENTE...");
             }
         }
+        combate.updateInterface(interfaceJogo, type_event);
     }
 
 

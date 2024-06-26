@@ -142,10 +142,12 @@ public class Interface extends JPanel implements KeyListener{
         if(!isCombate){
             g.fillRect(20, 20, telaDeJogoWidth * FONT_AEROSMATICA_SIZE + 20, telaDeJogoHeight * FONT_AEROSMATICA_SIZE + 20);
             telaDeJogo.getTela().setBounds(30, 30, telaDeJogoWidth * FONT_AEROSMATICA_SIZE, telaDeJogoHeight * FONT_AEROSMATICA_SIZE);
+            telaCombate.getTela().clear();
             telaCombate.getTela().setBounds(30, 30, 0, 0);
         } else {
             g.fillRect(20, 20, 24 * 30 + 20, 16 * 30 + 20);
             telaCombate.getTela().setBounds(30, 30, 24 * 30, 16 * 30);
+            telaDeJogo.getTela().clear();
             telaDeJogo.getTela().setBounds(30, 30, 0, 0);
         }
 
@@ -165,7 +167,7 @@ public class Interface extends JPanel implements KeyListener{
         if(!isCombate){
             telaDeJogo.getTela().repaint();
         } else {
-            telaCombate.getTela().clear();
+            telaCombate.getTela().repaint();
         }
         relatorioJogo.getTela().repaint();
         statusJogador.getTela().repaint();
