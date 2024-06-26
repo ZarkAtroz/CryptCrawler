@@ -13,7 +13,7 @@ public class GoblinForte extends Inimigo {
         addHabs(0, 1, getForca(), 0.25f, "ATK BAS");
         addHabs(2, 2, getInteligencia(), 0.30f, "Hab4");
         addHabs(2, 2, getForca(), 0.40f, "Hab1");
-        addHabs(3, 2, getInteligencia(), 0.50f, "Hab2");
+        addHabs(3, 2, getInteligencia(), 0.50f, "Hab3");
     }
 
     @Override
@@ -29,6 +29,7 @@ public class GoblinForte extends Inimigo {
 
     @Override
     public int dano(Habilidade hb, float buff, int res_ini, int agi_def) {
+        System.out.println(hb.getNome_hab());
         if (hb.getCd() > 0) {
             hb.setEm_cd(hb.getCd());
         }

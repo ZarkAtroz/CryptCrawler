@@ -146,6 +146,8 @@ public class CryptCrawler extends JFrame implements KeyListener, GameEventListen
 
         dungeonMap.setEnemyOnMap(enemyOnMap);
 
+        System.out.println(enemyOnMap.getInimigos());
+
         // An instance of the KeyEventController class is created, that controls the game's keyboard events.
         KeyEventController keyEventController = new KeyEventController(this, playerOnMap, c);
 

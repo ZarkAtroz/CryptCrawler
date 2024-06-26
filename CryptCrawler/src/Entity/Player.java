@@ -30,10 +30,10 @@ public class Player {
         this.y = y;
         this.world = world;
 
-        party.add(new Guerreiro(1));
-        party.add(new Healer(1));
-        party.add(new MagoElemental(1));
-        party.add(new Rogue(1));
+        party.add(new Guerreiro(3));
+        party.add(new Healer(3));
+        party.add(new MagoElemental(3));
+        party.add(new Rogue(3));
     }
 
     // Set and Get

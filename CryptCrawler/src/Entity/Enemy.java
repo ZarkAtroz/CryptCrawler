@@ -6,6 +6,7 @@ import combate.inimigos.Goblin;
 import combate.inimigos.GoblinForte;
 import combate.inimigos.Inimigo;
 import world.World;
+import java.lang.Math;
 
 public class Enemy {
     
@@ -79,8 +80,10 @@ public class Enemy {
 
     // Gerar party de inimigos aleatoriamente
     public void createParty() {
-        int i = (int) Math.random() * 2;
-        int lvl = 1 + (int) Math.random() * 10;
+        int i = (int) Math.round(Math.random() * 1);
+        int lvl = 1 + (int) Math.round(Math.random() * 10);
+
+        System.out.println(i + "-" + lvl);
 
         if (i == 0) {
             inimigos.add(new Goblin(lvl));
@@ -88,8 +91,8 @@ public class Enemy {
             inimigos.add(new GoblinForte(lvl));
         }
 
-        if (inimigos.size() <= 4) {
-            int add = (int) Math.random() * 2;
+        if (inimigos.size() < 4) {
+            int add = (int) Math.round(Math.random() * 2);
             if (add == 0) {
                 createParty();
             }

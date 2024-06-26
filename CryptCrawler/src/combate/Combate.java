@@ -62,7 +62,7 @@ public class Combate {
             }
 
         } else {
-            index_hb = (int) Math.random() * inimigo_atual.getHbs().size();
+            index_hb = (int) Math.round(Math.random() * inimigo_atual.getHbs().size());
 
 
             Habilidade hb = inimigo_atual.returnHabilidade(index_hb);
