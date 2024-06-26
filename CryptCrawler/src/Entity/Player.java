@@ -2,7 +2,15 @@ package Entity;
 
 import log.Log;
 import world.World;
+
+import java.util.ArrayList;
+
 import Ui.Exceptions.OutOfMapException;
+import combate.herois.Guerreiro;
+import combate.herois.Healer;
+import combate.herois.Heroi;
+import combate.herois.MagoElemental;
+import combate.herois.Rogue;
 
 public class Player {
 
@@ -12,11 +20,20 @@ public class Player {
 
     private String name;
 
+    // Para o combate
+    private ArrayList<Heroi> party = new ArrayList<>();
+    private int index_h_atual = 0;
+
     public Player(String name, int x, int y, World world) {
         this.name = name;
         this.x = x;
         this.y = y;
         this.world = world;
+
+        party.add(new Guerreiro(1));
+        party.add(new Healer(1));
+        party.add(new MagoElemental(1));
+        party.add(new Rogue(1));
     }
 
     // Set and Get
@@ -42,6 +59,14 @@ public class Player {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public ArrayList<Heroi> getParty() {
+        return party;
+    }
+
+    public void setParty(ArrayList<Heroi> party) {
+        this.party = party;
     }
 
     public void moveUp() {

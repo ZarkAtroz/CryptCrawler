@@ -1,5 +1,6 @@
 package world;
 
+import Entity.Enemy;
 import Entity.Player;
 import Ui.Exceptions.OutOfMapException;
 
@@ -19,6 +20,8 @@ public class World {
 
     /* Player displaying on map */
     private Player playerOnMap;
+
+    private Enemy enemyOnMap;
 
     /* Constructor */
     public World(int width, int height) {
@@ -59,6 +62,14 @@ public class World {
 
     public void setPlayerOnMap(Player playerOnMap) {
         this.playerOnMap = playerOnMap;
+    }
+
+    public Enemy getEnemyOnMap() {
+        return enemyOnMap;
+    }
+
+    public void setEnemyOnMap(Enemy inimigo) {
+        this.enemyOnMap = inimigo;
     }
 
     /*

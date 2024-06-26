@@ -9,9 +9,9 @@ public class StatusJogador extends Tela{
     }
 
     public void printTela(String texto, int x, int y){
-        getTela().clear();
+        // getTela().clear();
         getTela().write(texto, x, y);
-        getTela().write(getWidth() + " x " + getHeight(), 1, 2);
+        // getTela().write(getWidth() + " x " + getHeight(), 1, 2);
         getTela().repaint();
     }
 }

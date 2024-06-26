@@ -1,5 +1,6 @@
 package game;
 
+import Entity.Enemy;
 import Entity.Entidade;
 import Entity.Player;
 import Ui.Controller.GameEventListener;
@@ -7,6 +8,8 @@ import log.Log;
 import world.World;
 import Ui.Interface;
 import Ui.Controller.KeyEventController;
+import combate.Combate;
+import combate.inimigos.Inimigo;
 
 import javax.swing.*;
 import java.awt.event.InputEvent;
@@ -44,6 +47,8 @@ public class CryptCrawler extends JFrame implements KeyListener, GameEventListen
 
     // The input event queue.
     private Queue<InputEvent> inputQueue;
+
+    private boolean in_combat = false;
 
     /**
      * This method reads a file and stores the entities in an ArrayList.
@@ -125,14 +130,24 @@ public class CryptCrawler extends JFrame implements KeyListener, GameEventListen
         // An instance of the World class is created.
         World dungeonMap = new World(450, 300);
 
+
         // An instance of the Player class is created, that represents the player on the map.
         Player playerOnMap = new Player(null, 22, 15, dungeonMap);
+
+
+        Enemy enemyOnMap = new Enemy(dungeonMap, 36, 26, null);
+
+        enemyOnMap.createParty();
+
+        Combate c = new Combate(0, 0, playerOnMap.getParty(), enemyOnMap.getInimigos());
 
         // The player is set on the map.
         dungeonMap.setPlayerOnMap(playerOnMap);
 
+        dungeonMap.setEnemyOnMap(enemyOnMap);
+
         // An instance of the KeyEventController class is created, that controls the game's keyboard events.
-        KeyEventController keyEventController = new KeyEventController(this, playerOnMap);
+        KeyEventController keyEventController = new KeyEventController(this, playerOnMap, c);
 
         // The start time of the game loop, used to calculate the necessary sleep time
         // to maintain the desired frame rate.
@@ -145,6 +160,7 @@ public class CryptCrawler extends JFrame implements KeyListener, GameEventListen
         // The necessary sleep time to maintain the desired frame rate. Calculated as the difference between
         // the time per loop (based on the desired frame rate) and the time the game loop actually took.
         long sleepTime;
+        c.statusHerois(interfaceJogo);
 
         while (true){
             this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -166,14 +182,25 @@ public class CryptCrawler extends JFrame implements KeyListener, GameEventListen
 
             // Print the minimap and the game world.
             interfaceJogo.getMiniMapa().printMatriz();
-            interfaceJogo.getTelaDeJogo().printMundo(dungeonMap.getTiles(), playerOnMap);
-            interfaceJogo.getRelatorioJogo().textoUnico("RELATORIO JOGO", 0, 0);
-            interfaceJogo.getRelatorioJogo().atualizarInformacao("OWNDOA", 0, 0);
+            if (in_combat) {
+
+                if (!c.isTurno_heroi()) {
+                    c.atacar(0, 0, interfaceJogo);
+                }
+
+            } else {
+                interfaceJogo.getTelaDeJogo().printMundo(dungeonMap.getTiles(), playerOnMap, enemyOnMap);                
+            }
+            /*interfaceJogo.getRelatorioJogo().textoUnico("RELATORIO JOGO", 0, 0);
+            interfaceJogo.getRelatorioJogo().atualizarInformacao("OWNDOA", 0, 0);*/
+
+            // Checa colisao de inimigo
+            colisaoPlayerEnemy(dungeonMap);
 
             // Executes the next key event in the queue. This method is responsible for processing
             // the user's keyboard input and performing the corresponding actions in the game.
             // It takes the game interface as a parameter, which is used to retrieve the next input event.
-            keyEventController.executeKeyEvent(this.interfaceJogo);
+            keyEventController.executeKeyEvent(this.interfaceJogo, in_combat);
 
             // The end time of the game loop is recorded in nanoseconds.
             endTime = System.nanoTime();
@@ -194,6 +221,13 @@ public class CryptCrawler extends JFrame implements KeyListener, GameEventListen
                 }
             }
 
+        }
+    }
+
+    public void colisaoPlayerEnemy(World world) {
+        if (world.getEnemyOnMap().getX() == world.getPlayerOnMap().getX() 
+            && world.getEnemyOnMap().getY() == world.getPlayerOnMap().getY()) {
+            in_combat = true;
         }
     }
 
