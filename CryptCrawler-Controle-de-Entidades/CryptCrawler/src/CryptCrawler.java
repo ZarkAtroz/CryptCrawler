@@ -57,6 +57,7 @@ public class CryptCrawler extends JFrame implements GameEventListener {
 
                     dungeonMap.readTiles();
                     dungeonMap.drawAllCharacters();
+                    dungeonMap.createEnemiesList();
 
                 } catch (ClassNotFoundException e){
                     e.printStackTrace();
@@ -108,6 +109,7 @@ public class CryptCrawler extends JFrame implements GameEventListener {
         entidades.add(vilao);
 
         Enemy enemyOnMap = new Enemy(dungeonMap, 36, 26, null);
+        dungeonMap.addEnemyToList(enemyOnMap);
 
         enemyOnMap.createParty();
 
@@ -139,7 +141,7 @@ public class CryptCrawler extends JFrame implements GameEventListener {
                     interfaceJogo.setCombate();
                     in_combat = !in_combat;
 
-                    
+                    dungeonMap.deleteEnemyAt(playerOnMap.getX(), playerOnMap.getY());
 
                 } else {
                     if (!c.isTurno_heroi()) {
@@ -154,7 +156,8 @@ public class CryptCrawler extends JFrame implements GameEventListener {
                 interfaceJogo.getStatusJogador().printCoords("POSICAO X = " + playerOnMap.getX() + " / Y = " + playerOnMap.getY());
 
                 // Checa colisao de inimigo
-                colisaoPlayerEnemy(dungeonMap);
+                if(!dungeonMap.isEnemiesEmpty())
+                    colisaoPlayerEnemy(dungeonMap);
 
                 interfaceJogo.refresh();
             }
@@ -184,7 +187,7 @@ public class CryptCrawler extends JFrame implements GameEventListener {
         int enemyX = world.getEnemyOnMap().getX();
         int enemyY = world.getEnemyOnMap().getY();
 
-        if (enemyX == playerX && enemyY == playerY) {
+        if(world.getEnemyAt(playerX, playerY)){
             interfaceJogo.setCombate();
             in_combat = true;
             interfaceJogo.getRelatorioJogo().atualizarInformacao("HEROIS ENTRARAM EM COMBATE!");

@@ -7,6 +7,7 @@ import Ui.Exceptions.OutOfMapException;
 import java.awt.*;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Random;
 
 /*
@@ -27,7 +28,7 @@ public class World implements Serializable {
     private Player playerOnMap;
 
     private Enemy enemyOnMap;
-    private ArrayList<Enemy> enemies = new ArrayList<>();
+    private ArrayList<Enemy> enemies;
 
     /* Constructor */
     public World(int width, int height) {
@@ -38,6 +39,8 @@ public class World implements Serializable {
 
         drawMap();
     }
+
+    public void createEnemiesList(){ this.enemies = new ArrayList<>(); }
 
     /* Get and Set */
     public int getWidth() {
@@ -76,23 +79,37 @@ public class World implements Serializable {
         this.enemyOnMap = inimigo;
     }
 
-    public Enemy getEnemyAt(int x, int y) {
+    public boolean getEnemyAt(int x, int y) {
         for(Enemy ens : enemies){
             if(ens.getX() == x && ens.getY() == y)
-                return ens;
+                return true;
         }
-        return null;
+        return false;
     }
 
     public void deleteEnemyAt(int x, int y){
+        Enemy removeEnemyIterator = null;
+
         for(Enemy ens : enemies){
             if(ens.getX() == x && ens.getY() == y)
-                enemies.remove(ens);
+                removeEnemyIterator = ens;
         }
+
+        if(removeEnemyIterator != null)
+            removeEnemy(removeEnemyIterator);
+
+    }
+
+    public void removeEnemy(Enemy enemy){
+        this.enemies.remove(enemy);
     }
 
     public void addEnemyToList(Enemy newEnemy){
         enemies.add(newEnemy);
+    }
+
+    public boolean isEnemiesEmpty(){
+        return enemies.isEmpty();
     }
 
     public void setEnemies(ArrayList<Enemy> enemies) {
