@@ -140,7 +140,7 @@ public class CryptCrawler extends JFrame implements GameEventListener {
 
                 } else {
                     if (!combate.isTurno_heroi()) {
-                        combate.atacar(0, 0, interfaceJogo);
+                        combate.atacar(0, 0, 0, interfaceJogo);
                     }
 
                     combate.updateInterface(interfaceJogo, keyEventController.getCombateTypeEvent());

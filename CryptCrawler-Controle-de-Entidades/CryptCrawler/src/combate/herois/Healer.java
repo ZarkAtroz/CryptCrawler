@@ -12,9 +12,9 @@ public class Healer extends AliadoClasse {
         this.mp_atual = this.mp_max;
 
         addHabs(0, 1, getInteligencia(), 0.25f, "ATK BASICO");
-        addHabs(4, 3, (int) (getInteligencia() * 0.5), 0, "Cura");
-        addHabs(3, 3, (int) (getInteligencia() * 0.5), 0, "Buff Dano");
-        addHabs(0, 3, (int) (getInteligencia() * 0.5), 0, "Buff Res");
+        addHabs(4, 3, (int) (getInteligencia() * 0.5), 0, "CURA");
+        addHabs(3, 3, (int) (getInteligencia() * 0.5), 0, "BUFF DANO");
+        addHabs(0, 3, (int) (getInteligencia() * 0.5), 0, "BUFF RES");
     }
 
     // Funções da classe PersonagemCombate
@@ -38,9 +38,9 @@ public class Healer extends AliadoClasse {
             if (res < 1) {
                 res = 1;
             }
-            
+
             int dmg = (int) (hb.getStatus() * hb.getModficador() * buff);
-            
+
 
             if (txcrit()) {
                 dmg = dmg * this.critico;

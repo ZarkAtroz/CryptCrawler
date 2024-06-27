@@ -12,7 +12,7 @@ public class Guerreiro extends AliadoClasse {
         this.mp_atual = this.mp_max;
 
         addHabs(0, 1, getForca(), 5f, "ATK BASICO");
-        addHabs(4, 2, getForca(), 0.40f, "Roda Jeckit");
+        addHabs(4, 2, getForca(), 0.40f, "RODA JECKIT");
     }
 
     // Funções da classe PersonagemCombate
@@ -38,7 +38,7 @@ public class Guerreiro extends AliadoClasse {
                 if (res < 1) {
                     res = 1;
                 }
-                
+
                 int dmg = (int) (hb.getStatus() * hb.getModficador() * buff);
 
                 if (txcrit()) {
@@ -47,7 +47,7 @@ public class Guerreiro extends AliadoClasse {
 
                 return (int) (dmg / res);
             }
-        }        
+        }
         return 0;
     }
 
@@ -58,7 +58,7 @@ public class Guerreiro extends AliadoClasse {
         int necessario = 100 * agi_atk / total;
         int num_random = (int) (1 + (Math.random() * 100));
 
-       boolean acertou = necessario > num_random;
+        boolean acertou = necessario > num_random;
 
         return acertou;
     }

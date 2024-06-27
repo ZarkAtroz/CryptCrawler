@@ -40,7 +40,9 @@ public class Combate {
         return inimigos.isEmpty();
     }
 
-    public void atacar(int index_hb, int index_personagem, Interface inter_jogo) {
+    public void atacar(int index_hb, int index_personagem, int indexInimigo, Interface inter_jogo) {
+
+        InimigoClasse inimigoSelecionado = inimigos.get(indexInimigo);
 
         if (inimigo_atual.getHp_atual() <= 0) {
             inter_jogo.getRelatorioJogo().atualizarInformacao(inimigo_atual.getClass().getSimpleName().toUpperCase() + " MORREU!", Color.GREEN);
@@ -53,9 +55,15 @@ public class Combate {
         }
 
         if (turno_heroi) {
-            int dano = heroi_atual.dano(heroi_atual.getHbs().get(index_hb), 1, 1, inimigo_atual.getAgilidade());
-            int n_hp_atual = inimigo_atual.getHp_atual() - dano;
-            inimigo_atual.setHp_atual(n_hp_atual);
+            int dano = heroi_atual.dano(heroi_atual.getHbs().get(index_hb), 1, 1, inimigoSelecionado.getAgilidade());
+            int n_hp_atual = inimigoSelecionado.getHp_atual() - dano;
+            inimigoSelecionado.setHp_atual(n_hp_atual);
+
+            if (inimigoSelecionado.getHp_atual() <= 0) {
+                inter_jogo.getRelatorioJogo().atualizarInformacao(inimigoSelecionado.getClass().getSimpleName().toUpperCase() + " MORREU!", Color.GREEN);
+                inimigos.remove(inimigoSelecionado);
+                proximoInimigo();
+            }
 
             turno_heroi = false;
 
@@ -204,6 +212,29 @@ public class Combate {
                 }
                 break;
             case 3:
+                interfaceJogo.getStatusJogador().printTela("SELECIONAR INIMIGO: ", 1, 1);
+                for(i = 0; i < inimigos.size(); i++){
+                    InimigoClasse in = inimigos.get(i);
+                    String nomeInimigo =  in.getClass().getSimpleName().toUpperCase();
+                    if(nomeInimigo.equals("GOBLINFORTE"))
+                        nomeInimigo = "GOBLIN";
+                    interfaceJogo.getStatusJogador().printTela("[" + (i+1) + "]" + nomeInimigo + (i + 1), 1, (i + 2));
+                }
+
+                interfaceJogo.getStatusJogador().printTela("HEROI SELECIONADO:", 24, 1);
+                interfaceJogo.getStatusJogador().printTela(heroi.getClass().getSimpleName().toUpperCase(), 24, 2);
+                interfaceJogo.getStatusJogador().printTela("HP: " + heroi.getHp_atual() + "/" + heroi.getHp_max(), 24, 3);
+                interfaceJogo.getStatusJogador().printTela("MP: " + heroi.getMp_atual() + "/" + heroi.getMp_max(), 24, 4);
+
+                interfaceJogo.getStatusJogador().printTela("INIMIGOS INFO:", 50, 1);
+                num = 1;
+                for (InimigoClasse inimigo : inimigos) {
+                    String nomeInimigo = inimigo.getClass().getSimpleName().toUpperCase();
+                    if(nomeInimigo.equals("GOBLINFORTE")){
+                        nomeInimigo = "GOBLIN";
+                    }
+                    interfaceJogo.getStatusJogador().printTela(nomeInimigo + " " + (num) + " - HP: " + inimigo.getHp_atual() + "/" + inimigo.getHp_max() , 45, (num++));
+                }
                 break;
             case 4:
                 break;

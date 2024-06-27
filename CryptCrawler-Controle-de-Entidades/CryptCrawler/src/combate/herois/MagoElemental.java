@@ -12,7 +12,7 @@ public class MagoElemental extends AliadoClasse {
         this.mp_atual = this.mp_max;
 
         addHabs(0, 1, getInteligencia(), 0.25f, "ATK BASICO");
-        addHabs(5, 1, (getInteligencia() + 2), 0.50f, "Bola de Fogo");
+        addHabs(5, 1, (getInteligencia() + 2), 0.50f, "BOLA DE FOGO");
     }
 
     // Funções da classe PersonagemCombate
@@ -38,7 +38,7 @@ public class MagoElemental extends AliadoClasse {
                 if (res < 1) {
                     res = 1;
                 }
-                
+
                 int dmg = (int) (hb.getStatus() * hb.getModficador() * buff);
 
                 if (txcrit()) {

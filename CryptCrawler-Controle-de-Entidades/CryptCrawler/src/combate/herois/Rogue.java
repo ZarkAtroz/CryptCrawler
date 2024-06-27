@@ -4,7 +4,7 @@ import combate.Habilidade;
 
 public class Rogue extends AliadoClasse {
 
-    
+
     // Construtor
     public Rogue(int lvl) {
         super(lvl);
@@ -12,7 +12,7 @@ public class Rogue extends AliadoClasse {
         this.hp_atual = this.hp_max;
         this.mp_atual = this.mp_max;
         addHabs(0, 1, (getAgilidade() + getSorte()), 0.25f, "ATK BASICO");
-        addHabs(4, 2, (getAgilidade() + getSorte()), 0.50f, "Estocada");
+        addHabs(4, 2, (getAgilidade() + getSorte()), 0.50f, "ESTOCADA");
     }
 
     // Funções da classe PersonagemCombate
@@ -38,7 +38,7 @@ public class Rogue extends AliadoClasse {
                 if (res < 1) {
                     res = 1;
                 }
-                
+
                 int dmg = (int) (hb.getStatus() * hb.getModficador() * buff);
 
                 if (txcrit()) {
@@ -49,7 +49,7 @@ public class Rogue extends AliadoClasse {
             }
         }
         return 0;
-        
+
     }
 
     @Override
