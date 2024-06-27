@@ -21,7 +21,7 @@ public class Interface extends JPanel implements KeyListener{
     private final TelaDeJogo telaDeJogo;
     private final StatusJogador statusJogador;
     private final RelatorioJogo relatorioJogo;
-    private final MiniMapa miniMapa;
+    private final MiniMapaInterface miniMapa;
 
     private final TelaCombate telaCombate;
 
@@ -64,7 +64,7 @@ public class Interface extends JPanel implements KeyListener{
         this.add(statusJogador.getTela());
         relatorioJogo = new RelatorioJogo(relatorioJogoWidth, relatorioJogoHeight, AsciiFont.DRAKE_10x10, FONT_DRAKE_SIZE);
         this.add(relatorioJogo.getTela());
-        miniMapa = new MiniMapa(miniMapaWidth, miniMapaHeight, AsciiFont.CP437_10x10 , 10);
+        miniMapa = new MiniMapaInterface(miniMapaWidth, miniMapaHeight, AsciiFont.CP437_10x10 , 10);
         this.add(miniMapa.getTela());
 
         this.telaCombate = new TelaCombate(24, 16, AsciiFont.SR_HENRY_32_32, 30);
@@ -73,7 +73,7 @@ public class Interface extends JPanel implements KeyListener{
         super.addKeyListener(this); // Adicionando o KeyListener ao painel - "Registrando" a classe Interface como ouvinte de eventos de teclado
     }
 
-    public MiniMapa getMiniMapa() { return miniMapa; }
+    public MiniMapaInterface getMiniMapa() { return miniMapa; }
 
     public int getMiniMapaHeight() { return miniMapaHeight; }
 

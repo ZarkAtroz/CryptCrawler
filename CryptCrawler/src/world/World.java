@@ -23,6 +23,7 @@ public class World implements Serializable {
     private int height;
 
     private Tiles[][] tiles;
+    private MiniMap miniMap;
 
     /* Player displaying on map */
     private Player playerOnMap;
@@ -30,12 +31,19 @@ public class World implements Serializable {
     private ArrayList<Enemy> enemies;
 
     /* Constructor */
-    public World(int width, int height) {
+    public World(int width, int height, int miniMapScale) {
         this.width = width;
         this.height = height;
 
         this.tiles = new Tiles[width][height];
+        this.miniMap = new MiniMap(width / miniMapScale, height / miniMapScale, miniMapScale);
 
+        for (int i = 0; i < width; i++) {
+            for (int j = 0; j < height; j++) {
+                this.tiles[i][j] = new Tiles();
+            }
+        }
+        createEnemiesList();
         drawMap();
     }
 
@@ -68,6 +76,9 @@ public class World implements Serializable {
 
     public void setPlayerOnMap(Player playerOnMap) {
         this.playerOnMap = playerOnMap;
+    }
+    public MiniMap getMiniMap() {
+        return miniMap;
     }
 
     public boolean isEnemyAt(int x, int y) {
@@ -162,15 +173,14 @@ public class World implements Serializable {
 
         for (int i = 0; i < getWidth(); i++) {
             for (int j = 0; j < getHeight(); j++) {
-                tiles[i][j].setIcon((char)0);
+                drawTile(i, j, (char)0);
             }
         }
-
-        tiles[21][15].setIcon((char)254);
-        tiles[21][16].setIcon((char)254);
-        tiles[21][17].setIcon((char)254);
-        tiles[21][18].setIcon((char)254);
-        tiles[22][18].setIcon((char)254);
+        drawTile(21, 15, (char)254);
+        drawTile(21, 16, (char)254);
+        drawTile(21, 17, (char)254);
+        drawTile(21, 18, (char)254);
+        drawTile(22, 18, (char)254);
     }
 
     public boolean isPassable(int x, int y) throws OutOfMapException {
@@ -189,8 +199,8 @@ public class World implements Serializable {
         tiles[x][y].setIcon(tile);
         tiles[x][y].setBackgroundColor(Color.BLACK);
         tiles[x][y].setForegroundColor(Color.WHITE);
-
         drawPassableTile(x, y, tile);
+        miniMap.updateTiles(x, y, tiles[x][y]);
     }
 
     public void drawPassableTile(int x, int y, char tile) {

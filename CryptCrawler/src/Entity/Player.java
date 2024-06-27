@@ -50,11 +50,16 @@ public class Player extends Entidade {
     }
 
     public void moveUp() {
+        Log.logDebug("ENTROU NO MOVEUP");
         try {
+            Log.logDebug("ENTROU NO TRY");
             if (world.isPassable(x, y - 1) && !world.isOutOfBounds(x, y - 1)) {
+                Log.logDebug("ENTROU NO IF");
                 gravarPosicoes();
+                Log.logDebug("PASSOU DO GRAVAR POSICOES");
                 y--;
             }
+            Log.logDebug("PASSOU DO IF");
         } catch (OutOfMapException e) {
             Log.logWarning("Is not possible to move up");
             Log.logExceptionMessage(e);

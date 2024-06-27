@@ -21,6 +21,10 @@ public class Tiles implements Serializable {
         this.background = background;
     }
 
+    public Tiles(){
+
+    }
+
     public Color getBackgroundColor() {
         return background;
     }

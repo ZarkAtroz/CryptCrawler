@@ -35,7 +35,9 @@ public class PlayerMovementController {
     public void processKeyEvent(KeyEvent keyEvent) {
         switch (keyEvent.getKeyCode()){
             case KeyEvent.VK_W:
+                Log.logDebug("ENTROU NO W");
                 player.moveUp();
+                Log.logDebug("PASSOU DO W");
                 break;
             case KeyEvent.VK_S:
                 player.moveDown();

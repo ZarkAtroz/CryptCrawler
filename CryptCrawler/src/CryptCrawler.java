@@ -2,6 +2,7 @@ import Entity.*;
 import Ui.Controller.GameEventListener;
 import combate.Combate;
 import log.Log;
+import world.MiniMap;
 import world.World;
 import Ui.Interface;
 import Ui.Controller.KeyEventController;
@@ -76,7 +77,7 @@ public class CryptCrawler extends JFrame implements GameEventListener {
         }
 
         if(dungeonMap == null){
-            dungeonMap = new World(450, 300);
+            dungeonMap = new World(450, 300, 5);
             dungeonMap.drawAllCharacters();
         }
 
@@ -126,7 +127,7 @@ public class CryptCrawler extends JFrame implements GameEventListener {
             if(!this.getRodando())
                 System.exit(0);
 
-            interfaceJogo.getMiniMapa().printMiniMapa(dungeonMap, playerOnMap);
+            interfaceJogo.getMiniMapa().printMiniMap(dungeonMap.getMiniMap(), entidades, inimigos);
             interfaceJogo.getRelatorioJogo().imprimirRelatorios();
 
             if (in_combat) {
