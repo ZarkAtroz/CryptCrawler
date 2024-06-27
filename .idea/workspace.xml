@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="cd81eca7-8282-4515-b0e4-cc228301eed5" name="Changes" comment="" />
+    <list default="true" id="cd81eca7-8282-4515-b0e4-cc228301eed5" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/CryptCrawler/bin/combate/Combate.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CryptCrawler/bin/combate/Combatente.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CryptCrawler/bin/combate/Habilidade.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CryptCrawler/bin/combate/PersonagemCombate.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CryptCrawler/bin/combate/jogador/Rogue.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CryptCrawler/src/Mundo/Mundo.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CryptCrawler/src/blocos.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CryptCrawler/src/mundo.txt" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -27,7 +36,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "Game-Alpha-Version",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/johnc/Documents/GitHub/CryptCrawler/CryptCrawler"
   }

@@ -4,12 +4,12 @@ import combate.Combatente;
 import combate.Habilidade;
 import combate.PersonagemCombate;
 
-public abstract class Inimigo extends PersonagemCombate implements Combatente {
+public abstract class InimigoClasse extends PersonagemCombate implements Combatente {
 
     protected int hp_atual;
     protected int hp_max;
 
-    public Inimigo(int lvl) {
+    public InimigoClasse(int lvl) {
         super(lvl);
     }
 

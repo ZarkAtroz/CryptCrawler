@@ -1,9 +1,8 @@
 package combate.herois;
 
 import combate.Habilidade;
-import combate.TesteCombate;
 
-public class Healer extends Heroi {
+public class Healer extends AliadoClasse {
 
     // Construtor
     public Healer(int lvl) {
@@ -13,9 +12,9 @@ public class Healer extends Heroi {
         this.mp_atual = this.mp_max;
 
         addHabs(0, 1, getInteligencia(), 0.25f, "ATK BASICO");
-        addHabs(4, 3, (int) (getInteligencia() * 0.5), 0, "Cura");
-        addHabs(3, 3, (int) (getInteligencia() * 0.5), 0, "Buff Dano");
-        addHabs(0, 3, (int) (getInteligencia() * 0.5), 0, "Buff Res");
+        addHabs(4, 3, (int) (getInteligencia() * 0.5), 0, "CURA");
+        addHabs(3, 3, (int) (getInteligencia() * 0.5), 0, "BUFF DANO");
+        addHabs(0, 3, (int) (getInteligencia() * 0.5), 0, "BUFF RES");
     }
 
     // Funções da classe PersonagemCombate
@@ -39,9 +38,9 @@ public class Healer extends Heroi {
             if (res < 1) {
                 res = 1;
             }
-            
+
             int dmg = (int) (hb.getStatus() * hb.getModficador() * buff);
-            
+
 
             if (txcrit()) {
                 dmg = dmg * this.critico;
@@ -60,12 +59,6 @@ public class Healer extends Heroi {
         int num_random = (int) (1 + (Math.random() * 100));
 
         boolean acertou = necessario > num_random;
-
-        if (acertou) {
-            TesteCombate.relatorioJogo(getClass().getSimpleName() + " acertou com sucesso");
-        } else {
-            TesteCombate.relatorioJogo(getClass().getSimpleName() + " não teve sucesso no acerto");
-        }
 
         return acertou;
     }

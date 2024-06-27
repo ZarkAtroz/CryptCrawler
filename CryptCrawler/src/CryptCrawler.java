@@ -1,148 +1,219 @@
-import Entity.Entidade;
+import Entity.*;
+import Ui.Controller.GameEventListener;
+import combate.Combate;
+import log.Log;
+import world.World;
 import Ui.Interface;
+import Ui.Controller.KeyEventController;
 
 import javax.swing.*;
-import java.awt.event.InputEvent;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.awt.event.MouseEvent;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.awt.*;
+import java.io.*;
+import java.lang.reflect.Array;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Queue;
 
-public class CryptCrawler extends JFrame implements KeyListener {
+public class CryptCrawler extends JFrame implements GameEventListener {
 
     private boolean rodando;
-    private int framesPerSecond = 60;
-    private int timePerLoop = 1000000000 / framesPerSecond;
-
-    private JFrame frame;
-    private ImageIcon img;
-
-    private Queue<InputEvent> inputQueue;
-
-    public static void lerArquivo(String arquivo){
-
-        String linha;
-        ArrayList<Entidade> entidades = new ArrayList<>();
-
-        try (BufferedReader br = new BufferedReader(new FileReader(arquivo))) {
-
-            // InputStreamReader
-            linha = br.readLine();
-
-            while((linha = br.readLine()) != null) {
-
-            }
-
-        } catch (IOException e){
-            e.printStackTrace();
-        }
-
-    }
-
+    private final int framesPerSecond = 60;
+    private final int timePerLoop = 1000000000 / framesPerSecond;
     private final Interface interfaceJogo;
 
+    private boolean in_combat = false;
+    private Combate combate;
+
     public CryptCrawler(){
-
-        //if(lerSave == true){
-            // importar do save
-            // passar pra classes
-        //} else {
-            // ler direto do .txt
-        //}
-
-        // lerArquivo("blocos.txt");
-
         this.rodando = true;
+        Log.logInfo("Game Started");
 
-        this.frame = new JFrame("Crypt Crawler");
-        this.img = new ImageIcon("Icon\\icon.jpg");
-        this.frame.setIconImage(img.getImage());
+        JFrame frame;
+        frame = new JFrame("Crypt Crawler");
+        frame.setIconImage((new ImageIcon("Icon\\icon.jpg")).getImage());
 
-        this.interfaceJogo = new Interface();
-        this.frame.add(interfaceJogo);
-        this.frame.setSize(1280, 720);
-        super.addKeyListener(this);
+        interfaceJogo = new Interface();
+        frame.add(interfaceJogo);
+        frame.setSize(1280, 720);
 
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setVisible(true);
+        frame.setLayout(null);
     }
 
     public void run(){
 
-        // Colocar a lógica do frame rate
-        // 1. Verificar input
-        // 2. Atualizar matriz, valores, dados
-        // 3. Renderizar na tela
+        World dungeonMap = null;
 
-        while (true){
-            this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            frame.setVisible(true);
-            frame.setLayout(null);
+        String userHome = System.getProperty("user.home");
+        String desktopPath = userHome + File.separator + "Desktop";
 
-            long startTime = System.nanoTime();
+        Path worldPath = Paths.get(desktopPath + "\\World\\world.save").getParent();
 
-            // Tela cheia
-            // frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
-            // frame.setUndecorated(true);
+        File newFolder = new File(desktopPath + "\\World");
 
-            getInput();
-            if(!this.getRodando())
-                System.exit(0);
-
-            // update(); -> atualizar matriz, relatório, vida, etc...
-            // render(); -> imprimir todas as telas, mesmo que não tenha mudado nada
-
-            long endTime = System.nanoTime();
-
-            long sleepTime = timePerLoop - (endTime-startTime);
-
-            if (sleepTime > 0) {
+        if (newFolder.exists()) {
+            if (Files.exists(worldPath)) {
                 try {
-                    Thread.sleep(sleepTime/1000000);
-                } catch (InterruptedException e) {
-                    // TODO Auto-generated catch block
+                    ObjectInputStream os = new ObjectInputStream(new FileInputStream(desktopPath + "\\World\\world.save"));
+                    dungeonMap = (World) os.readObject();
+
+                    dungeonMap.readTiles();
+                    dungeonMap.drawAllCharacters();
+                    dungeonMap.createEnemiesList();
+
+                } catch (ClassNotFoundException e){
+                    e.printStackTrace();
+
+                } catch (FileNotFoundException e){
+                    e.printStackTrace();
+
+                } catch (IOException e){
                     e.printStackTrace();
                 }
             }
-
         }
-    }
 
-    public void getInput(){
-        InputEvent event = this.interfaceJogo.getNextInput();
-        if (event instanceof KeyEvent keypress){
-            switch (keypress.getKeyCode()){
-                case KeyEvent.VK_PAGE_UP:
-                    interfaceJogo.getTelaDeJogo().printTexto("Voce apertou a tecla: PAGE UP" , 1, 1);
-                    break;
+        if(dungeonMap == null){
+            dungeonMap = new World(450, 300);
+            dungeonMap.drawAllCharacters();
+        }
 
-                case KeyEvent.VK_W:
-                    interfaceJogo.getTelaDeJogo().printTexto("Voce apertou a tecla: W", 1, 1);
-                    break;
+        ArrayList<Entidade> entidades = new ArrayList<>();
 
-                case KeyEvent.VK_ESCAPE:
-                    this.setRodando(false);
-                    break;
+        Player playerOnMap = new Player("Player", 22, 15, dungeonMap, 1, 0);
+        entidades.add(playerOnMap);
+
+        Aliado mago = new Aliado("Mago", playerOnMap.getX(), playerOnMap.getY(), 2, playerOnMap);
+        Aliado barbaro = new Aliado("Barbaro", playerOnMap.getX(), playerOnMap.getY(), 3, playerOnMap);
+
+        entidades.add(mago);
+        entidades.add(barbaro);
+
+        playerOnMap.setMaximoTrilha(2);
+
+        ArrayList<Enemy> inimigos = new ArrayList<>();
+
+        Enemy goblin = new Enemy(dungeonMap, 36, 26, "Goblin", (char)21);
+        Enemy goblinForte = new Enemy(dungeonMap, 40, 26, "Goblin Forte", (char)22);
+        Enemy goblinDois = new Enemy(dungeonMap, 25, 25, "Goblin", (char)22);
+
+        inimigos.add(goblin);
+        inimigos.add(goblinForte);
+        inimigos.add(goblinDois);
+
+        for(Enemy ens : inimigos){
+            entidades.add(new Inimigo(ens.getClassName(), ens.getX(), ens.getY(), ens.getIcon(), playerOnMap));
+            dungeonMap.addEnemyToList(ens);
+        }
+
+        combate = new Combate(0, 0, playerOnMap.getParty());
+
+        dungeonMap.setPlayerOnMap(playerOnMap);
+
+        KeyEventController keyEventController = new KeyEventController(this, playerOnMap, entidades, combate);
+
+        long startTime;
+        long endTime;
+        long sleepTime;
+
+        interfaceJogo.getRelatorioJogo().atualizarInformacao("BEM-VINDO AO CRYPT CRAWLER!", Color.WHITE);
+
+        while (true){
+            startTime = System.nanoTime();
+
+            if(!this.getRodando())
+                System.exit(0);
+
+            interfaceJogo.getMiniMapa().printMiniMapa(dungeonMap, playerOnMap);
+            interfaceJogo.getRelatorioJogo().imprimirRelatorios();
+
+            if (in_combat) {
+                if (combate.isEmptyEnemyies()) {
+                    deleteEnemyEntity(dungeonMap, entidades);
+                    interfaceJogo.setCombate();
+                    in_combat = !in_combat;
+
+                    dungeonMap.deleteEnemyAt(playerOnMap.getX(), playerOnMap.getY());
+
+                    interfaceJogo.getRelatorioJogo().atualizarInformacao("BATALHA VENCIDA!", Color.BLUE);
+
+                } else {
+                    if (!combate.isTurno_heroi()) {
+                        combate.atacar(0, 0, 0, interfaceJogo);
+                    }
+
+                    combate.updateInterface(interfaceJogo, keyEventController.getCombateTypeEvent());
+                    interfaceJogo.refreshCombate();
+                }
+            } else {
+                interfaceJogo.getTelaDeJogo().printMundo(playerOnMap, entidades, dungeonMap, dungeonMap.getEnemies());
+                interfaceJogo.getStatusJogador().printCoords("POSICAO X = " + playerOnMap.getX() + " / Y = " + playerOnMap.getY());
+
+                // Checa colisao de inimigo
+                if (!dungeonMap.isEnemiesEmpty()) {
+                    colisaoPlayerEnemy(dungeonMap);
+                }
+
+                interfaceJogo.refresh();
             }
-        } else if (event instanceof MouseEvent) {
-            //
+
+            keyEventController.executeKeyEvent(this.interfaceJogo, in_combat);
+
+            endTime = System.nanoTime();
+            sleepTime = timePerLoop - (endTime-startTime);
+
+            if (sleepTime > 0) {
+                try {
+                    Thread.sleep(sleepTime / 1000000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
 
-    public void setRodando(boolean rodando){ this.rodando = rodando; }
+    public void colisaoPlayerEnemy(World world) {
+
+        int playerX = world.getPlayerOnMap().getX();
+        int playerY = world.getPlayerOnMap().getY();
+
+        if(world.isEnemyAt(playerX, playerY)){
+            Enemy selectedEnemy = world.getEnemyAt(playerX, playerY);
+            selectedEnemy.createParty();
+            combate.setInimigos(selectedEnemy.getInimigos());
+            interfaceJogo.setCombate();
+            in_combat = true;
+            interfaceJogo.getRelatorioJogo().atualizarInformacao("HEROIS ENTRARAM EM COMBATE!", Color.WHITE);
+        }
+
+    }
+
+    public void deleteEnemyEntity(World dungeonMap, ArrayList<Entidade> entidades){
+        int playerX = dungeonMap.getPlayerOnMap().getX();
+        int playerY = dungeonMap.getPlayerOnMap().getY();
+
+        Inimigo selectedEnemy = null;
+
+        for(Entidade ent : entidades){
+            if(ent instanceof Inimigo){
+                if(playerX == ent.getX() && playerY == ent.getY()){
+                    selectedEnemy = (Inimigo) ent;
+                }
+            }
+        }
+
+        if(selectedEnemy != null)
+            entidades.remove(selectedEnemy);
+    }
+
+    @Override
+    public void onGameExit() {
+        Log.logInfo("Game Closed");
+        this.rodando = false;
+    }
 
     public boolean getRodando() { return this.rodando; }
-
-    @Override
-    public void keyTyped(KeyEvent e) { }
-
-    @Override
-    public void keyPressed(KeyEvent e) { }
-
-    @Override
-    public void keyReleased(KeyEvent e) { }
 
 }

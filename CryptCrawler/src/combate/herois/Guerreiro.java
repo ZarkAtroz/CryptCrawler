@@ -1,9 +1,8 @@
 package combate.herois;
 
 import combate.Habilidade;
-import combate.TesteCombate;
 
-public class Guerreiro extends Heroi {
+public class Guerreiro extends AliadoClasse {
 
     // Construtor
     public Guerreiro(int lvl) {
@@ -12,8 +11,8 @@ public class Guerreiro extends Heroi {
         this.hp_atual = this.hp_max;
         this.mp_atual = this.mp_max;
 
-        addHabs(0, 1, getForca(), 0.25f, "ATK BASICO");
-        addHabs(4, 2, getForca(), 0.40f, "Roda roda Jeckit");
+        addHabs(0, 1, getForca(), 5f, "ATK BASICO");
+        addHabs(4, 2, getForca(), 0.40f, "RODA JECKIT");
     }
 
     // Funções da classe PersonagemCombate
@@ -32,20 +31,22 @@ public class Guerreiro extends Heroi {
     // Funções da interface
     @Override
     public int dano(Habilidade hb, float buff, int res_ini, int agi_def) {
-        this.mp_atual -= hb.getCusto_mp();
-        if (acerto(this.agilidade, agi_def)) {
-            int res = res_ini / 2;
-            if (res < 1) {
-                res = 1;
-            }
-            
-            int dmg = (int) (hb.getStatus() * hb.getModficador() * buff);
+        if (this.mp_atual >= hb.getCusto_mp()) {
+            this.mp_atual -= hb.getCusto_mp();
+            if (acerto(this.agilidade, agi_def)) {
+                int res = res_ini / 2;
+                if (res < 1) {
+                    res = 1;
+                }
 
-            if (txcrit()) {
-                dmg = dmg * this.critico;
-            }
+                int dmg = (int) (hb.getStatus() * hb.getModficador() * buff);
 
-            return (int) (dmg / res);
+                if (txcrit()) {
+                    dmg = dmg * this.critico;
+                }
+
+                return (int) (dmg / res);
+            }
         }
         return 0;
     }
@@ -57,13 +58,7 @@ public class Guerreiro extends Heroi {
         int necessario = 100 * agi_atk / total;
         int num_random = (int) (1 + (Math.random() * 100));
 
-       boolean acertou = necessario > num_random;
-
-        if (acertou) {
-            TesteCombate.relatorioJogo(getClass().getSimpleName() + " acertou com sucesso");
-        } else {
-            TesteCombate.relatorioJogo(getClass().getSimpleName() + " não teve sucesso no acerto");
-        }
+        boolean acertou = necessario > num_random;
 
         return acertou;
     }

@@ -2,58 +2,93 @@ package Ui;
 
 import asciiPanel.AsciiFont;
 
+import java.awt.*;
 import java.util.ArrayList;
 
-public class RelatorioJogo extends Tela{
+public class RelatorioJogo extends Tela {
 
     private ArrayList<String> linhas;
-    private ArrayList<String> historico;
+    private ArrayList<Color> cores;
+    private int linhaInicial = 0;
+    private static final int MAX_LINHAS_VISIVEIS = 24;
 
     public RelatorioJogo(int width, int height, AsciiFont font, int FONT_SIZE) {
         super(width, height, font, FONT_SIZE);
         this.linhas = new ArrayList<>();
-        this.historico = new ArrayList<>();
+        this.cores = new ArrayList<>();
     }
 
     public ArrayList<String> getLinhas() {
         return linhas;
     }
 
-    public ArrayList<String> getHistorico() {
-        return historico;
-    }
-
     public void setLinhas(ArrayList<String> linhas) {
         this.linhas = linhas;
     }
 
-    public void setHistorico(ArrayList<String> historico) {
-        this.historico = historico;
+    public int getLinhaInicial() {
+        return linhaInicial;
     }
 
-    public void atualizarInformacao(String texto, int x, int y){
+    public void setLinhaInicial(int linhaInicial) {
+        this.linhaInicial = linhaInicial;
+    }
 
-        if(linhas.size() == 26){
-            historico.add(linhas.get(0));
+    public ArrayList<Color> getCores() {
+        return cores;
+    }
+
+    public void setCores(ArrayList<Color> cores) {
+        this.cores = cores;
+    }
+
+    public void decrementarLinha() {
+        if (this.getLinhaInicial() != 0)
+            this.setLinhaInicial(this.getLinhaInicial() - 1);
+    }
+
+    public void encrementarLinha() {
+        if (getLinhaInicial() < (linhas.size() - MAX_LINHAS_VISIVEIS))
+            this.setLinhaInicial(this.getLinhaInicial() + 1);
+    }
+
+    public void setLinhaFim() {
+        if (!linhas.isEmpty())
+            this.setLinhaInicial(linhas.size() - MAX_LINHAS_VISIVEIS);
+    }
+
+    public void atualizarInformacao(String texto, Color cor) {
+        if (linhas.size() == 100) {
             linhas.remove(0);
+            cores.remove(0);
         }
+
+        if ((linhas.size() - linhaInicial) == MAX_LINHAS_VISIVEIS) {
+            linhaInicial++;
+        }
+
         linhas.add(texto);
+        cores.add(cor);
 
-        getTela().clear();
-        for (String linha : linhas) {
-            getTela().write(linha, x, y);
+    }
+
+    public void imprimirRelatorios() {
+        if (!linhas.isEmpty()) {
+            getTela().clear();
+
+            int y = 2; // Linha inicial na tela para impressão
+
+            // Itera sobre as linhas a partir de linhaInicial até o final da lista ou até preencher a tela
+            for (int i = linhaInicial; i < linhas.size() && y < MAX_LINHAS_VISIVEIS + 2; i++) {
+                String linha = linhas.get(i);
+                Color cor = cores.get(i);
+
+                getTela().write("> ", 0, y);
+                getTela().write(linha, 2, y++, cor, Color.BLACK);
+            }
+
+            // Exibe a linha atual e o total de linhas no topo da tela
+            getTela().write((char) 25 + " LINHA ATUAL: " + getLinhaInicial() + "/" + linhas.size(), 0, 0);
         }
-
-        getTela().repaint();
     }
-
-    public void textoUnico(String texto, int x, int y){
-        getTela().write(texto, x, y);
-        // getTela().write(getWidth() + " x " + getHeight(), 1, 2);
-        // getTela().write("QUANTIDADE REAL LINHAS = 26" , 1, 3);
-        // getTela().write("TAMANHO MAXIMO LINHA = 48 COMECANDO PELO x0" , 1, 4);
-        // getTela().write("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",0,6);
-        getTela().repaint();
-    }
-
 }
