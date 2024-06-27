@@ -3,7 +3,6 @@ package combate.herois;
 import combate.Habilidade;
 
 public class Guerreiro extends AliadoClasse {
-
     // Construtor
     public Guerreiro(int lvl) {
         super(lvl);

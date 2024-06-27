@@ -14,11 +14,22 @@ public class MainMenu extends JPanel {
         // Criando tela e background
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(1280, 720);
-        frame.getContentPane().setBackground(java.awt.Color.BLACK);
-        frame.setLayout(null);
 
         // Titulo
         frame.setTitle("Crypt Crawler");
+        frame.setLayout(null);
+
+        // Imagem fundo
+        ImageIcon backgroundIcon = new ImageIcon("Assets/background.png");
+        Image backgroundImg = backgroundIcon.getImage();
+        Image resized = backgroundImg.getScaledInstance(frame.getWidth(), frame.getHeight(), Image.SCALE_SMOOTH);
+        backgroundIcon = new ImageIcon(resized);
+        // Create a label and set its icon to the loaded image
+        JLabel background = new JLabel();
+        background.setIcon(backgroundIcon);
+        // Set the label's bounds to cover the entire frame
+        background.setBounds(0, 0, frame.getWidth(), frame.getHeight());
+        frame.add(background);
 
         // Botao start
         JButton startButton = new JButton("Start Game");
@@ -27,6 +38,8 @@ public class MainMenu extends JPanel {
         startButton.setBackground(Color.BLACK);
         startButton.setBorder(BorderFactory.createLineBorder(Color.WHITE));
         startButton.setFont(new Font("Arial", Font.PLAIN, 20));
+        frame.add(startButton);
+
 
         // Texto
         JLabel text = new JLabel("Crypt Crawler");
