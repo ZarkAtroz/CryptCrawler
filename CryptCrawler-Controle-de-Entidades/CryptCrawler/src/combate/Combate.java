@@ -4,6 +4,7 @@ import Ui.Interface;
 import combate.herois.AliadoClasse;
 import combate.inimigos.InimigoClasse;
 
+import java.awt.*;
 import java.util.ArrayList;
 
 public class Combate {
@@ -42,7 +43,7 @@ public class Combate {
     public void atacar(int index_hb, int index_personagem, Interface inter_jogo) {
 
         if (inimigo_atual.getHp_atual() <= 0) {
-            inter_jogo.getRelatorioJogo().atualizarInformacao(inimigo_atual.getClass().getSimpleName().toUpperCase() + " MORREU!");
+            inter_jogo.getRelatorioJogo().atualizarInformacao(inimigo_atual.getClass().getSimpleName().toUpperCase() + " MORREU!", Color.GREEN);
             inimigos.remove(inimigo_atual);
             proximoInimigo();
         }
@@ -58,15 +59,18 @@ public class Combate {
 
             turno_heroi = false;
 
+            String nomeAliado = heroi_atual.getClass().getSimpleName().toUpperCase();
+            if(nomeAliado.equals("MAGOELEMENTAL"))
+                nomeAliado = "MAGO";
+
             if (dano <= 0) {
-                inter_jogo.getRelatorioJogo().atualizarInformacao(heroi_atual.getClass().getSimpleName().toUpperCase() + " ERROU O ATAQUE...");
+                inter_jogo.getRelatorioJogo().atualizarInformacao(nomeAliado + " ERROU O ATAQUE...", Color.WHITE);
             } else {
-                inter_jogo.getRelatorioJogo().atualizarInformacao(heroi_atual.getClass().getSimpleName().toUpperCase() + " ACERTOU O ATAQUE DANDO: " + dano);
+                inter_jogo.getRelatorioJogo().atualizarInformacao(nomeAliado + " ACERTOU O ATAQUE DANDO: " + dano, Color.GREEN);
             }
 
         } else {
             index_hb = (int) Math.random() * inimigo_atual.getHbs().size();
-
 
             Habilidade hb = inimigo_atual.returnHabilidade(index_hb);
             int dano = inimigo_atual.dano(hb, 1, 1, heroi_atual.getAgilidade());
@@ -76,40 +80,16 @@ public class Combate {
             turno_heroi = true;
             inimigo_atual.colldownHabilidade();
 
+            String nomeInimigo = inimigo_atual.getClass().getSimpleName().toUpperCase();
+            if(nomeInimigo.equals("GOBLINFORTE"))
+                nomeInimigo = "GOBLIN";
 
             if (dano <= 0) {
-                inter_jogo.getRelatorioJogo().atualizarInformacao(inimigo_atual.getClass().getSimpleName().toUpperCase() + " ERROU O ATAQUE...");
+                inter_jogo.getRelatorioJogo().atualizarInformacao(nomeInimigo + " ERROU O ATAQUE...", Color.WHITE);
             } else {
-                inter_jogo.getRelatorioJogo().atualizarInformacao(inimigo_atual.getClass().getSimpleName().toUpperCase() + " ACERTOU O ATAQUE DANDO: "+ dano);
+                inter_jogo.getRelatorioJogo().atualizarInformacao(nomeInimigo + " ACERTOU O ATAQUE DANDO: "+ dano, Color.RED);
             }
         }
-
-    }
-
-    // Gera ataque dos herois
-    public void statusHerois(Interface interface_jogo) {
-        interface_jogo.getStatusJogador().clear();
-
-        int x = 0;
-
-        for (AliadoClasse h: getHerois()) {
-            interface_jogo.getStatusJogador().printTela(h.getClass().getSimpleName(), x, 0);
-            interface_jogo.getStatusJogador().printTela("HP: " + h.getHp_atual() +"/"+ h.getHp_max(), x, 1);
-            interface_jogo.getStatusJogador().printTela("MP: " + h.getMp_atual() +"/"+ h.getMp_max(), x, 2);
-
-            int y = 3;
-            for (int i = 0; i < h.getHbs().size(); i++) {
-                Habilidade hb_1 = h.getHbs().get(i);
-                interface_jogo.getStatusJogador().printTela("[" + (i+1) + "]" + hb_1.getNome_hab(), x, y);
-                y++;
-            }
-            x += 19;
-        }
-    }
-
-    public void statusInimigos(Interface interfaceJogo){
-
-
 
     }
 
@@ -228,8 +208,6 @@ public class Combate {
             case 4:
                 break;
         }
-
-
     }
 
     // Getter Setter

@@ -4,6 +4,7 @@ import Ui.Interface;
 import combate.Combate;
 import log.Log;
 
+import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.util.Stack;
 
@@ -91,7 +92,7 @@ public class CombateEventController {
                         break;
                 }
             } catch (IndexOutOfBoundsException i) {
-                interfaceJogo.getRelatorioJogo().atualizarInformacao("ALIADO SEM ACESSO A HABILIDADE");
+                interfaceJogo.getRelatorioJogo().atualizarInformacao("ALIADO SEM ACESSO A HABILIDADE", Color.RED);
             }
         } else if (type_event == 2) {
             try {
@@ -124,9 +125,9 @@ public class CombateEventController {
                     default:
                         break;
                 }
-                interfaceJogo.getRelatorioJogo().atualizarInformacao("ALIADO SELECIONADO: " + combate.heroi_atual.getClass().getSimpleName().toUpperCase());
+                interfaceJogo.getRelatorioJogo().atualizarInformacao("ALIADO SELECIONADO: " + combate.heroi_atual.getClass().getSimpleName().toUpperCase(), Color.WHITE);
             } catch (IndexOutOfBoundsException i) {
-                interfaceJogo.getRelatorioJogo().atualizarInformacao("ALIADO INEXISTENTE...");
+                interfaceJogo.getRelatorioJogo().atualizarInformacao("ALIADO INEXISTENTE...", Color.RED);
             }
         }
         combate.updateInterface(interfaceJogo, type_event);

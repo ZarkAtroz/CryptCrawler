@@ -7,6 +7,7 @@ import Ui.Interface;
 import Ui.Controller.KeyEventController;
 
 import javax.swing.*;
+import java.awt.*;
 import java.io.*;
 import java.lang.reflect.Array;
 import java.nio.file.Files;
@@ -117,7 +118,7 @@ public class CryptCrawler extends JFrame implements GameEventListener {
         long endTime;
         long sleepTime;
 
-        interfaceJogo.getRelatorioJogo().atualizarInformacao("BEM-VINDO AO CRYPT CRAWLER!");
+        interfaceJogo.getRelatorioJogo().atualizarInformacao("BEM-VINDO AO CRYPT CRAWLER!", Color.WHITE);
 
         while (true){
             startTime = System.nanoTime();
@@ -126,16 +127,16 @@ public class CryptCrawler extends JFrame implements GameEventListener {
                 System.exit(0);
 
             interfaceJogo.getMiniMapa().printMiniMapa(dungeonMap, playerOnMap);
-            if(in_combat){
 
-                if(combate.isEmptyEnemyies()){
-
+            if (in_combat) {
+                if (combate.isEmptyEnemyies()) {
                     deleteEnemyEntity(dungeonMap, entidades);
-
                     interfaceJogo.setCombate();
                     in_combat = !in_combat;
 
                     dungeonMap.deleteEnemyAt(playerOnMap.getX(), playerOnMap.getY());
+
+                    interfaceJogo.getRelatorioJogo().atualizarInformacao("BATALHA VENCIDA!", Color.BLUE);
 
                 } else {
                     if (!combate.isTurno_heroi()) {
@@ -143,17 +144,16 @@ public class CryptCrawler extends JFrame implements GameEventListener {
                     }
 
                     combate.updateInterface(interfaceJogo, keyEventController.getCombateTypeEvent());
-
                     interfaceJogo.refreshCombate();
                 }
-
             } else {
                 interfaceJogo.getTelaDeJogo().printMundo(playerOnMap, entidades, dungeonMap, dungeonMap.getEnemies());
                 interfaceJogo.getStatusJogador().printCoords("POSICAO X = " + playerOnMap.getX() + " / Y = " + playerOnMap.getY());
 
                 // Checa colisao de inimigo
-                if(!dungeonMap.isEnemiesEmpty())
+                if (!dungeonMap.isEnemiesEmpty()) {
                     colisaoPlayerEnemy(dungeonMap);
+                }
 
                 interfaceJogo.refresh();
             }
@@ -186,7 +186,7 @@ public class CryptCrawler extends JFrame implements GameEventListener {
             combate.setInimigos(selectedEnemy.getInimigos());
             interfaceJogo.setCombate();
             in_combat = true;
-            interfaceJogo.getRelatorioJogo().atualizarInformacao("HEROIS ENTRARAM EM COMBATE!");
+            interfaceJogo.getRelatorioJogo().atualizarInformacao("HEROIS ENTRARAM EM COMBATE!", Color.WHITE);
         }
 
     }
