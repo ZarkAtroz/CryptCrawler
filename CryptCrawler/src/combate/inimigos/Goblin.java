@@ -1,9 +1,8 @@
 package combate.inimigos;
 
 import combate.Habilidade;
-import combate.TesteCombate;
 
-public class Goblin extends Inimigo {
+public class Goblin extends InimigoClasse {
 
     public Goblin(int lvl) {
         super(lvl);
@@ -16,13 +15,13 @@ public class Goblin extends Inimigo {
 
     @Override
     public void leveling() {
-        this.forca = 2 + (1 * this.lvl);
+        this.forca = 3 + (1 * this.lvl);
         this.inteligencia = 1 + (1 * this.lvl);
         this.agilidade = 1 + (1 * this.lvl);
         this.sorte = 1 + (1 * this.lvl);
         this.critico = 1;
 
-        this.hp_max = (7 + this.forca) + (1 * this.lvl);         
+        this.hp_max = (7 + this.forca) + (1 * this.lvl);
     }
 
     @Override
@@ -55,12 +54,6 @@ public class Goblin extends Inimigo {
         int num_random = (int) (1 + (Math.random() * 100));
 
         boolean acertou = necessario > num_random;
-
-        if (acertou) {
-            TesteCombate.relatorioJogo(getClass().getSimpleName() + " acertou com sucesso");
-        } else {
-            TesteCombate.relatorioJogo(getClass().getSimpleName() + " não teve sucesso no acerto");
-        }
 
         return acertou;
     }

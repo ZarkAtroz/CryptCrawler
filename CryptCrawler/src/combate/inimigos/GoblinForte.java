@@ -1,9 +1,8 @@
 package combate.inimigos;
 
 import combate.Habilidade;
-import combate.TesteCombate;
 
-public class GoblinForte extends Inimigo {
+public class GoblinForte extends InimigoClasse {
 
     public GoblinForte(int lvl) {
         super(lvl);
@@ -57,12 +56,6 @@ public class GoblinForte extends Inimigo {
         int num_random = (int) (1 + (Math.random() * 100));
 
         boolean acertou = necessario > num_random;
-
-        if (acertou) {
-            TesteCombate.relatorioJogo(getClass().getSimpleName() + " acertou com sucesso");
-        } else {
-            TesteCombate.relatorioJogo(getClass().getSimpleName() + " não teve sucesso no acerto");
-        }
 
         return acertou;
     }

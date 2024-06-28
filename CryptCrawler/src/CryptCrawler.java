@@ -1,148 +1,259 @@
-import Entity.Entidade;
+import Entity.*;
+import Ui.Controller.GameEventListener;
+import combate.Combate;
+import combate.herois.*;
+import combate.inimigos.InimigoClasse;
+import log.Log;
+import world.World;
 import Ui.Interface;
+import Ui.Controller.KeyEventController;
 
 import javax.swing.*;
-import java.awt.event.InputEvent;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.awt.event.MouseEvent;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.awt.*;
+import java.io.*;
+import java.lang.reflect.Array;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Queue;
+import java.util.Iterator;
 
-public class CryptCrawler extends JFrame implements KeyListener {
+public class CryptCrawler extends JFrame implements GameEventListener {
 
     private boolean rodando;
-    private int framesPerSecond = 60;
-    private int timePerLoop = 1000000000 / framesPerSecond;
+    private final int framesPerSecond = 60;
+    private final int timePerLoop = 1000000000 / framesPerSecond;
+    private final Interface interfaceJogo;
 
-    private JFrame frame;
-    private ImageIcon img;
+    private boolean in_combat = false;
+    private Combate combate;
 
-    private Queue<InputEvent> inputQueue;
+    public CryptCrawler(){
+        this.rodando = true;
+        Log.logInfo("Game Started");
 
-    public static void lerArquivo(String arquivo){
+        JFrame frame;
+        frame = new JFrame("Crypt Crawler");
+        frame.setIconImage((new ImageIcon("Icon\\icon.jpg")).getImage());
 
-        String linha;
-        ArrayList<Entidade> entidades = new ArrayList<>();
+        interfaceJogo = new Interface();
+        frame.add(interfaceJogo);
+        frame.setSize(1280, 720);
 
-        try (BufferedReader br = new BufferedReader(new FileReader(arquivo))) {
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setVisible(true);
+        frame.setLayout(null);
+    }
 
-            // InputStreamReader
-            linha = br.readLine();
+    public void run(String selectedClassName){
 
-            while((linha = br.readLine()) != null) {
+        World dungeonMap = null;
 
-            }
+        try {
+            ObjectInputStream os = new ObjectInputStream(new FileInputStream("src/world.save"));
+            dungeonMap = (World) os.readObject();
+
+            dungeonMap.readTiles();
+            dungeonMap.drawAllCharacters();
+            dungeonMap.createEnemiesList();
+
+        } catch (ClassNotFoundException e){
+            e.printStackTrace();
+
+        } catch (FileNotFoundException e){
+            e.printStackTrace();
 
         } catch (IOException e){
             e.printStackTrace();
         }
 
-    }
+        if(dungeonMap == null){
+            dungeonMap = new World(450, 300);
+            dungeonMap.drawAllCharacters();
+        }
 
-    private final Interface interfaceJogo;
+        ArrayList<Entidade> entidades = new ArrayList<>();
+        ArrayList<AliadoClasse> classes = new ArrayList<>();
 
-    public CryptCrawler(){
+        // Criador de classes
+        Guerreiro guerreiro = new Guerreiro(1);
+        guerreiro.setIcone(1);
+        classes.add(guerreiro);
+        MagoElemental magoElemental = new MagoElemental(1);
+        magoElemental.setIcone(2);
+        classes.add(magoElemental);
+        Healer healer = new Healer(1);
+        healer.setIcone(3);
+        classes.add(healer);
+        Rogue rogue = new Rogue(1);
+        rogue.setIcone(18);
+        classes.add(rogue);
 
-        //if(lerSave == true){
-            // importar do save
-            // passar pra classes
-        //} else {
-            // ler direto do .txt
-        //}
+        // Criador de player
+        Player playerOnMap = new Player("Player", 22, 15, dungeonMap, 0, 0);
+        for(AliadoClasse classe : classes){
+            if(classe.getClass().getSimpleName().equals(selectedClassName)){
+                playerOnMap.setClasse(classe);
+                entidades.add(playerOnMap);
+                playerOnMap.setIcone(classe.getIcone());
+                classes.remove(classe);
+                break;
+            }
+        }
+        for(AliadoClasse classe: classes){
+            Aliado aliado = new Aliado(classe.getClass().getName(), 22, 15, classe.getIcone(), playerOnMap);
+            aliado.setClasse(classe);
+            entidades.add(aliado);
+            playerOnMap.addParty(classe);
+            playerOnMap.setMaximoTrilha(playerOnMap.getMaximoTrilha() + 1);
+        }
 
-        // lerArquivo("blocos.txt");
+        ArrayList<Enemy> inimigos = new ArrayList<>();
 
-        this.rodando = true;
+        Enemy esqueleto1 = new Enemy(dungeonMap, 3, 45, "Esqueleto", (char) 25);
+        Enemy esqueleto2 = new Enemy(dungeonMap, 65, 66, "Esqueleto", (char) 24);
+        Enemy slime = new Enemy(dungeonMap, 48, 74, "Slime", (char) 5);
+        Enemy goblin = new Enemy(dungeonMap, 58, 22, "Goblin", (char) 22);
+        Enemy goblinForte = new Enemy(dungeonMap, 59, 27, "Goblin Forte", (char) 8);
 
-        this.frame = new JFrame("Crypt Crawler");
-        this.img = new ImageIcon("Icon\\icon.jpg");
-        this.frame.setIconImage(img.getImage());
+        inimigos.add(esqueleto1);
+        inimigos.add(esqueleto2);
+        inimigos.add(slime);
+        inimigos.add(goblin);
+        inimigos.add(goblinForte);
 
-        this.interfaceJogo = new Interface();
-        this.frame.add(interfaceJogo);
-        this.frame.setSize(1280, 720);
-        super.addKeyListener(this);
+        for(Enemy ens : inimigos){
+            entidades.add(new Inimigo(ens.getClassName(), ens.getX(), ens.getY(), ens.getIcon(), playerOnMap));
+            dungeonMap.addEnemyToList(ens);
+        }
 
-    }
+        combate = new Combate(0, 0, playerOnMap.getParty(), playerOnMap);
 
-    public void run(){
+        dungeonMap.setPlayerOnMap(playerOnMap);
 
-        // Colocar a lógica do frame rate
-        // 1. Verificar input
-        // 2. Atualizar matriz, valores, dados
-        // 3. Renderizar na tela
+        KeyEventController keyEventController = new KeyEventController(this, playerOnMap, entidades, combate);
+
+        long startTime;
+        long endTime;
+        long sleepTime;
+
+        interfaceJogo.getRelatorioJogo().atualizarInformacao("BEM-VINDO AO CRYPT CRAWLER!", Color.WHITE);
 
         while (true){
-            this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            frame.setVisible(true);
-            frame.setLayout(null);
+            startTime = System.nanoTime();
 
-            long startTime = System.nanoTime();
-
-            // Tela cheia
-            // frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
-            // frame.setUndecorated(true);
-
-            getInput();
             if(!this.getRodando())
                 System.exit(0);
 
-            // update(); -> atualizar matriz, relatório, vida, etc...
-            // render(); -> imprimir todas as telas, mesmo que não tenha mudado nada
+            interfaceJogo.getMiniMapa().printMiniMapa(dungeonMap, playerOnMap);
+            interfaceJogo.getRelatorioJogo().imprimirRelatorios();
 
-            long endTime = System.nanoTime();
+            if (in_combat) {
 
-            long sleepTime = timePerLoop - (endTime-startTime);
+                interfaceJogo.printCombate(combate.getHerois(), combate);
+
+                if (combate.isEmptyEnemyies()) {
+                    deleteEnemyEntity(dungeonMap, entidades);
+                    deleteAllyEntity(entidades, playerOnMap);
+                    interfaceJogo.setCombate();
+                    in_combat = !in_combat;
+
+                    dungeonMap.deleteEnemyAt(playerOnMap.getX(), playerOnMap.getY());
+
+                    interfaceJogo.getRelatorioJogo().atualizarInformacao("BATALHA VENCIDA!", Color.BLUE);
+
+                } else {
+                    if (!combate.isTurno_heroi()) {
+                        combate.atacar(0, 0, 0, interfaceJogo);
+                    }
+
+                    combate.updateInterface(interfaceJogo, keyEventController.getCombateTypeEvent());
+                    interfaceJogo.refreshCombate();
+                }
+            } else {
+                interfaceJogo.getTelaDeJogo().printMundo(playerOnMap, entidades, dungeonMap, dungeonMap.getEnemies());
+                interfaceJogo.getStatusJogador().printCoords("POSICAO X = " + playerOnMap.getX() + " / Y = " + playerOnMap.getY());
+
+                // Checa colisao de inimigo
+                if (!dungeonMap.isEnemiesEmpty()) {
+                    colisaoPlayerEnemy(dungeonMap, entidades);
+                }
+
+                interfaceJogo.refresh();
+            }
+
+            keyEventController.executeKeyEvent(this.interfaceJogo, in_combat, entidades);
+
+            endTime = System.nanoTime();
+            sleepTime = timePerLoop - (endTime-startTime);
 
             if (sleepTime > 0) {
                 try {
-                    Thread.sleep(sleepTime/1000000);
+                    Thread.sleep(sleepTime / 1000000);
                 } catch (InterruptedException e) {
-                    // TODO Auto-generated catch block
                     e.printStackTrace();
                 }
             }
-
         }
     }
 
-    public void getInput(){
-        InputEvent event = this.interfaceJogo.getNextInput();
-        if (event instanceof KeyEvent keypress){
-            switch (keypress.getKeyCode()){
-                case KeyEvent.VK_PAGE_UP:
-                    interfaceJogo.getTelaDeJogo().printTexto("Voce apertou a tecla: PAGE UP" , 1, 1);
-                    break;
+    public void colisaoPlayerEnemy(World world, ArrayList<Entidade> entidades){
 
-                case KeyEvent.VK_W:
-                    interfaceJogo.getTelaDeJogo().printTexto("Voce apertou a tecla: W", 1, 1);
-                    break;
+        int playerX = world.getPlayerOnMap().getX();
+        int playerY = world.getPlayerOnMap().getY();
 
-                case KeyEvent.VK_ESCAPE:
-                    this.setRodando(false);
-                    break;
+        if(world.isEnemyAt(playerX, playerY)){
+            Enemy selectedEnemy = world.getEnemyAt(playerX, playerY);
+            selectedEnemy.createParty();
+
+            combate.setInimigos(selectedEnemy.getInimigos());
+
+            interfaceJogo.setCombate();
+
+            in_combat = true;
+            interfaceJogo.getRelatorioJogo().atualizarInformacao("HEROIS ENTRARAM EM COMBATE!", Color.WHITE);
+        }
+
+    }
+
+    public void deleteEnemyEntity(World dungeonMap, ArrayList<Entidade> entidades){
+        int playerX = dungeonMap.getPlayerOnMap().getX();
+        int playerY = dungeonMap.getPlayerOnMap().getY();
+
+        Inimigo selectedEnemy = null;
+
+        for(Entidade ent : entidades){
+            if(ent instanceof Inimigo){
+                if(playerX == ent.getX() && playerY == ent.getY()){
+                    selectedEnemy = (Inimigo) ent;
+                }
             }
-        } else if (event instanceof MouseEvent) {
-            //
+        }
+
+        if(selectedEnemy != null)
+            entidades.remove(selectedEnemy);
+    }
+
+    public void deleteAllyEntity(ArrayList<Entidade> entidades, Player player){
+        Iterator<Entidade> iterator = entidades.iterator();
+        while(iterator.hasNext()){
+            Entidade entidade = iterator.next();
+            if(entidade instanceof Aliado){
+                AliadoClasse aliadoClasse = ((Aliado) entidade).getClasse();
+                if(!player.getParty().contains(aliadoClasse)){
+                    iterator.remove();
+                    player.setMaximoTrilha(player.getMaximoTrilha() - 1);
+                }
+            }
         }
     }
 
-    public void setRodando(boolean rodando){ this.rodando = rodando; }
+    @Override
+    public void onGameExit() {
+        Log.logInfo("Game Closed");
+        this.rodando = false;
+    }
 
     public boolean getRodando() { return this.rodando; }
-
-    @Override
-    public void keyTyped(KeyEvent e) { }
-
-    @Override
-    public void keyPressed(KeyEvent e) { }
-
-    @Override
-    public void keyReleased(KeyEvent e) { }
 
 }

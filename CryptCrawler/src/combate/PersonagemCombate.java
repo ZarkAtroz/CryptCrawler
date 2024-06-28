@@ -3,7 +3,7 @@ package combate;
 import java.util.ArrayList;
 
 public abstract class PersonagemCombate {
-
+    public int icone;
     // Status principais
     protected int forca;
     protected int inteligencia;
@@ -61,6 +61,13 @@ public abstract class PersonagemCombate {
 
     public ArrayList<Habilidade> getHbs() {
         return hbs;
+    }
+
+    public int getIcone(){
+        return icone;
+    }
+    public void setIcone(int icone){
+        this.icone = icone;
     }
 
 }

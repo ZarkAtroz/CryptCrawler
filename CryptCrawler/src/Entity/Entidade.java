@@ -1,16 +1,21 @@
 package Entity;
 
-public class Entidade {
+import combate.PersonagemCombate;
+import combate.herois.AliadoClasse;
 
-    private int x;
-    private int y;
+public abstract class Entidade {
+
+    public int x;
+    public int y;
 
     private String nome;
     private boolean bloqueado;
+    private int icone;
 
-    public Entidade(boolean bloqueado, String nome, int x, int y) {
+    public Entidade(boolean bloqueado, String nome, int x, int y, int icone) {
         this.bloqueado = bloqueado;
         this.nome = nome;
+        this.icone = icone;
         this.x = x;
         this.y = y;
     }
@@ -46,5 +51,9 @@ public class Entidade {
     public void setY(int y) {
         this.y = y;
     }
+
+    public void setIcone(int icone) {this.icone = icone;};
+
+    public int getIcone() {return icone;};
 
 }
