@@ -13,6 +13,7 @@ public class CombateEventController {
     private Combate combate;
     private int type_event = 0;
     private Stack<Integer> menuStack = new Stack<>();
+    private int index_hb = 0;
 
     /*
      * 0 = Selecionar opcao
@@ -28,9 +29,12 @@ public class CombateEventController {
         return this.type_event;
     }
 
+    public int getIndexHb() {
+        return this.index_hb;
+    }
+
     public void processesKeyEvent(KeyEvent keyEvent, Interface interfaceJogo) {
 
-        int index_hb = 0;
 
         if(keyEvent.getKeyCode() == KeyEvent.VK_ESCAPE){
             if(!menuStack.isEmpty()){
@@ -39,6 +43,9 @@ public class CombateEventController {
                 Log.log("NAO HA MENU ANTERIOR");
             }
         }else if (type_event == 0) {
+
+            index_hb = 0;
+
             switch (keyEvent.getKeyCode()) {
                 case KeyEvent.VK_Q:
                     menuStack.push(type_event);
