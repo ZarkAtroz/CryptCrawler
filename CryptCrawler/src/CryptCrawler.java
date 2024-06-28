@@ -54,7 +54,7 @@ public class CryptCrawler extends JFrame implements GameEventListener {
             dungeonMap = (World) os.readObject();
 
             dungeonMap.readTiles();
-            dungeonMap.drawAllCharacters();
+            // dungeonMap.drawAllCharacters();
             dungeonMap.createEnemiesList();
 
         } catch (ClassNotFoundException e){
