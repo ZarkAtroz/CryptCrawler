@@ -70,10 +70,6 @@ public class KeyEventController {
                     case KeyEvent.VK_END:
                         interfaceJogo.getRelatorioJogo().setLinhaFim();
                         break;
-
-                    case KeyEvent.VK_C:
-                        interfaceJogo.setCombate(entidades);
-                        break;
                 }
             } else {
                 combateEventController.processesKeyEvent(keypress, interfaceJogo);

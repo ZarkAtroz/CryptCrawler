@@ -39,6 +39,10 @@ public class Combate {
         turno_heroi = (heroi_atual.getAgilidade() > inimigo_atual.getAgilidade());
     }
 
+    public ArrayList<InimigoClasse> getInimigos() {
+        return inimigos;
+    }
+
     public boolean isEmptyEnemyies(){
         return inimigos.isEmpty();
     }
@@ -102,9 +106,14 @@ public class Combate {
             inter_jogo.getRelatorioJogo().atualizarInformacao(heroi_atual.getClass().getSimpleName().toUpperCase() + " MORREU!", Color.RED);
             player.delPart(heroi_atual);
             herois.remove(heroi_atual);
+            inter_jogo.printCombate(this.player.getParty(), this);
             trocaPersonagem(index_heroi_atual + 1, 0);
         }
 
+    }
+
+    public void removerHeroiAtualMorto(AliadoClasse aliado){
+        herois.remove(aliado);
     }
 
     public void trocaPersonagem(int index_h, int cont) {

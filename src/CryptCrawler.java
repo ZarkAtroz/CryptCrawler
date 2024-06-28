@@ -1,10 +1,8 @@
 import Entity.*;
 import Ui.Controller.GameEventListener;
 import combate.Combate;
-import combate.herois.AliadoClasse;
-import combate.herois.Guerreiro;
-import combate.herois.Healer;
-import combate.herois.MagoElemental;
+import combate.herois.*;
+import combate.inimigos.InimigoClasse;
 import log.Log;
 import world.World;
 import Ui.Interface;
@@ -47,10 +45,9 @@ public class CryptCrawler extends JFrame implements GameEventListener {
         frame.setLayout(null);
     }
 
-    public void run(){
+    public void run(String selectedClassName){
 
         World dungeonMap = null;
-
 
         try {
             ObjectInputStream os = new ObjectInputStream(new FileInputStream("src/world.save"));
@@ -76,16 +73,40 @@ public class CryptCrawler extends JFrame implements GameEventListener {
         }
 
         ArrayList<Entidade> entidades = new ArrayList<>();
+        ArrayList<AliadoClasse> classes = new ArrayList<>();
 
-        Player playerOnMap = new Player("Player", 22, 15, dungeonMap, 1, 0);
-        playerOnMap.setClasse(new Guerreiro(1));
-        entidades.add(playerOnMap);
+        // Criador de classes
+        Guerreiro guerreiro = new Guerreiro(1);
+        guerreiro.setIcone(1);
+        classes.add(guerreiro);
+        MagoElemental magoElemental = new MagoElemental(1);
+        magoElemental.setIcone(2);
+        classes.add(magoElemental);
+        Healer healer = new Healer(1);
+        healer.setIcone(3);
+        classes.add(healer);
+        Rogue rogue = new Rogue(1);
+        rogue.setIcone(18);
+        classes.add(rogue);
 
-       Aliado aliado1 = new Aliado("Ronaldo", playerOnMap.getX(), playerOnMap.getY(), 2, playerOnMap);
-       aliado1.setClasse(new MagoElemental(1));
-       playerOnMap.addParty(aliado1.getClasse());
-       entidades.add(aliado1);
-       playerOnMap.setMaximoTrilha(1);
+        // Criador de player
+        Player playerOnMap = new Player("Player", 22, 15, dungeonMap, 0, 0);
+        for(AliadoClasse classe : classes){
+            if(classe.getClass().getSimpleName().equals(selectedClassName)){
+                playerOnMap.setClasse(classe);
+                entidades.add(playerOnMap);
+                playerOnMap.setIcone(classe.getIcone());
+                classes.remove(classe);
+                break;
+            }
+        }
+        for(AliadoClasse classe: classes){
+            Aliado aliado = new Aliado(classe.getClass().getName(), 22, 15, classe.getIcone(), playerOnMap);
+            aliado.setClasse(classe);
+            entidades.add(aliado);
+            playerOnMap.addParty(classe);
+            playerOnMap.setMaximoTrilha(playerOnMap.getMaximoTrilha() + 1);
+        }
 
         ArrayList<Enemy> inimigos = new ArrayList<>();
 
@@ -124,10 +145,13 @@ public class CryptCrawler extends JFrame implements GameEventListener {
             interfaceJogo.getRelatorioJogo().imprimirRelatorios();
 
             if (in_combat) {
+
+                interfaceJogo.printCombate(combate.getHerois(), combate);
+
                 if (combate.isEmptyEnemyies()) {
                     deleteEnemyEntity(dungeonMap, entidades);
                     deleteAllyEntity(entidades, playerOnMap);
-                    interfaceJogo.setCombate(entidades);
+                    interfaceJogo.setCombate();
                     in_combat = !in_combat;
 
                     dungeonMap.deleteEnemyAt(playerOnMap.getX(), playerOnMap.getY());
@@ -177,8 +201,11 @@ public class CryptCrawler extends JFrame implements GameEventListener {
         if(world.isEnemyAt(playerX, playerY)){
             Enemy selectedEnemy = world.getEnemyAt(playerX, playerY);
             selectedEnemy.createParty();
+
             combate.setInimigos(selectedEnemy.getInimigos());
-            interfaceJogo.setCombate(entidades);
+
+            interfaceJogo.setCombate();
+
             in_combat = true;
             interfaceJogo.getRelatorioJogo().atualizarInformacao("HEROIS ENTRARAM EM COMBATE!", Color.WHITE);
         }

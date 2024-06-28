@@ -1,3 +1,11 @@
+# Cpryt Crawler
+
+# Informações Gerais
+
+## Descrição
+> **Este projeto é um jogo estilo Roguelike, onde o personagem está em uma dungeon muito perigosa, e deve explora-lá para**
+
+
 # Guia game.CryptCrawler
 
 > Use o IntelliJ IDE para jogar

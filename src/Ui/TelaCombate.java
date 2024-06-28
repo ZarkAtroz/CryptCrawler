@@ -5,6 +5,7 @@ import Entity.Entidade;
 import Entity.Player;
 import asciiPanel.AsciiFont;
 import combate.herois.AliadoClasse;
+import combate.inimigos.InimigoClasse;
 
 import java.util.ArrayList;
 
@@ -14,36 +15,85 @@ public class TelaCombate extends Tela{
         super(width, height, font, FONT_SIZE);
     }
 
-    public void printPersonagens(ArrayList<Entidade> entidades){
-        int x = 1;
-        for(Entidade e : entidades){
-            if(e instanceof Aliado | e instanceof Player){
-                String nome_classe = null;
-                if(e instanceof Aliado) {
-                    nome_classe = ((Aliado) e).getClasse().getClass().getSimpleName();
-                }else {
-                    nome_classe = ((Player) e).getClasse().getClass().getSimpleName();
-                }
-                switch (nome_classe){
-                    case "Healer":
-                        drawMage(x);
-                        break;
-                    case "Guerreiro":
-                        drawKnight(x);
-                        break;
-                    case "MagoElemental":
-                        drawWizard(x);
-                        break;
-                    case "Rogue":
-                        //drawRogue(x);
-                        break;
-                }
-                x+=3;
+    public void printPersonagens(ArrayList<AliadoClasse> entidades){
+        for (int i = 0; i < getWidth(); i++) {
+            for (int j = 0; j < getHeight(); j++) {
+                getTela().write((char) 255, i, j);
             }
+        }
+
+        int x = 1;
+        for(AliadoClasse e : entidades){
+            String nome_classe = e.getClass().getSimpleName();
+
+            switch (nome_classe){
+                case "Healer":
+                    drawhealer(x);
+                    break;
+                case "Guerreiro":
+                    drawKnight(x);
+                    break;
+                case "MagoElemental":
+                    drawMagoElemental(x);
+                    break;
+                case "Rogue":
+                    drawRogue(x);
+                    break;
+            }
+            x+=3;
         }
     }
 
-    public void drawMage(int x){
+    public void printInimigos(ArrayList<InimigoClasse> inimigos){
+
+        int x = 21;
+        for(InimigoClasse ini : inimigos){
+
+            String nomeClasse = ini.getClass().getSimpleName();
+
+            switch(nomeClasse){
+                case "Goblin":
+                    drawGoblin(x);
+                    x -= 2;
+                    break;
+
+                case "GoblinForte":
+                    drawStrongGoblin(x);
+                    x -= 3;
+                    break;
+            }
+
+        }
+
+    }
+
+    public void drawGoblin(int x){
+        int var = x;
+        int y = 2;
+        char c = (char)109;
+        for(int j = 0; j < 2; j++, y++){
+            x = var;
+            for (int i = 0; i < 2; i++, x--) {
+                getTela().write(c--, x, y);
+            }
+            c += 18;
+        }
+    }
+
+    public void drawStrongGoblin(int x){
+        int var = x;
+        int y = 1;
+        char c = (char)114;
+        for(int j = 0; j < 3; j++, y++){
+            x = var;
+            for (int i = 0; i < 3; i++, x--) {
+                getTela().write(c--, x, y);
+            }
+            c += 19;
+        }
+    }
+
+    public void drawhealer(int x){
         int var = x;
         int y = 11;
         char c = (char)64;
@@ -69,10 +119,23 @@ public class TelaCombate extends Tela{
         }
     }
 
-    public void drawWizard(int x){
+    public void drawMagoElemental(int x){
         int var = x;
         int y = 11;
         char c = (char)70;
+        for(int j = 0; j < 3; j++, y++){
+            x = var;
+            for(int i = 0; i < 3; i++, x++){
+                getTela().write(c++, x, y);
+            }
+            c+= 13;
+        }
+    }
+
+    public void drawRogue(int x){
+        int var = x;
+        int y = 11;
+        char c = (char)73;
         for(int j = 0; j < 3; j++, y++){
             x = var;
             for(int i = 0; i < 3; i++, x++){

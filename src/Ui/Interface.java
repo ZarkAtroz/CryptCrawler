@@ -5,6 +5,7 @@ import java.awt.*;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
@@ -13,6 +14,9 @@ import java.util.Queue;
 import Entity.Aliado;
 import Entity.Entidade;
 import asciiPanel.*;
+import combate.Combate;
+import combate.herois.AliadoClasse;
+import combate.inimigos.InimigoClasse;
 
 public class Interface extends JPanel implements KeyListener{
 
@@ -102,11 +106,15 @@ public class Interface extends JPanel implements KeyListener{
 
     public InputEvent getNextInput() { return inputQueue.poll(); }
 
-    public void setCombate(ArrayList<Entidade> entidades){
+    public void setCombate(){
         this.isCombate = !this.isCombate;
         statusJogador.getTela().clear();
-        telaCombate.printPersonagens(entidades);
         repaint();
+    }
+
+    public void printCombate(ArrayList<AliadoClasse> aliados, Combate combate){
+        telaCombate.printPersonagens(aliados);
+        telaCombate.printInimigos(combate.getInimigos());
     }
 
     public void refresh(){
