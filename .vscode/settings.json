@@ -1,6 +1,0 @@
-{
-    "java.project.referencedLibraries": [
-        "lib/**/*.jar",
-        "CryptCrawler/src/asciiPanel/asciiPanel.jar"
-    ]
-}
